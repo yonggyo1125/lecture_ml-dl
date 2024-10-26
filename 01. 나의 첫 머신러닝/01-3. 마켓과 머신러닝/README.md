@@ -300,24 +300,3 @@ print(35/49)
 ```
 
 - `n_neighbors` 매개변수를 49로 두는 것 보다는 기본값 5로 도미를 완벽하게 분류한 모델이 좋다.
-
-### 확인 문제
-
-```python
-kn = KNeighborsClassifier()
-kn.fit(fish_data, fish_target)
-
-for n in range(5, 50):
-    # 최근접 이웃 개수 설정
-    kn.n_neighbors = n
-    # 점수 계산
-    score = kn.score(fish_data, fish_target)
-    # 100% 정확도에 미치지 못하는 이웃 개수 출력
-    if score < 1:
-        print(n, score)
-        break
-```
-
-```
-18 0.9795918367346939
-```
