@@ -30,7 +30,6 @@
   - `n_neighbors`매개변수에서 다르게 지정할 수도 있습니다.
   - `return_distance` 매개변수를 False로 지정하면 이웃 샘플의 인덱스만 반환하고 거리는 반환하지 않습니다. 기본값은 True
 
-
 ## 넘파이로 데이터 준비하기
 
 ```python
@@ -101,3 +100,47 @@ print(fish_target)
 ```python
 from sklearn.model_selection import train_test_split
 ```
+
+```python
+train_input, test_input, train_target, test_target = train_test_split(
+    fish_data, fish_target, random_state=42)
+```
+
+```
+print(train_input.shape, test_input.shape)
+```
+
+```
+(36, 2) (13, 2)
+```
+
+```python
+print(train_target.shape, test_target.shape)
+```
+
+```
+(36,) (13,)
+```
+
+```python
+print(test_target)
+```
+
+```
+[1. 0. 0. 0. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
+```
+
+```python
+train_input, test_input, train_target, test_target = train_test_split(
+    fish_data, fish_target, stratify=fish_target, random_state=42)
+```
+
+```python
+print(test_target)
+```
+
+```
+[0. 0. 1. 0. 1. 0. 1. 1. 1. 1. 1. 1. 1.]
+```
+
+## 수상한 도미 한마리
