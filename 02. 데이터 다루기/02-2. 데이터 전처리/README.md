@@ -144,3 +144,160 @@ print(test_target)
 ```
 
 ## 수상한 도미 한마리
+
+```python
+from sklearn.neighbors import KNeighborsClassifier
+
+kn = KNeighborsClassifier()
+kn.fit(train_input, train_target)
+kn.score(test_input, test_target)
+```
+
+```
+1.0
+```
+
+```python
+print(kn.predict([[25, 150]]))
+```
+
+```python
+import matplotlib.pyplot as plt
+```
+
+```python
+plt.scatter(train_input[:,0], train_input[:,1])
+plt.scatter(25, 150, marker='^')
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show()
+```
+
+```python
+distances, indexes = kn.kneighbors([[25, 150]])
+```
+
+```python
+plt.scatter(train_input[:,0], train_input[:,1])
+plt.scatter(25, 150, marker='^')
+plt.scatter(train_input[indexes,0], train_input[indexes,1], marker='D')
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show()
+```
+
+```python
+print(train_input[indexes])
+```
+
+```
+[[[ 25.4 242. ]
+  [ 15.   19.9]
+  [ 14.3  19.7]
+  [ 13.   12.2]
+  [ 12.2  12.2]]]
+```
+
+```python
+print(train_target[indexes])
+```
+
+```
+[[1. 0. 0. 0. 0.]]
+```
+
+```python
+print(distances)
+```
+
+```
+[[ 92.00086956 130.48375378 130.73859415 138.32150953 138.39320793]]
+```
+
+## 기준을 맞춰라
+
+```python
+plt.scatter(train_input[:,0], train_input[:,1])
+plt.scatter(25, 150, marker='^')
+plt.scatter(train_input[indexes,0], train_input[indexes,1], marker='D')
+plt.xlim((0, 1000))
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show()
+```
+
+```python
+mean = np.mean(train_input, axis=0)
+std = np.std(train_input, axis=0)
+```
+
+```python
+print(mean, std)
+```
+
+```
+[ 27.29722222 454.09722222] [  9.98244253 323.29893931]
+```
+
+```python
+train_scaled = (train_input - mean) / std
+```
+
+## 전처리 데이터로 모델 훈련하기
+
+```python
+plt.scatter(train_scaled[:,0], train_scaled[:,1])
+plt.scatter(25, 150, marker='^')
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show()
+```
+
+```python
+new = ([25, 150] - mean) / std
+```
+
+```python
+plt.scatter(train_scaled[:,0], train_scaled[:,1])
+plt.scatter(new[0], new[1], marker='^')
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show()
+```
+
+```python
+kn.fit(train_scaled, train_target)
+```
+
+```python
+test_scaled = (test_input - mean) / std
+```
+
+```python
+kn.score(test_scaled, test_target)
+```
+
+```
+1.0
+```
+
+```python
+print(kn.predict([new]))
+```
+
+```
+[1.]
+```
+
+```python
+distances, indexes = kn.kneighbors([new])
+```
+
+```python
+plt.scatter(train_scaled[:,0], train_scaled[:,1])
+plt.scatter(new[0], new[1], marker='^')
+plt.scatter(train_scaled[indexes,0], train_scaled[indexes,1], marker='D')
+plt.xlabel('length')
+plt.ylabel('weight')
+plt.show()
+```
