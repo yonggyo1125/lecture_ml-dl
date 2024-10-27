@@ -270,7 +270,7 @@ print(input_arr)
 print(input_arr.shape)
 ```
 
-- 넘파이 배열 객체에는 배열의 크기를 알려주는 shape 속성 제공 
+- 넘파이 배열 객체에는 배열의 크기를 알려주는 shape 속성 제공
 
 ```
 (49, 2)  # (샘플 수, 특성 수)
@@ -284,9 +284,17 @@ index = np.arange(49)
 np.random.shuffle(index)
 ```
 
+- 생선 데이터 배열에서 랜덤하게 샘플을 선택해 훈련 세트와 테스트 세트로 만듭니다.
+- 넘파이 `arange()`함수를 사용하여 0에서 부터 48까지 1씩 증가하는 인덱스를 만듭니다(0에서 부터 N-1까지 1씩 증가).
+- random 패키지의 `shuffle()`함수는 주어진 배열을 무작위로 섞습니다.
+
+> 넘파이에서 무작위 결과를 만드는 함수들은 실행할 때마다 다른 결과를 만듭니다. 일정한 결과를 얻으려면 초기에 랜덤 시드(random seed)를 지정하면 됩니다. 여기에서는 42로 지정했습니다.
+
 ```python
 print(index)
 ```
+
+- 만들어진 인덱스 출력
 
 ```
 [13 45 47 44 17 27 26 25 31 19 12  4 34  8  3  6 40 41 46 15  9 16 24 33
@@ -298,6 +306,8 @@ print(index)
 print(input_arr[[1,3]])
 ```
 
+- 잘 섞여 있는지 확인, 배열 인덱스 1,2로 조회가 되는지 확인한다.
+
 ```
 [[ 26.3 290. ]
  [ 29.  363. ]]
@@ -308,9 +318,14 @@ train_input = input_arr[index[:35]]
 train_target = target_arr[index[:35]]
 ```
 
+- 리스트 대신 넘파이 배열을 인덱스로 전달
+- index 배열의 처음 35개를 `input_arr`과 `target_arr`에 전달하여 랜덤하게 35개의 샘플 훈련 세트를 만듭니다.
+
 ```python
 print(input_arr[13], train_input[0])
 ```
+
+- 테스트
 
 ```
 [ 32. 340.] [ 32. 340.]
@@ -320,6 +335,8 @@ print(input_arr[13], train_input[0])
 test_input = input_arr[index[35:]]
 test_target = target_arr[index[35:]]
 ```
+
+- 나머지 14개를 테스트 세트로 만듭니다.
 
 ```python
 import matplotlib.pyplot as plt
@@ -331,23 +348,38 @@ plt.ylabel('weight')
 plt.show()
 ```
 
+- 훈련 세트와 테스트 세트에 도미와 방버가 잘 섞여 있는지 산점도로 확인
+- 파란색: 훈련 세트
+- 주황색: 테스트 세트
+
 ## 두 번째 머신러닝 프로그램
 
 ```python
 kn.fit(train_input, train_target)
 ```
 
+- `fit()` 메서드를 실행할 때마다 `KNeighborsClassifier` 클래스의 객체는 이전에 학습한 모든 것을 잃어버린다.
+- 이전 모델을 그대로 두고 싶다면 `KNeighborsClassifier` 클래스 객체를 새로 만들어야 한다.
+- 여기에서는 이미 만든 kn객체를 그대로 사용
+- 인덱스를 섞어 만든 train_input과 train_target으로 훈련 시킴
+
 ```python
 kn.score(test_input, test_target)
 ```
+
+- test_input, test_target으로 이 모델을 테스트 함
 
 ```
 1.0
 ```
 
+- 100%의 정확도로 테스트 세트에 있는 모든 생선을 맞힘
+
 ```python
 kn.predict(test_input)
 ```
+
+- `predict()`메서드로 테스트 세트의 예측과 실제 타킷을 확인
 
 ```
 array([0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0])
@@ -360,3 +392,7 @@ test_target
 ```
 array([0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0])
 ```
+
+- 테스트 세트에 대한 예측 결과와 정답이 일치합니다.
+- `predict()`메서드가 반환하는 값은 단순한 파이썬 리스트가 아닌 넘파이 배열을 의미
+- 사이킷런 모델의 입력과 출력은 모두 넘파이 배열
