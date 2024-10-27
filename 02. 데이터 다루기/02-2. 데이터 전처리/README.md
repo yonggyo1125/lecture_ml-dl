@@ -43,13 +43,20 @@ fish_weight = [242.0, 290.0, 340.0, 363.0, 430.0, 450.0, 500.0, 390.0, 450.0, 50
                 7.5, 7.0, 9.7, 9.8, 8.7, 10.0, 9.9, 9.8, 12.2, 13.4, 12.2, 19.7, 19.9]
 ```
 
+- 넘파이를 사용하여 길이와 무게를 2차원 배열로 만들어 봅시다.
+
 ```python
 import numpy as np
 ```
 
+- 넘파이를 임포트 합니다.
+
 ```python
 np.column_stack(([1,2,3], [4,5,6]))
 ```
+
+- `column_stack()` 함수는 전달받은 리스트를 일렬로 세운 다음 차례대로 나란히 연결합니다.
+- 연결할 리스트는 파이썬 튜플(tuple)로 전달합니다.
 
 ```
 array([[1, 4],
@@ -57,13 +64,20 @@ array([[1, 4],
        [3, 6]])
 ```
 
+- \[1,2,3\]과 \[4,5,6\] 두 리스트를 일렬로 세운 다움 나란히 옆으로 붙였습니다.
+- 만들어진 배열은 (3, 2) 크기의 배열입니다. 즉, 3개의 행과 2개읠 열
+
 ```python
 fish_data = np.column_stack((fish_length, fish_weight))
 ```
 
+- fish_length와 fish_weight를 합칩니다.
+
 ```python
 print(fish_data[:5])
 ```
+
+- 처음 5개의 데이터 확인
 
 ```
 [[ 25.4 242. ]
@@ -73,9 +87,13 @@ print(fish_data[:5])
  [ 29.  430. ]]
 ```
 
+- 5개의 행을 출력했고, 행마다 2개의 열(생선의 길이와 무게)이 있음을 알 수 있습니다.
+
 ```python
 print(np.ones(5))
 ```
+
+- 원소가 하나인 리스트 \[1\], \[0\]을 여러번 곱해서 데이터를 만드는데, `np.ones()`와 `np.zeros()` 함수를 이용할 수도 있습니다.
 
 ```
 [1. 1. 1. 1. 1.]
@@ -85,9 +103,16 @@ print(np.ones(5))
 fish_target = np.concatenate((np.ones(35), np.zeros(14)))
 ```
 
+- 위 두 함수를 사용해 1이 35개인 배열과 0이 14개인 배열을 만듭니다.
+- 그 다음 두 배열을 그대로 연결합니다.
+- 이때는 `np.column_stack()` 함수를 사용하여 첫 번째 차원을 따라 배열을 연결합니다.
+- 연결할 리스트나 배열을 튜플로 전달해야 합니다.
+
 ```python
 print(fish_target)
 ```
+
+- 만들어져 있는 데이터 확인
 
 ```python
 [1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1. 1.
@@ -97,18 +122,36 @@ print(fish_target)
 
 ## 사이킷런으로 훈련 세트와 테스트 세트 나누기
 
+- 넘파이 배열의 인덱스를 직접 섞어서 훈련 세트와 테스트 세트로 나누는 방법은 번거롭습니다.
+- 사이킷런의 `train_test_split()`함수를 이용하면 좀더 세련되게 나눌 수 있습니다.
+- 이 함수는 전달되는 리스트나 배열을 비율에 맞게 섞어서 `훈련 세트`와 `테스트 세트`로 나누어 줍니다.
+- `train_test_split()` 함수는 사이킷런의 `model_selection` 모듈 아래 있습니다.
+
 ```python
 from sklearn.model_selection import train_test_split
 ```
+
+- 위와 같이 임포트 합니다.
 
 ```python
 train_input, test_input, train_target, test_target = train_test_split(
     fish_data, fish_target, random_state=42)
 ```
 
+- 훈련 세트와 테스트 세트를 나눕니다.
+- fish_data와 fish_target 2개의 배열을 전달했으므로 2개씩 나뉘어 총 4개의 배열이 반환됩니다.
+- (train_input, test_input) : 입력 데이터
+- (train_target, test_target): 타깃 데이터
+- 이 함수는 기본적으로 25%를 테스트 세트로 떼어 냅니다.
+
+> `random_state` : np.random.seed() 함수와 같이 출력 결과와 강의 자료 내용과 같아지도록 만들기 위해서 직접 값을 지정할 수 있음
+
 ```
 print(train_input.shape, test_input.shape)
 ```
+
+- 훈련 세트와 테스트 세트가 잘 나뉘었는지 체크
+- 넘파이 배열의 shape 속성으로 입력 데이터 크기 출력
 
 ```
 (36, 2) (13, 2)
@@ -122,18 +165,32 @@ print(train_target.shape, test_target.shape)
 (36,) (13,)
 ```
 
+- 훈련 데이터와 테스트 데이터를 각각 36, 13개로 나누었음
+- 입력 데이터는 2개의 열이 있는 2차원 배열
+- 타깃 데이터는 1차원 배열
+
 ```python
 print(test_target)
 ```
+
+- 도미와 방어가 잘 섞였는지 테스트 데이터 출력
 
 ```
 [1. 0. 0. 0. 1. 1. 1. 1. 1. 1. 1. 1. 1.]
 ```
 
+- 잘 섞인 것 같지만 빙어의 비율이 조금 모자랍니다. 
+- 샘플링 편향이 여기에서도 나타났습니다.
+- 특히 일부 클래스의 갯수가 적을때 무작위로 데이터를 나누었을 때 샘플이 골고루 섞이지 않을 수 있습니다. 
+- 휸련 세트와 테스트 세트에서 샘플의 클래스 비율이 일정하지 않다면 모델이 일부 샘플을 올바르게 학습할 수 없습니다. 
+
 ```python
 train_input, test_input, train_target, test_target = train_test_split(
     fish_data, fish_target, stratify=fish_target, random_state=42)
 ```
+
+- `train_test_split()` 함수의 `stratify` 매개변수에 타깃 데이터를 전달하면 클래스 비율에 맞게 데이터를 나눕니다.
+- 훈련 데이터가 작거나 특정 클래스의 샘플 갯수가 적을 때 유용
 
 ```python
 print(test_target)
@@ -142,6 +199,8 @@ print(test_target)
 ```
 [0. 0. 1. 0. 1. 0. 1. 1. 1. 1. 1. 1. 1.]
 ```
+
+
 
 ## 수상한 도미 한마리
 
