@@ -190,17 +190,25 @@ kn.score(test_input, test_target)
 
 - 훈련 세트와 테스트 세트에 샘플이 골고루 섞여 있지 않으면 샘플링이 한쪽으로 치우치게 됩니다. 이를 **샘플링 편향**(sampling bias)이라고 부릅니다.
 - 훈련 세트와 테스트 세트를 나누기 전에 데이터를 섞거나 골고르 샘플을 뽑아서 훈련세트와 테스트 세트를 만들어야 합니다.
+- 특정 종류의 샘플이 과도하게 많은 샘플링 편향을 가지고 있다면 제대로된 지도 학습 모델을 만들 수 없습니다.
 
 ## 넘파이
+
+- 파이썬의 대표적인 배열(array) 라이브러리
+- 고차원의 배열을 손쉽게 만들고 조작할 수 있는 간편한 도구를 많이 제공
 
 ```python
 import numpy as np
 ```
 
+- 넘파이 라이브러리 임포트
+
 ```python
 input_arr = np.array(fish_data)
 target_arr = np.array(fish_target)
 ```
+
+- 파이썬 리스트를 전달하면 끝
 
 ```python
 print(input_arr)
@@ -262,9 +270,13 @@ print(input_arr)
 print(input_arr.shape)
 ```
 
+- 넘파이 배열 객체에는 배열의 크기를 알려주는 shape 속성 제공 
+
 ```
-(49, 2)
+(49, 2)  # (샘플 수, 특성 수)
 ```
+
+- 49개의 샘플과 2개의 특성이 있음을 확인할 수 있다.
 
 ```python
 np.random.seed(42)
