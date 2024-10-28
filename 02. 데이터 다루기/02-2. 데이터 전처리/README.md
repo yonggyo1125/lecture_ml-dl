@@ -352,7 +352,6 @@ train_scaled = (train_input - mean) / std
 ```
 
 - 원본 데이터에서 평균을 빼고 표준편차로 나누어 표준점수로 변환합니다.
-- **브로드캐스팅**(broadcasting): 넘파이는 train_input의 모든 행에서 mean에 있는 두 평균 값을 빼주고 std에 있는 두 표준편차를 다시 모든 행에 적용합니다.
 
 ## 전처리 데이터로 모델 훈련하기
 
