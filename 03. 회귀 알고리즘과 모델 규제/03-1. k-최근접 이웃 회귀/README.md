@@ -89,3 +89,65 @@ print(train_input.shape, test_input.shape)
 ```
 (42, 1) (14, 1)
 ```
+
+## 결정 계수( R^2 )
+
+```python
+from sklearn.neighbors import KNeighborsRegressor
+```
+
+```python
+knr = KNeighborsRegressor()
+# k-최근접 이웃 회귀 모델을 훈련합니다
+knr.fit(train_input, train_target)
+```
+
+```python
+knr.score(test_input, test_target)
+```
+
+```
+0.992809406101064
+```
+
+```python
+from sklearn.metrics import mean_absolute_error
+```
+
+```python
+# 테스트 세트에 대한 예측을 만듭니다
+test_prediction = knr.predict(test_input)
+# 테스트 세트에 대한 평균 절댓값 오차를 계산합니다
+mae = mean_absolute_error(test_target, test_prediction)
+print(mae)
+```
+
+```
+19.157142857142862
+```
+
+## 과대적합 vs 과소적합
+
+```python
+print(knr.score(train_input, train_target))
+```
+
+```
+0.9698823289099254
+```
+
+```python
+# 이웃의 갯수를 3으로 설정합니다
+knr.n_neighbors = 3
+# 모델을 다시 훈련합니다
+knr.fit(train_input, train_target)
+print(knr.score(train_input, train_target))
+```
+
+```
+0.9804899950518966
+```
+
+```python
+print(knr.score(test_input, test_target))
+```
