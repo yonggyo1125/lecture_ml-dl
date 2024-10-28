@@ -352,6 +352,7 @@ train_scaled = (train_input - mean) / std
 ```
 
 - 원본 데이터에서 평균을 빼고 표준편차로 나누어 표준점수로 변환합니다.
+- **브로드캐스팅**(broadcasting): 넘파이는 train_input의 모든 행에서 mean에 있는 두 평균 값을 빼주고 std에 있는 두 표준편차를 다시 모든 행에 적용합니다.
 
 ## 전처리 데이터로 모델 훈련하기
 
@@ -363,9 +364,14 @@ plt.ylabel('weight')
 plt.show()
 ```
 
+- 샘플 \[20, 150\]을 동일한 비율로 변환하지 않아서 해당 샘플만 오른쪽 맨 꼭대기에 덩그러니 떨어져 있는 문제가 있음
+
 ```python
 new = ([25, 150] - mean) / std
 ```
+
+- 샘플 \[25, 150\]을 동일한 비율로 변환해야 합니다.
+- 훈련 세트의 mean, std이용해서 변환해야 합니다.
 
 ```python
 plt.scatter(train_scaled[:,0], train_scaled[:,1])
@@ -375,17 +381,27 @@ plt.ylabel('weight')
 plt.show()
 ```
 
+- 표준편차로 변환하기 전의 산점도와 거의 동일합니다. 크게 달라진 점은 x축과 y축의 범위가 -1.5 \~ 1.5 사이로 바뀌었다는 것 입니다.
+- 훈련 데이터의 두 특성이 비슷한 범위를 차지하고 있습니다.
+
 ```python
 kn.fit(train_scaled, train_target)
 ```
+
+- 변환된 데이터 셋으로 k-최근접 이웃 모델을 다시 훈련합니다.
 
 ```python
 test_scaled = (test_input - mean) / std
 ```
 
+- 테스트 세트도 훈련 세트의 평균과 표준편차로 변환해야 합니다.
+- 그렇지 않다면 데이터의 스케일이 같아지지 않으므로 훈련한 모델이 쓸모없게 됩니다.
+
 ```python
 kn.score(test_scaled, test_target)
 ```
+
+- 모델을 평가해봅니다.
 
 ```
 1.0
@@ -395,9 +411,13 @@ kn.score(test_scaled, test_target)
 print(kn.predict([new]))
 ```
 
+- 모델 예측을 출력해 보면
+
 ```
 [1.]
 ```
+
+- 도미로 예측을 합니다.
 
 ```python
 distances, indexes = kn.kneighbors([new])
