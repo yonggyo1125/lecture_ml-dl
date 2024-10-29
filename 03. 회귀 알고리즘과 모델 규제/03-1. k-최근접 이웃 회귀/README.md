@@ -100,7 +100,8 @@ train_input, test_input, train_target, test_target = train_test_split(
     perch_length, perch_weight, random_state=42)
 ```
 
-- 머신러닝 모델에 사용하기 전에 훈련 세트와 테스트 세트로 나눕니다.
+- 농어 데이터를 머신러닝 모델에 사용하기 전에 훈련 세트와 테스트 세트로 나눕니다.
+- 결과를 동일하게 유지하기 위해 random_state=42로 지정
 
 ```python
 print(train_input.shape, test_input.shape)
@@ -123,6 +124,10 @@ print(test_array.shape)
 test_array = test_array.reshape(2, 2)
 print(test_array.shape)
 ```
+
+- 특성을 1개만 사용하므로 2차원 배열을 만들어야 합니다. 
+- 넘파이 배열은 크기를 바꿀 수 있는 2차원 배열을 만듭니다. 이 때 `reshape()` 메서드를 제공
+- (4,) 배열을 (2,2)로 변경하는 예제
 
 ```
 (2, 2)
