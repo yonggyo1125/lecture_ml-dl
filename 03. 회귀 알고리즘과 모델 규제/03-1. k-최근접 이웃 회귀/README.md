@@ -125,9 +125,11 @@ test_array = test_array.reshape(2, 2)
 print(test_array.shape)
 ```
 
-- 특성을 1개만 사용하므로 2차원 배열을 만들어야 합니다. 
+- 특성을 1개만 사용하므로 2차원 배열을 만들어야 합니다.
 - 넘파이 배열은 크기를 바꿀 수 있는 2차원 배열을 만듭니다. 이 때 `reshape()` 메서드를 제공
 - (4,) 배열을 (2,2)로 변경하는 예제
+- 크기가 바뀐 새로운 배열을 반환할 때 지정한 크기가 원본 배열에 있는 원소 개수와 다르면 에러가 발생합니다.
+- 예를 들어 (4,) 크기의 배열을 (2,3)으로 바꾸려고 하면 에러가 발생
 
 ```
 (2, 2)
@@ -141,11 +143,13 @@ print(test_array.shape)
 ```python
 train_input = train_input.reshape(-1, 1)
 test_input = test_input.reshape(-1, 1)
-```
-
-```python
 print(train_input.shape, test_input.shape)
 ```
+
+- train_input과 test_input을 2차원 배열로 변경
+- train_input의 크기는 (42,) 인데, 이를 2차원 배열인 (42, 1)로 바꾸려면 train_input.reshape(42, 1)과 같이 사용합니다.
+- 넘파이는 배열의 크기를 자동으로 지정하는 기능도 제공하는데, 크기에 -1을 지정하면 나머지 원소 개수로 모두 채우라는 의미 입니다. 첫 번째 크기를 원소 개수로 채우고, 두 번째 크기를 1로 하려면 `train_input.reshape(-1, 1)`처럼 사용합니다.
+- `reshape(-1, 1)`과 같이 사용하면 배열의 전체 원소 개수를 매번 외우지 않아도 되므로 편리합니다.
 
 ```
 (42, 1) (14, 1)
@@ -155,21 +159,31 @@ print(train_input.shape, test_input.shape)
 
 ```python
 from sklearn.neighbors import KNeighborsRegressor
-```
 
-```python
 knr = KNeighborsRegressor()
+
 # k-최근접 이웃 회귀 모델을 훈련합니다
 knr.fit(train_input, train_target)
 ```
+
+- 사이킷런에서 k-최근접 이웃 회귀 알고리즘을 구현한 클래스는 `KNeighborsRegressor`입니다. 
+- 이 클래스의 사용법은 `KNeighborsClassifier`와 매우 비슷합니다.
+- 객체를 생성하고 `fit()`메서드로 회귀 모델을 훈련합니다.
+
 
 ```python
 knr.score(test_input, test_target)
 ```
 
+- 테스트 세트의 점수를 확인합니다.
+
 ```
 0.992809406101064
 ```
+
+- 회귀에서는 정확한 숫자를 맞힌다는 것은 거의 불가능합니다. 예측하는 값이나 타깃 모두 임의의 수치이기 때문입니다.
+- 회귀의 경우에는 조금 다른 값으로 평가하는데 이 점수를 **결정계수**(coefficient of determination)라고 부릅니다. 또는 간단하게 R^2라고 부릅니다. 
+- 이 값은 다음과 같은 식으로 계산됩니다.
 
 ```python
 from sklearn.metrics import mean_absolute_error
