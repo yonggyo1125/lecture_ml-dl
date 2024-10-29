@@ -185,6 +185,9 @@ knr.score(test_input, test_target)
 - 회귀의 경우에는 조금 다른 값으로 평가하는데 이 점수를 **결정계수**(coefficient of determination)라고 부릅니다. 또는 간단하게 R^2라고 부릅니다. 
 - 이 값은 다음과 같은 식으로 계산됩니다.
 
+![스크린샷 2024-10-30 오전 6 23 23](https://github.com/user-attachments/assets/8007dcc1-d972-494d-b0d0-53cfdbb5d74c)
+
+
 ```python
 from sklearn.metrics import mean_absolute_error
 ```
