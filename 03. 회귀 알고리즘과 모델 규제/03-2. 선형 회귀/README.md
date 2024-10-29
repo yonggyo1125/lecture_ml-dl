@@ -35,27 +35,37 @@ train_input = train_input.reshape(-1, 1)
 test_input = test_input.reshape(-1, 1)
 ```
 
+- 데이터를 훈련 세트와 테스트 세트로 나눕니다.
+- 특성 데이터는 2차원 배열로 변환합니다.
+
+
 ```python
 from sklearn.neighbors import KNeighborsRegressor
 
 knr = KNeighborsRegressor(n_neighbors=3)
+
 # k-최근접 이웃 회귀 모델을 훈련합니다
 knr.fit(train_input, train_target)
 ```
+
+- 최근접 이웃 개수를 3으로 하는 모델을 훈련합니다.
 
 ```python
 print(knr.predict([[50]]))
 ```
 
+- 이 모델을 사용해 길이가 50cm인 농어의 무게를 예측합니다.
+
 ```
 [1033.33333333]
 ```
+- 50cm 농어의 무게를 1,033g 정도로 예측했습니다.
+- 실제 이 농어의 무게는 훨씬 더 많이 나갑니다. 어딘가 문제가 있는 것 처럼 보입니다. 
+
 
 ```python
 import matplotlib.pyplot as plt
-```
 
-```python
 # 50cm 농어의 이웃을 구합니다
 distances, indexes = knr.kneighbors([[50]])
 
@@ -69,6 +79,10 @@ plt.xlabel('length')
 plt.ylabel('weight')
 plt.show()
 ```
+
+- 훈련 세트와 50cm 농어, 이 농어의 최근접 이웃을 산점도에 표시합니다.
+- 사이킷런의 k-최근점 이웃 모델의 kneighbors() 메서드를 사용하면 가장 가까운 이웃까지의 거리와 이웃 샘플의 인덱스를 얻을 수 있습니다.
+
 
 ```python
 print(np.mean(train_target[indexes]))
