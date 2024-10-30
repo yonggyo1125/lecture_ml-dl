@@ -194,6 +194,7 @@ plt.show()
 - 이 직선을 그리려면 앞에서 구한 기울기와 절편을 사용하여 (15, 15 X 39 - 709)와 (50, 50 X 39 - 709) 두 점을 이으면 됩니다. 
 - 훈련세트의 산점도를 그립니다. 
 
+![스크린샷 2024-10-31 오전 6 32 19](https://github.com/user-attachments/assets/e58e21c0-c127-4611-8a09-aa84ae204c4e)
 
 ```python
 print(lr.score(train_input, train_target))
