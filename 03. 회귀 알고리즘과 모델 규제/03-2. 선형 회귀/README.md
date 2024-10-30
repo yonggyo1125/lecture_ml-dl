@@ -214,6 +214,11 @@ print(lr.score(test_input, test_target))    # 테스트 세트
 
 ## 다항 회귀
 
+- 선형 회귀가 만든 직선이 왼쪽 아래로 쭉 뻗어 있습니다. 이 직선대로 예측하면 농어의 무게가 0g 이하로 내려갈 수 있는데, 현실에서는 있을 수 없는 일입니다. 
+- 농어이 길이와 무게에 대한 산점도를 자세히 보면 일직선이라기보다 왼쪽 위로 조금 구부러진 곡선에 가깝습니다. 
+- 최적의 직선을 찾기보다 최적의 곡선을 찾는 것이 적합합니다. 
+
+
 ```python
 train_poly = np.column_stack((train_input ** 2, train_input))
 test_poly = np.column_stack((test_input ** 2, test_input))
