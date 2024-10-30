@@ -279,20 +279,29 @@ print(lr.coef_, lr.intercept_)
   
 ![스크린샷 2024-10-31 오전 6 57 40](https://github.com/user-attachments/assets/177533e4-c4d0-4b01-8eaf-4f369a261ecc)
 
+- 이런 방정식을 다항식(polynomial)이라 부르며 다항식을 사용한 선형 회귀를 **다항 회귀**(polynomial regression)라고 부릅니다.
 
 ```python
 # 구간별 직선을 그리기 위해 15에서 49까지 정수 배열을 만듭니다
 point = np.arange(15, 50)
+
 # 훈련 세트의 산점도를 그립니다
 plt.scatter(train_input, train_target)
+
 # 15에서 49까지 2차 방정식 그래프를 그립니다
 plt.plot(point, 1.01*point**2 - 21.6*point + 116.05)
+
 # 50cm 농어 데이터
 plt.scatter([50], [1574], marker='^')
 plt.xlabel('length')
 plt.ylabel('weight')
 plt.show()
 ```
+
+- 이 2차 방정식의 계수와 절편 a, b, c를 알았으니 이전과 동일하게 훈련 세트의 산점도에 그래프로 그려봅니다.
+- 짧은 직선을 이어서 그리면 마치 곡선처럼 표현할 수 있습니다.
+- 1씩 짧게 끊어서 그려봅니다.
+
 
 ```python
 print(lr.score(train_poly, train_target))
