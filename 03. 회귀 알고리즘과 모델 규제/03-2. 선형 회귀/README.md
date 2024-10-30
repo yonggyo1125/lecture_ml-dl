@@ -218,6 +218,9 @@ print(lr.score(test_input, test_target))    # 테스트 세트
 - 농어이 길이와 무게에 대한 산점도를 자세히 보면 일직선이라기보다 왼쪽 위로 조금 구부러진 곡선에 가깝습니다. 
 - 최적의 직선을 찾기보다 최적의 곡선을 찾는 것이 적합합니다. 
 
+![스크린샷 2024-10-31 오전 6 46 10](https://github.com/user-attachments/assets/4c09ca84-2419-4384-8f8d-84a0f83cf395)
+
+
 
 ```python
 train_poly = np.column_stack((train_input ** 2, train_input))
