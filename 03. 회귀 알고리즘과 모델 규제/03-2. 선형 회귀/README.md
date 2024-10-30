@@ -220,6 +220,8 @@ print(lr.score(test_input, test_target))    # 테스트 세트
 
 ![스크린샷 2024-10-31 오전 6 46 10](https://github.com/user-attachments/assets/4c09ca84-2419-4384-8f8d-84a0f83cf395)
 
+- 이런 2차 방정식의 그래프를 그리려면 길이를 제곱한 항이 훈련 세트에 추가되어야 합니다. 
+- 넘파이를 사용하면 아주 간단하게 만들 수 있습니다. 다음 처럼 농어의 길이를 제곱해서 원래 데이터 앞에 붙여 봅니다.
 
 
 ```python
@@ -227,13 +229,21 @@ train_poly = np.column_stack((train_input ** 2, train_input))
 test_poly = np.column_stack((test_input ** 2, test_input))
 ```
 
+- `column_stack()` 함수를 사용하면 간단합니다. `train_input`을 제곱한 것과 `train_input` 두 배열을 나란히 붙이면 됩니다. 
+- `test_input`도 마찬가지 입니다. 
+- `train_input ** 2` 식에도 넘파이 브로드캐스팅이 적용됩니다. 즉, train_input에 있는 모든 원소를 제곱합니다.  
+
 ```python
 print(train_poly.shape, test_poly.shape)
 ```
 
+- 새롭게 만든 데이터셋의 크기를 확인합니다.
+
 ```
 (42, 2) (14, 2)
 ```
+
+- 원래 특성인 길이를 제곱하여 왼쪽 열에 추가했기 때문에 훈련 세트와 테스트 세트 모두 열이 2개로 늘어났습니다.
 
 ```python
 lr = LinearRegression()
@@ -242,28 +252,31 @@ lr.fit(train_poly, train_target)
 print(lr.predict([[50**2, 50]]))
 ```
 
-```
-(42, 2) (14, 2)
-```
+- `train_poly`를 사용해 선형 회귀 모델을 다시 훈련합니다. 
+- 여기에서 주목할 점은 2차 방정식의 그래프를 찾기 위해 훈련 세트에 제곱 항을 추가했지만, 타깃값은 그대로 사용한다는 것, 목표하는 값은 어떤 그래프를 훈련하든지 바꿀 필요가 없습니다. 
+- 이 훈련 세트로 선형 회귀 모델을 훈련한 다음 50cm짜리 농어에 대해 무게를 예측해 봅시다. 
+- 테스트할 때는 이 모델에 농어 길이의 제곱과 원래 길이를 함께 넣어 주어야 합니다.
 
-```python
-lr = LinearRegression()
-lr.fit(train_poly, train_target)
-
-print(lr.predict([[50**2, 50]]))
-```
 
 ```
 [1573.98423528]
 ```
 
+- 앞서 훈련한 모델보다 더 높은 값을 예측하였습니다.
+
+
 ```python
 print(lr.coef_, lr.intercept_)
 ```
 
+- 이 모델이 훈련한 계수와 절편을 출력해 봅시다.
+
 ```
 [  1.01433211 -21.55792498] 116.0502107827827
 ```
+
+- 이 모델은 다음과 같은 그래프를 학습했습니다. 
+
 
 ```python
 # 구간별 직선을 그리기 위해 15에서 49까지 정수 배열을 만듭니다
