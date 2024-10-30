@@ -302,6 +302,8 @@ plt.show()
 - 짧은 직선을 이어서 그리면 마치 곡선처럼 표현할 수 있습니다.
 - 1씩 짧게 끊어서 그려봅니다.
 
+![스크린샷 2024-10-31 오전 7 02 38](https://github.com/user-attachments/assets/ff4e46af-acac-4b26-a952-396c1a135d81)
+
 
 ```python
 print(lr.score(train_poly, train_target))
