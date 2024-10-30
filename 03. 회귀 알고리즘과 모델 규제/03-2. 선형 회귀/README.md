@@ -156,10 +156,12 @@ print(lr.predict([[50]]))
 
 - k-최근접 이웃 회귀를 사용했을 때와 달리 선형 회귀는 50cm 농어의 무게를 아주 높게 예측했습니다. 
 - 하나의 직전을 그리려면 기울기와 절편이 있어야 합니다. ![스크린샷 2024-10-31 오전 6 21 53](https://github.com/user-attachments/assets/603fad2c-3a25-4f44-98f8-21a9c5e912a4)
-- 
-
+- 여기에서 x를 농어의 길이, y를 농어의 무게로 바꾸면 다음과 같습니다.
 
 ![스크린샷 2024-10-31 오전 6 22 07](https://github.com/user-attachments/assets/38f63167-f268-485b-bef6-fe78326c0a98)
+
+- 가장 간단한 직선의 방정식 입니다. 
+- `LinearRegression` 클래스가 찾은 이 데이터와 가장 잘 맞는 a와 b는 lr 객체의 `coef_`와 `intercept_` 속성에 저장되어 있습니다. 
 
 
 ```python
@@ -170,17 +172,28 @@ print(lr.coef_, lr.intercept_)
 [39.01714496] -709.0186449535477
 ```
 
+> coef_ 속성 이름에서 알수 있듯이 머신러닝에서 기울기를 종종 계수(coefficient) 또는 가중치(weight)라고 부릅니다. 
+
+> coef_와 intercept_를 머신러닝 알고리즘이 찾은 값이라는 의미로 **모델 파라미터**(model parameter)라고 부릅니다. 머신러닝 알고리즘의 훈련 과정은 최적의 모델 파라미터를 찾는 것과 같습니다. 이를 **모델 기반 학습**이라고 부릅니다. 앞서 사용한 k-최근접 이웃에는 모델 파라미터가 없습니다. 훈련 세트를 저장하는 것이 훈련의 전부입니다. 이를 **사례 기반 학습**이라고 부릅니다.
+
 ```python
 # 훈련 세트의 산점도를 그립니다
 plt.scatter(train_input, train_target)
+
 # 15에서 50까지 1차 방정식 그래프를 그립니다
 plt.plot([15, 50], [15*lr.coef_+lr.intercept_, 50*lr.coef_+lr.intercept_])
+
 # 50cm 농어 데이터
 plt.scatter(50, 1241.8, marker='^')
 plt.xlabel('length')
 plt.ylabel('weight')
 plt.show()
 ```
+
+- 농어의 길이 15에서 50까지 직선으로 그려봅니다.
+- 이 직선을 그리려면 앞에서 구한 기울기와 절편을 사용하여 (15, 15 X 39 - 709)와 (50, 50 X 39 - 709) 두 점을 이으면 됩니다. 
+- 훈련세트의 산점도를 그립니다. 
+
 
 ```python
 print(lr.score(train_input, train_target))
