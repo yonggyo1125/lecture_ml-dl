@@ -130,24 +130,34 @@ plt.show()
 
 ## 선형 회귀
 
-```python
-from sklearn.linear_model import LinearRegression
-```
+- **선형 회귀**(linear regression)는 널리 사용되는 대표적인 알고리즘
+- 선형이란 말에서 짐작할 수 있듯이 특성이 하나인 경우 어떤 직선을 학습하는 알고리즘입니다.
+- 특성을 가장 잘 나타낼 수 있는 직선을 찾는 것
 
 ```python
+from sklearn.linear_model import LinearRegression
+
 lr = LinearRegression()
 # 선형 회귀 모델 훈련
 lr.fit(train_input, train_target)
-```
 
-```python
 # 50cm 농어에 대한 예측
 print(lr.predict([[50]]))
 ```
 
+- 사이킷런은 `sklearn.linear_model` 패키지 아래에 `LinearRegression` 클래스로 선형 회귀 알고리즘을 구현해 놓았습니다. 
+- 사이킷런의 모델 클래스들은 훈련, 평가, 예측하는 메서드의 이름이 모두 동일합니다. 
+- 즉 `LinearRegression` 클래스에도 `fit()`, `score()`, `predict()` 메서드가 있습니다.
+
+
 ```
 [1241.83860323]
 ```
+
+- k-최근접 이웃 회귀를 사용했을 때와 달리 선형 회귀는 50cm 농어의 무게를 아주 높게 예측했습니다. 
+- 하나의 직전을 그리려면 기울기와 절편이 있어야 합니다. 
+- 
+
 
 ```python
 print(lr.coef_, lr.intercept_)
