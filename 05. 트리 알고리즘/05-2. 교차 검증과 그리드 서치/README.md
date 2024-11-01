@@ -47,3 +47,12 @@ print(dt.score(val_input, val_target))
 0.9971133028626413
 0.864423076923077
 ```
+
+## 교차 검증
+
+```python
+from sklearn.model_selection import cross_validate
+
+scores = cross_validate(dt, train_input, train_target)
+print(scores)
+```
