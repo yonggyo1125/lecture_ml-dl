@@ -526,7 +526,10 @@ plt.show()
 ```
 
 - train_score와 test_score 리스트를 사용해 그래프를 그립니다. 
-- 이 그래프도 x축은 로그 스케일로 바꿔 그립니다. 
+- 이 그래프도 x축은 로그 스케일로 바꿔 그립니다.
+  
+![스크린샷 2024-11-03 오후 2 33 52](https://github.com/user-attachments/assets/bfb480cf-b75a-46ee-ae65-1e9e197b4223)
+
 
 ```python
 lasso = Lasso(alpha=10)
