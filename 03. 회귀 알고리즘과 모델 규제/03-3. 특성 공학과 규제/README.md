@@ -447,14 +447,22 @@ plt.show()
 
 ![스크린샷 2024-11-03 오후 2 33 52](https://github.com/user-attachments/assets/52a2899a-aa4b-4ff8-b040-f0043edfe408)
 
+- 위는 훈련 세트 그래프, 아래는 테스트 세트 그래프입니다. 
+- 이 그래프의 왼쪽을 보면 훈련 세트와 테스트 세트의 점수 차이가 아주 큽니다. 
+- 훈련 세트에는 잘 맞고 테스트 세트에는 형편없는 과대적합의 전형적인 모습입니다.
+- 반대로 오른쪽 편은 훈련 세트와 테스트 세트의 점수가 모두 낮아지는 과소적합으로 가는 모습을 보입니다.
+- 적절한 alpha 값은 두 그래프가 가장 가깝고 테스트 세트의 점수가 가장 높은 -1, 즉 10^-1 = 0.1 입니다. 
+- alpha 값을 0.1로 하여 최종 모델을 훈련하겠습니다. 
+
 
 ```python
 ridge = Ridge(alpha=0.1)
 ridge.fit(train_scaled, train_target)
-
 print(ridge.score(train_scaled, train_target))
 print(ridge.score(test_scaled, test_target))
 ```
+
+- 이 모델은 훈련 세트와 테스트 세트의 점수가 비슷하게 모두 높고 과대적합과 과소적합 사이에서 균형을 맞추고 있습니다. 
 
 ```
 0.9903815817570367
@@ -471,17 +479,28 @@ lasso.fit(train_scaled, train_target)
 print(lasso.score(train_scaled, train_target))
 ```
 
+- 라쏘 모델을 훈련하는 것은 릿지와 매우 비슷합니다. 
+- `Ridge` 클래스를 `Lasso` 클래스로 바꾸는 것이 전부
+
 ```
 0.989789897208096
 ```
+
+- 라쏘도 과대적합을 잘 억제한 결과를 보여 줍니다. 
 
 ```python
 print(lasso.score(test_scaled, test_target))
 ```
 
+- 테스트 세트의 점수를 확인해 보면
+
 ```
 0.9800593698421883
 ```
+
+- 테스트 세트의 점수도 릿지만큼 아주 좋습니다. 
+- 라쏘 모델도 alpha 매개변수로 규제의 강도를 조절할 수 있습니다. 
+- alpha 값을 바꾸어 가며 훈련 세트와 테스트 세트에 대한 점수를 계산합니다.
 
 ```python
 train_score = []
@@ -505,6 +524,9 @@ plt.xlabel('alpha')
 plt.ylabel('R^2')
 plt.show()
 ```
+
+- train_score와 test_score 리스트를 사용해 그래프를 그립니다. 
+- 이 그래프도 x축은 로그 스케일로 바꿔 그립니다. 
 
 ```python
 lasso = Lasso(alpha=10)
