@@ -454,10 +454,12 @@ print(lr.coef_.shape, lr.intercept_.shape)
 - 먼저 7개의 z 값의 이름을 z1에서 z7이라고 붙이겠습니다. 
 - z1\~z7까지 값을 사용해 지수 함수 e^z1\~e^z7을 계산해 모두 더합니다. 이를 e_sum이라고 하겠습니다.
 
+![스크린샷 2024-11-03 오후 8 39 46](https://github.com/user-attachments/assets/935e0526-d694-44b2-8c8f-77bb764072d8)
 
 
 - 그 다음 e^z1\~e^z7을 각각 e_sum으로 나누어 주면 됩니다.
 
+![스크린샷 2024-11-03 오후 8 39 55](https://github.com/user-attachments/assets/66254150-6b7e-416d-895a-60ce18b8b7d3)
 
 
 - s1에서 s7까지 모두 더하면 분자와 분모가 같아지므로 1이 됩니다. 7개의 생선에 대한 확률의 합은 1이 되어야 하므로 잘 맞습니다.
