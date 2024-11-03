@@ -96,6 +96,9 @@
 
 
 
+![스크린샷 2024-11-04 오전 6 07 22](https://github.com/user-attachments/assets/6c426715-1a18-4fa4-9be4-bc3734f7e97c)
+
+
 
 ## SGDClassifier
 
