@@ -201,6 +201,8 @@ print(train_target[indexes])
 ## 로지스틱 회귀
 
 - **로지스틱 회귀**(logistic regression)는 이름은 회귀이지만 분류 모델입니다. 이 알고리즘은 선형 회귀와 동일하게 선형 방정식을 학습합니다.
+  
+![스크린샷 2024-11-03 오후 5 40 08](https://github.com/user-attachments/assets/d2def8eb-435c-4ee7-9927-56bacd7a6e01)
 
 
 
