@@ -226,6 +226,9 @@ print(sc.score(test_scaled, test_target))
 
 ![스크린샷 2024-11-04 오전 7 09 38](https://github.com/user-attachments/assets/0429290c-793b-4ff6-81ba-c1201266722c)
 
+- 이 그래프는 에포크가 진행됨에 따라 모델의 정확도를 나타낸 것입니다. 훈련 세트 점수는 에포크가 진행될수록 꾸준히 증가하지만 테스트 세트 점수는 어느 순간 감소하기 시작합니다. 바로 이 지점이 모델이 과대적합되기 시작하는 곳입니다. 
+- 과대적합이 시작하기 전에 훈련을 멈추는 것을 **조기 종료**(early stopping)라고 합니다. 그럼 준비한 데이터셋으로 위와 같은 그래프를 만들어 봅니다.
+- 이 예제에서는 `fit()` 메서드를 사용하지 않고 `partial_fit()` 메서드만 사용합니다. `partial_fit()` 메서드만 사용하려면 훈련 세트에 있는 전체 클래스의 레이블을 `partial_fit()` 메서드에 전달해 주어야 합니다. 
 
 ```python
 import numpy as np
@@ -238,6 +241,9 @@ test_score = []
 classes = np.unique(train_target)
 ```
 
+- 이를 위해 `np.unique()` 함수로 train_target에 있는 7개 생선 목록을 만듭니다.
+- 에포크마다 훈련 세트와 테스트 세트에 대한 점수를 기록하기 위해 2개의 리스트를 준비합니다.  
+
 ```python
 for _ in range(0, 300):
     sc.partial_fit(train_scaled, train_target, classes=classes)
@@ -245,6 +251,9 @@ for _ in range(0, 300):
     train_score.append(sc.score(train_scaled, train_target))
     test_score.append(sc.score(test_scaled, test_target))
 ```
+
+- 300번의 에포크 동안 훈련을 반복하여 진행해 보겠습니다. 
+- 반복마다 훈련 세트와 테스트 세트의 점수를 계산하여 `train_score`, `test_score` 리스트에 추가
 
 ```python
 import matplotlib.pyplot as plt
@@ -256,6 +265,13 @@ plt.ylabel('accuracy')
 plt.show()
 ```
 
+
+
+
+- 300번의 에포크 동안 기록한 훈련 세트와 테스트 세트의 점수를 그래프로 그려 봅니다.
+- 데이터가 작기 때문에 아주 잘 드러나지는 않지만, 백 번째 에포크 이후에는 훈련 세트와 테스트 세트의 점수가 조금씩 벌어지고 있습니다.
+- 확실히 에포크 초기에는 과소적합되어 훈련 세트와 테스트 세트의 점수가 낮습니다. 이 모델의 경우 백 번째 에포크가 적절한 반복 횟수로 보입니다.
+
 ```python
 sc = SGDClassifier(loss='log_loss', max_iter=100, tol=None, random_state=42)
 sc.fit(train_scaled, train_target)
@@ -264,10 +280,17 @@ print(sc.score(train_scaled, train_target))
 print(sc.score(test_scaled, test_target))
 ```
 
+- `SGDClassifier` 의 반복 횟수를 100에 맞추고 모델을 다시 훈련해 보겠습니다. 그리고 최종적으로 훈련 세트와 테스트 세트에서 점수를 출력합니다.
+
 ```
 0.957983193277311
 0.925
 ```
+
+- `SGDClassifier` 는 일정 에포크 동안 성능이 향상되지 않으면 더 훈련하지 않고 자동으로 멈춥니다. 
+- `tol` 매개변수에서 향상될 최소값을 지정합니다. 앞의 코드에서는 tol 매개변수를 None으로 지정하여 자동으로 멈추지 않고 max_iter=100만큼 무조건 반복하도록 하였습니다. 
+
+> `SGDRegressor`가 확률적 경사 하강법을 사용한 회귀 알고리즘을 제공합니다. 사용하는 방법은 `SGDClassifier`와 동일합니다.
 
 ```python
 sc = SGDClassifier(loss='hinge', max_iter=100, tol=None, random_state=42)
@@ -276,6 +299,8 @@ sc.fit(train_scaled, train_target)
 print(sc.score(train_scaled, train_target))
 print(sc.score(test_scaled, test_target))
 ```
+
+- `loss` 매개변수의 기본값은 'hinge' 입니다. **힌지 손실**(hinge loss)은 **서포트 벡터 머신**(support vector machine)이라고 불리는 또 다른 머신러닝 알고리즘을 위한 손실 함수입니다.
 
 ```
 0.9495798319327731
