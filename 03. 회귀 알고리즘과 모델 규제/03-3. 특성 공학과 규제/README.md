@@ -28,7 +28,7 @@
     - `skiprows`: 파일에서 읽기 전에 건너뛸 행의 개수를 지정합니다.
     - `nrows`: 파일에서 읽을 행의 개수를 지정합니다.
 
-### scikit-learn\*\*
+### scikit-learn
 
 - **PolynomialFeatures**
   - 주어진 특성을 조합하여 새로운 특성을 만듭니다.
@@ -444,6 +444,9 @@ plt.show()
 - 즉 0.001은 -3, 0.01은 -2가 되는 식입니다.
 
 > 넘파이 로그 함수는 np.log()와 np.log10()이 있습니다. 전자는 자연 상수 e를 밑으로 하는 자연로그입니다. 후자는 10을 밑으로 하는 상용로그입니다.
+
+![스크린샷 2024-11-03 오후 2 33 52](https://github.com/user-attachments/assets/52a2899a-aa4b-4ff8-b040-f0043edfe408)
+
 
 ```python
 ridge = Ridge(alpha=0.1)
