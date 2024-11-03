@@ -54,6 +54,11 @@
 
 ![스크린샷 2024-11-03 오전 11 10 39](https://github.com/user-attachments/assets/9dead331-dd31-4094-9be5-c876ff3bdd99)
 
+- 오른쪽 그림처럼 특성이 2개면 타깃값과 함께 3차원 공간을 형성하고 선형 회귀 방정식 `타깃 = a X 특성1 + b X 특성2 + 절편`은 평면이 됩니다.
+- 특성이 3개일 경우? 3차원 공간 이상을 그리거나 상상하기는 힘듭니다.
+- 선형 회귀를 단순한 직선이나 평면으로 생각하여 성능이 무조건 맞다고 오해해서는 안됩니다. 특성이 많은 고차원에서는 선형 회귀가 매우 복잡한 모델을 표현할 수 있습니다.
+- 농어의 길이 뿐만 아니라 높이와 두께도 함께 사용합니다. 이와 더불어 3개의 특성을 각각 제곱하여 추가합니다.
+- 또한 각 특성을 서로 곱해서 또 다른 특성을 만들겠습니다. 즉 '농어 길이 X 농어 높이'를 새로운 특성으로 만들게 됩니다. 이렇게 기존의 특성을 사용해 사로운 특성을 뽑아내는 작업을 **특성 공학**(feature engineering)이라고 부릅니다.
 
 ## 데이터 준비
 
@@ -66,6 +71,8 @@ df = pd.read_csv('https://bit.ly/perch_csv_data')
 perch_full = df.to_numpy()
 print(perch_full)
 ```
+
+- 판다스의 `read_csv()` 함수를 사용하면 인터넷에서 csv 파일을 바로 다운로드하여 사용할 수 있습니다. 다운로드 받은 csv는 **데이터프레임**(dataframe)으로 변환됩니다.
 
 ```
 [[ 8.4   2.11  1.41]
@@ -140,17 +147,27 @@ perch_weight = np.array(
      )
 ```
 
+- 타깃 데이터를 준비합니다.
+
 ```python
 from sklearn.model_selection import train_test_split
-
 train_input, test_input, train_target, test_target = train_test_split(perch_full, perch_weight, random_state=42)
 ```
 
+- perch_full과 perch_weight를 훈련 세트와 테스트 세트로 나눕니다.
+- 이 데이터를 사용해 새로운 특성을 만들겠습니다.
+
 ## 사이킷런의 변환기
+
+- 사이킷런은 특성을 만들거나 전처리하기 위한 다양한 클래스를 제공합니다. 사이킷런에서는 이런 클래스를 **변환기**(transformer)라고 부릅니다.
+- 변환기 클래스는 모두 `fit()`, `transform()` 메서드를 제공합니다.
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
 ```
+
+- 사용할 변환기는 `PolynomialFeatures` 클래스입니다.
+- 이 클래스는 `sklearn.preprocessing` 패키지에 포함되어 있습니다.
 
 ```python
 poly = PolynomialFeatures()
@@ -158,9 +175,28 @@ poly.fit([[2, 3]])
 print(poly.transform([[2, 3]]))
 ```
 
+- 2개의 특성 2와 3으로 이루어진 샘플 하나를 적용합니다.
+- 이 클래스의 객체를 만든 다음 `fit()`, `transform()` 메서드를 차례대로 호출합니다.
+- `fit()` : 새롭게 만들 특성 조합을 찾습니다.
+- `transform()` : 실제 데이터로 변환합니다.
+
 ```
 [[1. 2. 3. 4. 6. 9.]]
 ```
+
+- `PolynomialFeatures` 클래스는 기본적으로 각 특성을 제곱한 항을 추가하고 특성끼리 서로 곱한 항을 추가합니다.
+- 2와 3을 각기 제곱한 4와 9가 추가되었고, 2와 3을 곱한 6이 추가되었습니다.
+- 1이 추가된 이유는?
+
+```
+무게 = a X 길이 + b X 높이 + c X 두께 + d X 1
+```
+
+- 선형 방정식의 절편을 항상 값이 1인 특성과 곱해지는 계수라고 볼 수 있습니다. 이렇게 보면 특성은 (길이, 높이, 두께, 1)이 됩니다. 하지만 사이킷런의 선형 모델은 자동으로 절편을 추가하므로 굳이 이렇게 특성을 만들 필요가 없습니다.
+
+> transform전에 꼭 poly.fit을 사용해야 하나요?
+>
+> 훈련(fit)을 해야 변환(transform)이 가능합니다. 사이킷런의 일관된 api 때문에 두 단계로 나뉘어져 있습니다. 두 메서드를 하나로 붙인 `fit_transform` 메서드도 있습니다.
 
 ```python
 poly = PolynomialFeatures(include_bias=False)
@@ -168,20 +204,28 @@ poly.fit([[2, 3]])
 print(poly.transform([[2, 3]]))
 ```
 
+- `include_bias=False` 로 지정하여 다시 특성을 변환하겠습니다.
+
 ```
 [[2. 3. 4. 6. 9.]]
 ```
+
+- 절편을 위한 항이 제거되고 특성의 제곱과 특성끼리 곱한 항만 추가되었습니다.
+
+> include_bias=False는 꼭 지정해야 하나요?
+>
+> `include_bias=False`로 지정하지 않아도 사이킷런 모델은 자동으로 특성에 추가된 절편 항을 무시합니다. 하지만 여기에서는 혼돈을 피하기 위해 명시적으로 지정하겠습니다.
 
 ```python
 poly = PolynomialFeatures(include_bias=False)
 
 poly.fit(train_input)
 train_poly = poly.transform(train_input)
-```
-
-```python
 print(train_poly.shape)
 ```
+
+- 이 방식으로 `train_input`에 적용합니다. 
+- `train_input`을 변환한 데이터를 `train_poly`에 저장하고 이 배열의 크기를 확인해 봅니다.
 
 ```
 (42, 9)
@@ -191,14 +235,22 @@ print(train_poly.shape)
 poly.get_feature_names_out()
 ```
 
+- `PolynomialFeatures` 클래스는 9개의 특성이 어떻게 만들어졌는지 확인하는 방법을 제공합니다.
+- `get_feature_names_out()` 메서드를 호출하면 9개의 특성이 각각 어떤 입력의 조합으로 만들어졌는지 확인할 수 있습니다.
+
 ```
 array(['x0', 'x1', 'x2', 'x0^2', 'x0 x1', 'x0 x2', 'x1^2', 'x1 x2',
        'x2^2'], dtype=object)
 ```
 
+- `x0`은 첫 번째 특성을 의미, `x0^2` 는 첫 번째 특성의 제곱, `x0 x1`은 첫 번째 특성과 두 번째 특성의 곱을 나타내는 식입니다. 
+
 ```python
 test_poly = poly.transform(test_input)
 ```
+
+- 테스트 세트를 변환합니다.
+- 변환된 특성을 사용하여 다중 회귀 모델을 훈련하겠습니다.
 
 ## 다중 회귀 모델 훈련하기
 
