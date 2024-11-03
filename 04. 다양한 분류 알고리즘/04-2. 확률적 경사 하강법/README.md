@@ -265,6 +265,7 @@ plt.ylabel('accuracy')
 plt.show()
 ```
 
+![스크린샷 2024-11-04 오전 7 23 17](https://github.com/user-attachments/assets/afdb26b1-11c0-44c7-927a-d7b3037f754a)
 
 
 
