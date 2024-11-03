@@ -235,13 +235,22 @@ plt.show()
 
 ![스크린샷 2024-11-03 오후 6 31 31](https://github.com/user-attachments/assets/bab31cb0-196d-4875-8b14-d5d62b0a581f)
 
+- 시그모이드 함수의 출력은 0에서 1까지 변합니다. 
+- 
 
 ## 로지스틱 회귀로 이진 분류 수행하기
+
+- 사이킷 런에는 로지스틱 회귀 모델인 `LogisticRegression` 클래스가 준비되어 있습니다. 
+- 간단한 이진 분류를 연습해 봅니다. 
+- 이진 분류일 경우 시그모이드 함수의 출력이 0.5보다 크면 양성 클래스, 0.5보다 작으면 음성 클래스로 판단합니다. 
+- 정확히 0.5일 때 라이브러리마다 다를 수 있습니다. 사이킷런은 0.5일 때 음성 클래스로 판단합니다.
 
 ```python
 char_arr = np.array(['A', 'B', 'C', 'D', 'E'])
 print(char_arr[[True, False, True, False, False]])
 ```
+
+- 넘파이 배열은 True, False 값을 전달하여 행을 선택할 수 있습니다. 이를 **불리언 인덱싱**(boolean indexing)이라고 합니다. 
 
 ```
 ['A' 'C']
@@ -253,6 +262,10 @@ train_bream_smelt = train_scaled[bream_smelt_indexes]
 target_bream_smelt = train_target[bream_smelt_indexes]
 ```
 
+- 위와 같은 방식을 사용해 훈련 세트에서 도미(Bream)와 빙어(Smelt)의 행만 골라냅니다. 비교 연산자를 사용하면 도미와 빙어의 행을 모두 True로 만들 수 있습니다.
+- 도미인 행만 골라내려면 `train_target == 'Bream'` 과 같이 씁니다. 
+- 도미와 빙어에 대한 비교 결과를 비트 OR 연산자(|)를 사용해 합치면 도미와 빙어에 대한 행만 골라낼 수 있습니다.
+
 ```python
 from sklearn.linear_model import LogisticRegression
 
@@ -260,13 +273,26 @@ lr = LogisticRegression()
 lr.fit(train_bream_smelt, target_bream_smelt)
 ```
 
+- 이 데이터로 로지스틱 회귀 모델을 훈련합니다.
+- `LogisticRegression` 클래스는 선형 모델이므로 `sklearn.linear_model` 패키지 아래 있습니다.
+
+
 ```python
 print(lr.predict(train_bream_smelt[:5]))
+```
+
+- 훈련한 모델을 사용해 train_bream_smelt에 있는 처음 5개의 샘플을 예측해 봅니다.
+
+```
+['Bream', 'Smelt', 'Bream', 'Bream', 'Bream']
 ```
 
 ```python
 print(lr.predict_proba(train_bream_smelt[:5]))
 ```
+
+- `KNeighborsClassifier` 와 마찬가지로 예측 확률은 `predict_proba()` 메서드에서 제공합니다. 
+- `train_bream_smelt` 에서 처음 5개 샘플 예측 확률을 출력해 보겠습니다.
 
 ```python
 print(lr.classes_)
