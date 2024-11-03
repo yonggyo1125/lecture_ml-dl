@@ -333,6 +333,12 @@ print(lr.score(test_poly, test_target))
 
 ## 규제
 
+- **규제**(regularization)는 머신러닝 모델이 훈련 세트를 너무 과도하게 학습하지 못하도록 훼방하는 것을 말합니다. 
+- 즉, 모델이 훈련 세트에 과대적합되지 않도록 만드는 것입니다. 선형 회귀 모델의 경우 특성에 곱해지는 계수(또는 기울기)의 크기를 작게 만드는 일입니다.
+
+
+
+
 ```python
 from sklearn.preprocessing import StandardScaler
 
