@@ -290,32 +290,46 @@ poly = PolynomialFeatures(degree=5, include_bias=False)
 poly.fit(train_input)
 train_poly = poly.transform(train_input)
 test_poly = poly.transform(test_input)
-```
-
-```python
 print(train_poly.shape)
 ```
+
+- 특성을 더 많이 추가한다면?
+- `PolynomialFeatures` 클래스의 degree 매개변수를 사용하여 필요한 고차항의 최대 차수를 지정할 수 있습니다.
+- 5제곱까지 특성을 만들어 출력해 봅시다.
 
 ```
 (42, 55)
 ```
+
+- 만들어진 특성의 개수가 55개나 됩니다. train_poly 배열의 열의 개수가 특성의 개수입니다.
 
 ```python
 lr.fit(train_poly, train_target)
 print(lr.score(train_poly, train_target))
 ```
 
+- 이 데이터를 사용해 선형 회귀 모델을 다시 훈련하겠습니다.
+
 ```
 0.9999999999996433
 ```
+
+- 거의 완벽한 점수
 
 ```python
 print(lr.score(test_poly, test_target))
 ```
 
+- 테스트 세트에 대한 점수는?
+
 ```
 -144.40579436844948
 ```
+
+- 음수가 나왔습니다.
+- 특성의 개수를 크게 늘리면 선형 모델은 아주 강력해집니다. 훈련 세트에 대해 거의 완벽하게 학습할 수 있습니다.
+- 그러나 이런 모델은 훈련 세트에 너무 과대적합되므로 테스트 세트에서는 형편없는 점수를 만듭니다.
+- 이 문제를 해결하려면 다시 특성을 줄여야 합니다.
 
 ## 규제
 
