@@ -209,6 +209,7 @@ print(train_target[indexes])
 - z가 아주 큰 음수일 때 0이 되고, z가 아주 큰 양수일 때 1이 되도록 바꾸는 방법 -> **시그모이드 함수** sigmoid function (또는 **로지스틱 함수**(logistic function))를 사용하면 가능합니다.
 
 
+![스크린샷 2024-11-03 오후 6 26 05](https://github.com/user-attachments/assets/1d2defea-1c1d-4411-8f69-96b8c0321140)
 
 
 
