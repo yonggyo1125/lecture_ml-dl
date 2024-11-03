@@ -204,6 +204,10 @@ print(train_target[indexes])
   
 ![스크린샷 2024-11-03 오후 6 19 18](https://github.com/user-attachments/assets/51fc1f8e-1ff3-4dc4-87d7-7c8539a3a76a)
 
+- a, b, c, d, e는 가중치 혹은 계수입니다. 특성은 늘어났지만 다중 회귀를 위한 선형 방정식과 같습니다. 
+- z는 어떤 값도 가능합니다. 하지만 확률이 되려면 0\~1(또는 0\~100%) 사이 값이 되어야 합니다. 
+- z가 아주 큰 음수일 때 0이 되고, z가 아주 큰 양수일 때 1이 되도록 바꾸는 방법 -> **시그모이드 함수** sigmoid function (또는 **로지스틱 함수**(logistic function))를 사용하면 가능합니다.
+
 
 
 
