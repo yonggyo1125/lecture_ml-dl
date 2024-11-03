@@ -224,7 +224,7 @@ train_poly = poly.transform(train_input)
 print(train_poly.shape)
 ```
 
-- 이 방식으로 `train_input`에 적용합니다. 
+- 이 방식으로 `train_input`에 적용합니다.
 - `train_input`을 변환한 데이터를 `train_poly`에 저장하고 이 배열의 크기를 확인해 봅니다.
 
 ```
@@ -243,7 +243,7 @@ array(['x0', 'x1', 'x2', 'x0^2', 'x0 x1', 'x0 x2', 'x1^2', 'x1 x2',
        'x2^2'], dtype=object)
 ```
 
-- `x0`은 첫 번째 특성을 의미, `x0^2` 는 첫 번째 특성의 제곱, `x0 x1`은 첫 번째 특성과 두 번째 특성의 곱을 나타내는 식입니다. 
+- `x0`은 첫 번째 특성을 의미, `x0^2` 는 첫 번째 특성의 제곱, `x0 x1`은 첫 번째 특성과 두 번째 특성의 곱을 나타내는 식입니다.
 
 ```python
 test_poly = poly.transform(test_input)
@@ -253,6 +253,9 @@ test_poly = poly.transform(test_input)
 - 변환된 특성을 사용하여 다중 회귀 모델을 훈련하겠습니다.
 
 ## 다중 회귀 모델 훈련하기
+
+- 다중 회귀 모델을 훈련하는 것은 선형 회귀 모델을 훈련하는 것과 같습니다. 다만 여러 개의 특성을 사용하여 선형 회귀를 수행하는 것뿐
+- 사이킷런의 `LinearRegession` 클래스를 임포트하고 앞에서 만든 `train_poly를 사용해 모델을 훈련시킵니다.
 
 ```python
 from sklearn.linear_model import LinearRegression
@@ -266,13 +269,20 @@ print(lr.score(train_poly, train_target))
 0.9903183436982125
 ```
 
+- 농어의 길이뿐만 아니라 높이와 두께를 모두 사용하였고, 각 특성을 제곱하거나 서로 곱해서 다항 특성을 더 추가했습니다. 높은 점수로 평가되었습니다.
+- 특성이 늘어나면 선형 회귀의 능력은 매우 강하다는 것을 알 수 있습니다.
+
 ```python
 print(lr.score(test_poly, test_target))
 ```
 
+- 테스트 세트에 대한 점수를 확인합니다.
+
 ```
 0.9714559911594111
 ```
+
+- 테스트 세트에 대한 점수는 높아지지 않았지만 농어의 길이만 사용했을 때 과소적합 문제는 더이상 나타나지 않았습니다.
 
 ```python
 poly = PolynomialFeatures(degree=5, include_bias=False)
