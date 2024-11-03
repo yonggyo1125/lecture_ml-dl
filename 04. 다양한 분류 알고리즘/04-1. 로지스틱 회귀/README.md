@@ -52,23 +52,34 @@ fish.head()
 
 ![스크린샷 2024-11-03 오후 5 40 08](https://github.com/user-attachments/assets/c5ce8cf6-7782-433f-a76b-feef25e8228e)
 
-
+- 판다스는 CSV 파일의 첫 줄을 자동으로 인식해 열 제목으로 만들어 줍니다.
 
 ```python
 print(pd.unique(fish['Species']))
 ```
 
+- 어떤 종류의 생선이 있는지 `Species` 열에서 고유한 값을 추출합니다.
+- 판다스의 `unique()` 함수를 사용
+
 ```
 ['Bream' 'Roach' 'Whitefish' 'Parkki' 'Perch' 'Pike' 'Smelt']
 ```
+
+- 이 데이터프레임에서 `Species` 열을 타깃으로 만들고 나머지 5개 열은 입력 데이터로 사용합니다. 
 
 ```python
 fish_input = fish[['Weight','Length','Diagonal','Height','Width']].to_numpy()
 ```
 
+- 데이터프레임에서 원하는 열을 리스트로 나열하면 됩니다. 
+- `Species` 열을 뺴고 나머지 5개 열을 선택합니다. 
+- 데이터프레임에서 여러 열을 선택하면 새로운 데이터프레임이 반환됩니다. 이를 `to_numpy()` 메서드로 넘파이 배열로 바꾸어 `fish_input`에 저장했습니다.  
+
 ```python
 print(fish_input[:5])
 ```
+
+- `fish_input`에 5개의 특성이 잘 저장되어 있는지 처음 5개 행을 출력해 봅시다.
 
 ```
 [[242.      25.4     30.      11.52     4.02  ]
@@ -82,6 +93,8 @@ print(fish_input[:5])
 fish_target = fish['Species'].to_numpy()
 ```
 
+- 동일한 방식으로 타깃 데이터를 만듭니다.
+
 ```python
 from sklearn.model_selection import train_test_split
 
@@ -89,14 +102,19 @@ train_input, test_input, train_target, test_target = train_test_split(
     fish_input, fish_target, random_state=42)
 ```
 
+- 데이터를 훈련 세트와 테스트 세트로 나눕니다.
+
 ```python
 from sklearn.preprocessing import StandardScaler
-
 ss = StandardScaler()
 ss.fit(train_input)
 train_scaled = ss.transform(train_input)
 test_scaled = ss.transform(test_input)
 ```
+
+- 사이킷런의 `StandardScaler` 클래스를 사용해 훈련 세트와 테스트 세트를 표준화 전처리합니다. 
+- 반드시 훈련 세트의 통계 값으로 테스트 세트를 변환해야 한다는 점
+
 
 ## k-최근접 이웃 분류기의 확률 예측
 
@@ -110,14 +128,24 @@ print(kn.score(train_scaled, train_target))
 print(kn.score(test_scaled, test_target))
 ```
 
+- `KeighborsClassifier` 클래스 객체를 만들고 훈련 세트로 모델을 훈련한 다음 훈련 세트와 테스트 세트의 점수를 확인 합니다.
+- 최근접 이웃 개수인 k를 3으로 지정하여 사용합니다.
+
 ```
 0.8907563025210085
 0.85
 ```
 
+- 타깃 데이터를 만들 때 `fish['Species']`를 사용해 만들었기 때문에 훈련 세트와 테스트 세트의 타깃 데이터에도 7개의 생선 종류가 들어가 있습니다. 
+- 이렇게 타깃 데이터에 2개 이상의 클래스가 포함된 문제를 **다중 분류**(multi-class classification)라고 부릅니다.
+- 이진 분류와 모델을 만들고 훈련하는 방식은 동일합니다.
+- 이진 분류를 사용했을 때는 양성 클래스와 음성 클래스를 각각 1과 0으로 지정하여 타깃 데이터를 만들었습니다. 다중 분류에서도 타깃값을 숫자로 바꾸어 입력할 수 있지만 사이킷런에서는 편리하게도 문자열로 된 타깃값을 그대로 사용할 수 있습니다.
+
 ```python
 print(kn.classes_)
 ```
+- 이때 주의할 점, 타깃값을 그대로 사이킷런 모델에 전달하면 순서가 자동으로 알파벳 순으로 매겨집니다. 따라서 `pd.unique(fish['Species'])`로 출력했던 순서와 다릅니다. 
+- `KNeighborsClassifier` 에서 정렬된 타깃값은 `classes_` 속성에 저장되어 있습니다. 
 
 ```
 ['Bream' 'Parkki' 'Perch' 'Pike' 'Roach' 'Smelt' 'Whitefish']
@@ -126,6 +154,8 @@ print(kn.classes_)
 ```python
 print(kn.predict(test_scaled[:5]))
 ```
+
+ - 테스트 세트에 있는 처음 5개의 샘플의 타깃값을 예측해 보면
 
 ```
 ['Perch' 'Smelt' 'Pike' 'Perch' 'Perch']
@@ -138,6 +168,10 @@ proba = kn.predict_proba(test_scaled[:5])
 print(np.round(proba, decimals=4))
 ```
 
+- 사이킷런의 분류 모델은 `predict_proba()` 메서드로 클래스별 확률값을 반환합니다. 
+- 테스트 세트에 있는 처음 5개의 샘플에 대한 확률을 출력합니다. 
+- 넘파이 `round()` 함수는 기본적으로 소수점 첫째 자리에서 반올림을 하는데, decimals 매개변수로 유지할 소수점 아래 자리수를 지정할 수 있습니다. 
+
 ```
 [[0.     0.     1.     0.     0.     0.     0.    ]
  [0.     0.     0.     0.     0.     1.     0.    ]
@@ -146,14 +180,23 @@ print(np.round(proba, decimals=4))
  [0.     0.     0.6667 0.     0.3333 0.     0.    ]]
 ```
 
+- `predict_proba()` 메서드의 출력 순서는 앞서 보았던 `classes_` 속성과 같습니다. 
+- 즉, 첫 번째 열이 `Bream`에 대한 확률, 두 번째 열이 `Parkki`에 대한 확률
+
 ```python
 distances, indexes = kn.kneighbors(test_scaled[3:4])
 print(train_target[indexes])
 ```
 
+- 이 모델이 계산한 확률이 가장 가까운 이웃의 비율이 맞는지 확인합니다. 
+- 네 번째 샘플의 최근접 이웃의 클래스를 확인해 봅니다.
+
 ```
 [['Roach' 'Perch' 'Perch']]
 ```
+
+- 3개의 최근접 이웃을 사용하기 떄문에 가능한 확률은 0/3, 1/3, 2/3, 3/3이 전부 입니다. 확률이라고 하기엔 어색합니다.
+- 더 좋은 방법이 필요 -> 로지스틱 회귀
 
 ## 로지스틱 회귀
 
