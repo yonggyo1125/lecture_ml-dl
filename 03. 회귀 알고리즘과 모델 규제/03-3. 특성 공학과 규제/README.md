@@ -530,11 +530,14 @@ plt.show()
   
 ![스크린샷 2024-11-03 오후 5 07 02](https://github.com/user-attachments/assets/2dd6940d-a7cd-49e9-97bc-94f80491b386)
 
+- 이 그래프도 왼쪽은 과대적합을 보여주고 있고, 오른쪽으로 갈수록 훈련 세트와 테스트 세트의 점수가 좁혀지고 있습니다. 
+- 가장 오른쪽은 아주 크게 점수가 떨어집니다. 이 지점은 분명 과소적합되는 모델일 것입니다. 
+- 라쏘 모델에서 최적의 `alpha` 값은 1, 즉 10^1 = 10 입니다.
+- 이 값으로 다시 모델을 훈련합니다.  
 
 ```python
 lasso = Lasso(alpha=10)
 lasso.fit(train_scaled, train_target)
-
 print(lasso.score(train_scaled, train_target))
 print(lasso.score(test_scaled, test_target))
 ```
@@ -544,10 +547,20 @@ print(lasso.score(test_scaled, test_target))
 0.9824470598706695
 ```
 
+- 특성을 많이 사용했지만 릿지와 마찬가지로 라쏘 모델이 과대적합을 잘 억제하고 테스트 세트의 성능을 크게 높였습니다. 
+
 ```python
 print(np.sum(lasso.coef_ == 0))
 ```
 
+- 라쏘 모델은 계수 값을 아예 0으로 만들 수 있습니다. 라쏘 모델의 계수는 `coef_` 속성에 저장되어 있습니다. 
+- 이 중 0인 것을 헤아리겠습니다.
+
 ```
 40
 ```
+
+- 55개의 특성을 모델에 주입했지만 라쏘 모델이 사용한 특성은 15개 밖에 되지 않습니다. 
+- 이런 특징 때문에 라쏘 모델을 유용한 특성을 골라내는 용도로 사용할 수 있습니다.
+
+> np.sum() 함수는 배열을 모두 더한 값을 반환합니다. 넘파이 배열에 비교 연산자를 사용했을 때 각 원소는 True 또는 False가 됩니다. np.sum() 함수는 True를 1로, False를 0으로 인식하여 덧셈을 할 수 있기 때문에 연산자에 맞는 원소 개수를 헤아리는 효과를 냅니다.
