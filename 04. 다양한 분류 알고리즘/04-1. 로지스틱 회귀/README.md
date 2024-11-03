@@ -469,6 +469,9 @@ decision = lr.decision_function(test_scaled[:5])
 print(np.round(decision, decimals=2))
 ```
 
+- 이진 분류에서 처럼 `decision_function()` 메서드로 z1\~z7까지의 합을 구한 다음 소프트맥스 함수를 사용해 확률로 바꾸어 보겠습니다. 
+- 먼저 테스트 세트의 5개 샘플에 대한 z1\~z7의 값을 구해봅시다.
+
 ```
 [[ -6.51   1.04   5.17  -2.76   3.34   0.35  -0.63]
  [-10.88   1.94   4.78  -2.42   2.99   7.84  -4.25]
@@ -483,6 +486,11 @@ from scipy.special import softmax
 proba = softmax(decision, axis=1)
 print(np.round(proba, decimals=3))
 ```
+
+- 사이파이 라이브러리는 소프트 맥스 함수도 제공합니다. `scipy.special` 아래에 `softmax()` 함수를 임포트해 사용합니다.
+- 앞서 구한 `decision` 배열을 `softmax()` 함수에 전달했습니다. `softmax()` 의 axis 매개변수는 소프트맥스를 계산할 축을 지정합니다. 
+- 여기에서는 `axis=1`로 지정하여 각 행, 즉 각 샘플에 대해 소프트맥스를 계산합니다. 
+- 만약 axis 매개변수를 지정하지 않으면 배열 전체에 대해 소프트맥스를 계산합니다. 
 
 ```
 [[0.    0.014 0.842 0.    0.135 0.007 0.003]
