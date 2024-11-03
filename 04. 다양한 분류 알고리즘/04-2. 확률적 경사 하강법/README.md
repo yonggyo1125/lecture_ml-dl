@@ -63,6 +63,8 @@
 
 
 
+![스크린샷 2024-11-03 오후 9 36 26](https://github.com/user-attachments/assets/bda256c2-60ea-4642-b0d7-4262cafe3291)
+
 
 ## SGDClassifier
 
