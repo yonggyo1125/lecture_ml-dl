@@ -50,6 +50,10 @@ fish.head()
 
 - 판다스의 `read_csv()` 함수로 인터넷에서 직접 CSV 데이터를 읽어 데이터 프레임으로 변환한 다음 head() 메서드로 5개 행을 출력합니다.
 
+![스크린샷 2024-11-03 오후 5 40 08](https://github.com/user-attachments/assets/c5ce8cf6-7782-433f-a76b-feef25e8228e)
+
+
+
 ```python
 print(pd.unique(fish['Species']))
 ```
