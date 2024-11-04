@@ -181,6 +181,23 @@ print(lr.coef_, lr.intercept_)
 - `fit()` 메서드를 호출해서 모델을 훈련한 다음 `score()` 메서드로 정확도를 평가합니다. 
 
 
+```python
+from sklearn.tree import DecisionTreeClassifier
+
+dt = DecisionTreeClassifier(random_state=42)
+dt.fit(train_scaled, train_target)
+
+print(dt.score(train_scaled, train_target)) # 훈련 세트
+print(dt.score(test_scaled, test_target))   # 테스트 세트
+```
+
+```
+0.996921300750433
+0.8592307692307692
+```
+
+- 훈련 세트에 대한 점수가 매우 높으나 테스트 세트의 성능은 그에 비해 조금 낮습니다. 과대적합된 모델이라고 볼 수 있습니다. 
+- 이 모델을 그림으로 표현하려면 사이킷런의 `plot_tree()`함수를 사용해 결정 트리를 이해하기 쉬운 트리 그림으로 출력해 줍니다.
 
 
 ```python
@@ -191,6 +208,11 @@ plt.figure(figsize=(10,7))
 plot_tree(dt)
 plt.show()
 ```
+
+- 위에서 만든 결정 트리 모델 객체를 `plot_tree()` 함수에 전달해서 어떤 트리가 만들어졌는지 그려봅니다.
+
+
+
 
 ```python
 plt.figure(figsize=(10,7))
