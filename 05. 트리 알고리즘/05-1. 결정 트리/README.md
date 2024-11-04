@@ -53,9 +53,14 @@ import pandas as pd
 wine = pd.read_csv('https://bit.ly/wine_csv_data')
 ```
 
+- 판다스를 사용해 인터넷에서 직접 불러오겠습니다. 
+- 다운로드할 주소는 https://bit.ly/wine_csv_data 입니다.
+ 
 ```python
 wine.head()
 ```
+
+- 와인 데이터셋을 판다스 데이터프레임으로 제대로 읽어 들였는지 `head()` 메서드로 처음 5개의 샘플을 확인해 보겠습니다..
 
 ```python
 wine.info()
