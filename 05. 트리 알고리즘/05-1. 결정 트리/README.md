@@ -235,6 +235,7 @@ plt.show()
 - `feature_names` 매개변수에는 특성의 이름을 전달할 수 있습니다. 
 - 이렇게 하면 노드가 어떤 특성으로 나뉘는지 좀 더 잘 이해할 수 있습니다.
 
+![스크린샷 2024-11-05 오전 7 21 15](https://github.com/user-attachments/assets/9e2b5072-66eb-4504-8a67-b86be441c6f1)
 
 
 
