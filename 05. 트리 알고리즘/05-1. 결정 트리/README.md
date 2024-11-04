@@ -92,10 +92,19 @@ wine.describe()
 
 ![스크린샷 2024-11-05 오전 6 45 42](https://github.com/user-attachments/assets/1832b862-5d5c-4f07-91b7-f4554910f38f)
 
+- 평균(mean), 표준편차(std), 최소(min), 최대(max)값, 중간값(50%), 1사분위수(25%), 3사분위수(75%)를 볼 수 있습니다. 
+- 여기에서 알수 있는 것은 알코올 도수와 당도, pH 값의 스케일이 다르다는 것
+- 사이킷런의 `StandardScaler` 클래스를 사용해 특성을 표준화합니다.
+
+> 사분위수는 데이터를 순서대로 4등분 한 값입니다. 예를 들어 2사분위수(중간값)는 데이터를 일렬로 늘어놓았을 때 정중앙의 값입니다. 만약 데이터 개수가 짝수개라 중앙값을 선택할 수 없다면 가운데 2개 값의 평균을 사용합니다.
+
 ```python
 data = wine[['alcohol', 'sugar', 'pH']].to_numpy()
 target = wine['class'].to_numpy()
 ```
+
+- 판다스 데이터프레임을 넘파이 배열로 바꾸고 훈련 세트와 테스트 세트로 나누겠습니다. 
+- wine 데이터프레임에서 처음 3개의 열을 넘파이 배열로 바꿔서 data 배열에 저장하고 마지막 class 열을 넘파이 배열로 바꿔서 target 배열에 저장합니다.
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -104,13 +113,22 @@ train_input, test_input, train_target, test_target = train_test_split(
     data, target, test_size=0.2, random_state=42)
 ```
 
+- 훈련 세트와 테스트 세트로 나눕니다.
+- `train_test_split()` 함수는 설정값을 지정하지 않으면 25%를 테스트 세트로 지정합니다. 
+- 샘플 개수가 충분히 많으므로 20% 정도만 테스트 세트로 나눴습니다. 코드의 `test_size=0.2`가 이런 의미 입니다. 
+
+
 ```python
 print(train_input.shape, test_input.shape)
 ```
 
+- 만들어진 훈련 세트와 테스트 세트의 크기를 확인합니다.
+
 ```
 (5197, 3) (1300, 3)
 ```
+
+- 훈련 세트는 5.197개이고 테스트 세트는 1,300개 입니다.
 
 ```python
 from sklearn.preprocessing import StandardScaler
@@ -122,6 +140,10 @@ train_scaled = ss.transform(train_input)
 test_scaled = ss.transform(test_input)
 ```
 
+- `StandardScaler` 클래스를 사용해 훈련 세트를 전처리합니다. 
+- 그 다음 같은 객체를 그대로 사용해 테스트 세트를 변환하겠습니다.
+
+
 ```python
 from sklearn.linear_model import LogisticRegression
 
@@ -132,10 +154,34 @@ print(lr.score(train_scaled, train_target))
 print(lr.score(test_scaled, test_target))
 ```
 
+- 표준점수로 변환된 `train_scaled` 와 `test_scaled` 를 사용해 로지스틱 회귀 모델을 훈련합니다.
+
 ```
 0.7808350971714451
 0.7776923076923077
 ```
+
+- 훈련 세트와 테스트 세트의 점수가 모두 낮으니 모델이 다소 과소적합된 것 같습니다. 
+
+### 설명하기 쉬운 모델과 어려운 모델
+
+```python
+print(lr.coef_, lr.intercept_)
+```
+
+```
+[[ 0.51270274,  1.6733911,   -0.68767781]] [1.81777902]
+```
+
+## 결정 트리
+- **결정 트리**(Decision Tree)모델은 이유를 설명하기 쉽습니다.
+- 결정 트리 모델은 스무고개와 같이 질문을 하나씩 던져서 정답을 맞춰가는 것
+- 데이터를 잘 나눌 수 있는 질문을 찾는다면 계속 질문을 추가해서 분류 정확도를 높일 수 있습니다.
+- 사이킷런은 결정 트리 알고리즘을 제공합니다. **DecisionTreeClassifier** 클래스
+- `fit()` 메서드를 호출해서 모델을 훈련한 다음 `score()` 메서드로 정확도를 평가합니다. 
+
+
+
 
 ```python
 import matplotlib.pyplot as plt
