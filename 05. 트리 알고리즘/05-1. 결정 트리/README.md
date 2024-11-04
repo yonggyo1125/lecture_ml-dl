@@ -180,7 +180,7 @@ print(lr.coef_, lr.intercept_)
 - 사이킷런은 결정 트리 알고리즘을 제공합니다. **DecisionTreeClassifier** 클래스
 - `fit()` 메서드를 호출해서 모델을 훈련한 다음 `score()` 메서드로 정확도를 평가합니다. 
 
-
+![스크린샷 2024-11-05 오전 7 04 18](https://github.com/user-attachments/assets/4efae792-be2f-47d9-bb13-b94d1221e9da)
 
 
 ```python
