@@ -60,7 +60,10 @@ wine = pd.read_csv('https://bit.ly/wine_csv_data')
 wine.head()
 ```
 
-- 와인 데이터셋을 판다스 데이터프레임으로 제대로 읽어 들였는지 `head()` 메서드로 처음 5개의 샘플을 확인해 보겠습니다..
+- 와인 데이터셋을 판다스 데이터프레임으로 제대로 읽어 들였는지 `head()` 메서드로 처음 5개의 샘플을 확인해 보겠습니다.
+
+![스크린샷 2024-11-05 오전 6 33 45](https://github.com/user-attachments/assets/46e8cf34-a196-4aec-b69c-3740c468f471)
+
 
 ```python
 wine.info()
