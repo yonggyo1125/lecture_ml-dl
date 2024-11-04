@@ -215,6 +215,7 @@ plt.show()
 - 위에서 만든 결정 트리 모델 객체를 `plot_tree()` 함수에 전달해서 어떤 트리가 만들어졌는지 그려봅니다.
 
 
+![스크린샷 2024-11-05 오전 7 09 08](https://github.com/user-attachments/assets/c589c11d-39ef-4e6f-840a-7e4ae1d561a8)
 
 
 ```python
