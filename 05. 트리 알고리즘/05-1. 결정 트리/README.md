@@ -180,6 +180,7 @@ print(lr.coef_, lr.intercept_)
 - 사이킷런은 결정 트리 알고리즘을 제공합니다. **DecisionTreeClassifier** 클래스
 - `fit()` 메서드를 호출해서 모델을 훈련한 다음 `score()` 메서드로 정확도를 평가합니다. 
 
+![스크린샷 2024-11-05 오전 7 04 18](https://github.com/user-attachments/assets/4efae792-be2f-47d9-bb13-b94d1221e9da)
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
@@ -199,7 +200,7 @@ print(dt.score(test_scaled, test_target))   # 테스트 세트
 - 훈련 세트에 대한 점수가 매우 높으나 테스트 세트의 성능은 그에 비해 조금 낮습니다. 과대적합된 모델이라고 볼 수 있습니다. 
 - 이 모델을 그림으로 표현하려면 사이킷런의 `plot_tree()`함수를 사용해 결정 트리를 이해하기 쉬운 트리 그림으로 출력해 줍니다.
 
-![스크린샷 2024-11-05 오전 7 04 18](https://github.com/user-attachments/assets/4efae792-be2f-47d9-bb13-b94d1221e9da)
+
 
 
 ```python
