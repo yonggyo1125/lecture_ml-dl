@@ -90,6 +90,7 @@ wine.describe()
 - 이 메서드는 열에 대한 간략한 통계를 출력해 줍니다. 
 - 최소, 최대, 평균값 등을 볼 수 있습니다.
 
+![스크린샷 2024-11-05 오전 6 45 42](https://github.com/user-attachments/assets/1832b862-5d5c-4f07-91b7-f4554910f38f)
 
 ```python
 data = wine[['alcohol', 'sugar', 'pH']].to_numpy()
