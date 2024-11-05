@@ -369,6 +369,7 @@ plt.show()
 
 - 트리를 그려보면 다음과 같습니다.
 
+![스크린샷 2024-11-06 오전 7 01 13](https://github.com/user-attachments/assets/4621f4fc-b7ed-41cd-8e02-5134ce138d3b)
 
 
 
