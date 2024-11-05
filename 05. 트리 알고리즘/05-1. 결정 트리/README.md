@@ -239,6 +239,18 @@ plt.show()
 
 
 
+![스크린샷 2024-11-06 오전 6 05 21](https://github.com/user-attachments/assets/809c50f3-e53a-4bb2-9aa2-6d91b197edca)
+
+
+![스크린샷 2024-11-06 오전 6 06 19](https://github.com/user-attachments/assets/a656d0a1-4925-493b-936b-9fcc0cf9e7ae)
+
+
+![스크린샷 2024-11-06 오전 6 06 57](https://github.com/user-attachments/assets/f3e11c5d-68a2-40e9-82b5-e444017d4f6d)
+
+
+![스크린샷 2024-11-06 오전 6 07 39](https://github.com/user-attachments/assets/bd6208d5-1b94-457c-b7d7-759cff5ad28a)
+
+
 ## 가지치기
 
 ```python
