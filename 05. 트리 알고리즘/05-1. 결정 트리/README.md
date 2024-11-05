@@ -338,7 +338,7 @@ plt.show()
 
 - 이런 모델을 트리 그래프로 그린다면 훨씬 이해하기 쉽습니다. `plot_tree()` 함수로 그려봅니다. 
 
-
+![스크린샷 2024-11-06 오전 6 52 30](https://github.com/user-attachments/assets/0f851d6e-007f-41bc-9889-d97509a91b1c)
 
 
 
