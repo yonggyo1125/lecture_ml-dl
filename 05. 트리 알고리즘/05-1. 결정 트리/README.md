@@ -269,6 +269,13 @@ plt.show()
 - 지니 불순도를 계산하는 방법 : 클래스의 비율을 제곱해서 더한 다음 1에서 빼면 됩니다.
 
 
+![스크린샷 2024-11-06 오전 6 28 13](https://github.com/user-attachments/assets/edc99888-e215-4dde-b59f-c1fe979a7d7f)
+![스크린샷 2024-11-06 오전 6 28 25](https://github.com/user-attachments/assets/88da19ec-dba9-41d2-9937-de46e5db13f9)
+![스크린샷 2024-11-06 오전 6 28 32](https://github.com/user-attachments/assets/041818a7-a523-4bf5-a9bd-b844cb03e493)
+![스크린샷 2024-11-06 오전 6 28 38](https://github.com/user-attachments/assets/e2f3d8f7-1a43-4b38-83d7-9d9f0f1bca38)
+
+
+
 
 
 ## 가지치기
