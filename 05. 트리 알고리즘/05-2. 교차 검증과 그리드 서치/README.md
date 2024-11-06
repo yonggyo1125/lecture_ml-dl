@@ -133,6 +133,13 @@ print(dt.score(val_input, val_target))
 
 ![스크린샷 2024-11-07 오전 6 43 11](https://github.com/user-attachments/assets/1f90224b-406a-48ef-8112-b2b1093e01a6)
 
+> 3-폴드 교차 검증
+>
+> 훈련 세트를 세 부분으로 나눠서 교차 검증을 수행하는 것을 3-폴드 교차 검증이라고 합니다. 통칭 k-폴드 교차 검증(k-fold cross validation)이라고 하며, 훈련 세트를 몇 부분으로 나누냐에 따라 다르게 부릅니다. k-겹 교차 검증이라고도 부릅니다.
+
+- 보통 5-폴드 교차 검증이나 10-폴드 교차 검증을 많이 사용합니다. 
+- 이렇게 하면 데이터가 80\~90% 까지 훈련에 사용할 수 있습니다. 
+- 검증 세트가 줄어들지만 각 폴드에서 계산한 검증 점수를 평균하기 때문에 안정된 점수로 생각할 수 있습니다.
 
 ```python
 from sklearn.model_selection import cross_validate
@@ -141,9 +148,17 @@ scores = cross_validate(dt, train_input, train_target)
 print(scores)
 ```
 
+- 사이킷런에는 `cross_validate()`라는 교차 검증 함수가 있습니다. 
+- 먼저 평가할 모델 객체를 첫 번째 매개변수로 전달합니다. 그 다음 앞에서처럼 직접 검증 세트를 떼어 내지 않고 훈련 세트 전체를 `cross_validate()` 함수에 전달합니다. 
+
 ```
 {'fit_time': array([0.01341891, 0.02167416, 0.02525187, 0.04882073, 0.03598666]), 'score_time': array([0.0027864 , 0.0019815 , 0.00886154, 0.01437068, 0.02624893]), 'test_score': array([0.86923077, 0.84615385, 0.87680462, 0.84889317, 0.83541867])}
 ```
+
+- `fit_time`: 모델을 훈련하는 시간
+- `score_time`: 검증하는 시간
+- 각 키마다 5개의 숫자가 담겨 있습니다. `cross_validate()` 함수는 기본적으로 **5-폴드 교차 검증**을 수행합니다.
+- cv 매개변수에서 폴드 수를 바꿀 수도 있습니다. 
 
 ```python
 import numpy as np
@@ -151,9 +166,16 @@ import numpy as np
 print(np.mean(scores['test_score']))
 ```
 
+- 교차 검증의 최종 점수는 `test_score` 키에 담긴 5개의 점수를 평균하여 얻을 수 있습니다. 
+- 이름은 `test_score` 지만 검증 폴드의 점수입니다. 
+
 ```
 0.855300214703487
 ```
+- 교차 검증을 수행하면 입력한 모델에서 얻을 수 있는 최상의 검증 점수를 예상해 볼 수 있습니다.
+- 주의할 점은 `cross_validate()` 는 훈련 세트를 섞어 폴드를 나누지 않습니다. 앞서 `train_test_split()` 함수로 전체 데이터를 섞은 후 훈련 세트를 준비했기 때문에 따로 섞을 필요가 없습니다. 
+- 만약 교차 검증을 할 때 훈련 세트를 섞으려면 분할기(splitter)를 지정해야 합니다.
+
 
 ```python
 from sklearn.model_selection import StratifiedKFold
@@ -162,15 +184,23 @@ scores = cross_validate(dt, train_input, train_target, cv=StratifiedKFold())
 print(np.mean(scores['test_score']))
 ```
 
+- 사이킷런의 분할기는 교차 검증에서 폴드를 어떻게 나눌지 결정해 줍니다. 
+- `cross_validate()` 함수는 기본적으로 회귀 모델일 경우 **KFold** 분할기를 사용하고 분류 모델일 경우 타깃 클래스를 골고루 나누기 위해 **StratifiedKFold**를 사용합니다. 
+
+
 ```
 0.855300214703487
 ```
+
 
 ```python
 splitter = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
 scores = cross_validate(dt, train_input, train_target, cv=splitter)
 print(np.mean(scores['test_score']))
 ```
+- 10-폴드 교차 검증 수행은 위 코드와 같습니다.
+- `n_splits` 매개변수는 몇(k) 폴드 교차 검증을 할지 정합니다.
+
 
 ```
 0.8574181117533719
@@ -178,24 +208,53 @@ print(np.mean(scores['test_score']))
 
 ## 하이퍼파라미터 튜닝
 
+- **모델 파라미터** : 머신러닝 모델이 학습하는 파라미터
+- **하이퍼파라미터** : 모델이 학습할 수 없어서 사용자가 지정해야만 하는 파라미터
+- 사이킷런과 같은 머신러닝 라이브러리를 사용할 때 이런 하이퍼파라미터는 모두 클래스나 메서드의 매개변수로 표현된다.
+- 하이퍼파라미터를 튜닝하는 작업은 먼저 라이브러리가 제공하는 기본값을 그대로 사용해 모델을 훈련합니다. 그 다음 검증 세트의 점수나 교차 검증을 통해서 매개변수를 조금씩 바꿔 봅니다. 
+- 모델마다 적게는 1\~2개에서, 많게는 5\~6개의 매개변수를 제공합니다. 이 매개변수를 바꿔가면서 모델을 훈련하고 교차검증을 수행합니다.
+
+> 사람의 개입 없이 하이퍼파라미터 튜닝을 자동으로 수행하는 기술을 `AutoML` 이라고 부릅니다. 
+
+- 결정 트리 모델에서 `max_depth` 의 최적값은 `min_samples_split` 매개변수의 값이 바뀌면 함께 달라집니다. 
+- 즉, 이 두 매개변수를 동시에 바꿔가며 최적의 값을 찾아야 합니다. 
+- 매개변수가 많아지만 문제는 복잡해 집니다. 그래서 이미 만들어진 도구인 사이킷런에서 제공하는 **그리드 서치**(Grid Search)를 사용합니다. 
+
+
 ```python
 from sklearn.model_selection import GridSearchCV
 
 params = {'min_impurity_decrease': [0.0001, 0.0002, 0.0003, 0.0004, 0.0005]}
 ```
 
+- 사이킷런의 GridSearchCV 클래스는 친절하게도 하이퍼파라미터 탐색과 교차 검증을 한 번에 수행합니다. 별도로 `cross_validate()` 함수를 호출할 필요가 없습니다. 
+- 기본 매개변수를 사용한 결정 트리 모델에서 `min_impurity_decrease` 매개변수의 최적값을 찾아봅니다. 
+- 먼저 **GridSearchCV** 클래스를 임포트하고 탐색할 매개변수와 탐색할 값의 리스트를 딕셔너리로 만듭니다. 
+
 ```python
 gs = GridSearchCV(DecisionTreeClassifier(random_state=42), params, n_jobs=-1)
 ```
+- 0.0001 부터 0.0005까지 0.0001씩 증가하는 5개의 값을 시도합니다. 
+- **GridSearchCV** 클래스에 탐색 대상 모델과 `params` 변수를 전달하여 그리드 서치 객체를 만듭니다. 
 
 ```python
 gs.fit(train_input, train_target)
 ```
 
+- 일반 모델을 훈련하는 것처럼 `gs` 객체에 `fit()` 메서드를 호출합니다. 
+- 이 메서드를 호출하면 그리드 서치 객체는 결정 트리 모델 `min_impurity_decrease` 값을 바꿔가며 총 5번 실행합니다.
+- **GridSearchCV**의 cv 매개변수 기본값은 5입니다. 따라서 `min_impurity_decrease` 값마다 5-폴드 교차 검증을 수행합니다. 결국 5 X 5 = 25개의 모델을 훈련합니다. 
+- 많은 모델을 훈련하기 때문에 **GridSearchCV** 클래스의 `n_jobs` 매개변수에서 병렬 실해에 사용할 CPU 코어 수를 지정하는 것이 좋습니다. 
+- 이 매개변수의 기본값은 1입니다. -1로 지정하면 시스템에 있는 모든 코어를 사용합니다.
+
 ```python
 dt = gs.best_estimator_
 print(dt.score(train_input, train_target))
 ```
+
+- 교차 검증에서 최적의 하이퍼파라미터를 찾으면 전체 훈련 세트로 모델을 다시 만들어야 합니다. 
+- 편리하게도 사이킷런의 그리드 서치는 훈련이 끝나면 25개의 모델 중에서 검증 점수가 가장 높은 모델의 매개변수 조합으로 전체 훈련 세트에서 자동으로 다시 모델을 훈련합니다. 
+- 이 모델은 `gs` 객체의 `best_estimator_` 속성에 저장되어 있습니다. 이 모델을 일반 결정 트리처럼 똑같이 사용할 수 있습니다.
 
 ```
 0.9615162593804117
@@ -204,14 +263,20 @@ print(dt.score(train_input, train_target))
 ```python
 print(gs.best_params_)
 ```
+- 그리드 서치로 찾은 최적의 매개변수는 `best_params_` 속성에 저장되어 있습니다. 
 
 ```
 {'min_impurity_decrease': 0.0001}
 ```
 
+- 여기에서는 0.0001이 가장 좋은 값으로 선택되었습니다. 
+
 ```python
 print(gs.cv_results_['mean_test_score'])
 ```
+
+- 각 매개변수에서 수행한 교차 검증의 평균 점수는 `cv_results_` 속성의 `mean_test_score` 키에 저장되어 있습니다.
+- 5번의 교차 검증으로 얻은 점수를 출력해 봅시다.
 
 ```
 [0.86819297 0.86453617 0.86492226 0.86780891 0.86761605]
