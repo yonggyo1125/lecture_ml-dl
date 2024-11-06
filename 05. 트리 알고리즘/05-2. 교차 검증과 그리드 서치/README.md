@@ -46,6 +46,11 @@
 
 ![스크린샷 2024-11-07 오전 6 26 51](https://github.com/user-attachments/assets/214c58eb-29d2-40db-86a0-e5704531193f)
 
+> 보통 20\~30%를 테스트 세트와 검증 세트로 떼어 놓습니다. 하지만 문제에 따라 다릅니다. 훈련 데이터가 아주 많다면 단 몇 %만 떼어 놓아도 전체 데이터를 대표하는 데 문제가 없습니다.
+
+- 훈련 세트에서 모델을 훈련하고 검증 세트로 모델을 평가합니다. 이런 식으로 테스트 하고 싶은 매개변수를 바꿔가며 가장 좋은 모델을 고릅니다. 
+- 미 매개변수를 사용해 훈련 세트와 검증 세트를 합쳐 전체 훈련 데이터에서 모델을 다시 훈련합니다. 
+- 마지막에 테스트 세트에서 최종 점수를 평가합니다. 실전에 투입했을 때 테스트 세트의 점수와 비슷한 성능을 기대할 수 있을 것입니다. 
 
 ```python
 import pandas as pd
@@ -53,10 +58,17 @@ import pandas as pd
 wine = pd.read_csv('https://bit.ly/wine_csv_data')
 ```
 
+- 데이터를 다시 불러와서 검증 세트를 만들어 봅니다.
+- 판다스로 CSV 데이터를 읽습니다.
+
+
 ```python
 data = wine[['alcohol', 'sugar', 'pH']].to_numpy()
 target = wine['class'].to_numpy()
 ```
+
+- `class` 열을 타깃으로 사용하고 나머지 열은 특성 배열에 저장합니다. 
+
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -65,18 +77,32 @@ train_input, test_input, train_target, test_target = train_test_split(
     data, target, test_size=0.2, random_state=42)
 ```
 
+- 훈련 세트와 테스트 세트를 나눕니다. 
+- 훈련 세트의 입력 데이터와 타깃 데이터를 `train_input`과 `train_target` 배열에 저장
+
 ```python
 sub_input, val_input, sub_target, val_target = train_test_split(
     train_input, train_target, test_size=0.2, random_state=42)
 ```
 
+- `train_input` 과 `train_target` 을 다시 `train_test_split()` 함수에 넣어 훈련 세트 `sub_input`, `sub_target`과 검증 세트 `val_input`, `val_target`을 만듭ㄴ다. 
+- test_size 매개변수를 0.2로 지정하여 `train_input` 의 약 20%를 `val_input`으로 만듭니다.
+
+
 ```python
 print(sub_input.shape, val_input.shape)
 ```
 
+- 단순히 `train_test_split()` 함수를 2번 적용해서 훈련 세트와 검증 세트로 나눠준 것
+- 훈련 세트와 검증 세트의 크기를 확인
+
 ```
 (4157, 3) (1040, 3)
 ```
+
+- 원래 5,197개 였던 훈련 세트가 4,157개로 줄고, 검증 세트는 1,040개가 되었습니다. 
+- `sub_input`, `sub_target`과 `val_input`, `val_target`을 사용해 검증 모델을 만들고 평가합니다.
+
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
@@ -88,12 +114,24 @@ print(dt.score(sub_input, sub_target))
 print(dt.score(val_input, val_target))
 ```
 
+- `sub_input`, `sub_target`과 `val_input`, `val_target`을 사용해 모델을 만들고 평가합니다.  
+
 ```
 0.9971133028626413
 0.864423076923077
 ```
 
+- 이 모델은 훈련 세트에 과대적합되어 있습니다.
+- 매개변수를 바꿔서 더 좋은 모델을 찾아야 합니다. 
+
+
 ## 교차 검증
+
+- 검증 세트를 만드느라 훈련 세트가 줄었습니다. 보통 많은 데이터를 훈련에 사용할수록 좋은 모델이 만들어집니다. 그렇다고 검증 세트를 너무 조금 떼어 놓으면 검증 점수가 들쭉날쭉하고 불안정할 것입니다. 이럴 때 **교차 검증**(cross validation)을 이용하면 안정적인 검증 점수를 얻고 훈련에 더 많은 데이터를 사용할 수 있습니다. 
+- 교차 검증은 검증 세트를 떼어 내어 평가하는 과정을 여러 번 반복합니다. 그 다음 이 점수를 평균하여 최종 검증 점수를 얻습니다. 
+- 3-폴드 교차 검증
+
+
 
 ```python
 from sklearn.model_selection import cross_validate
