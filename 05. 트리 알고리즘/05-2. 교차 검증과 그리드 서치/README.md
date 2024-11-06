@@ -131,6 +131,7 @@ print(dt.score(val_input, val_target))
 - 교차 검증은 검증 세트를 떼어 내어 평가하는 과정을 여러 번 반복합니다. 그 다음 이 점수를 평균하여 최종 검증 점수를 얻습니다. 
 - 3-폴드 교차 검증
 
+![스크린샷 2024-11-07 오전 6 43 11](https://github.com/user-attachments/assets/1f90224b-406a-48ef-8112-b2b1093e01a6)
 
 
 ```python
