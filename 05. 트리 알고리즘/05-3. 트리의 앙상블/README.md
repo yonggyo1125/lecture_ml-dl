@@ -273,6 +273,11 @@ print(gb.feature_importances_)
 
 ## 히스토그램 기반 부스팅
 
+- **히스토그램 기반 그레이디언트 부스팅**(Histogram-based Gradient Boosting)은 정형 데이터를 다루는 머신러닝 알고리즘 중에 가장 인기가 높은 알고리즘입니다. 
+- 히스토그램 기반 그레디언트 부스팅은 먼저 입력 특성을 256개의 구간으로 나눕니다. 따라서 노드를 분할할 때 최적의 분할을 매우 빠르게 찾을 수 있습니다.
+- 히스토그램 기반 그레이디언트 부스팅은 256개의 구간 중에서 하나를 떼어 노고 누락된 값을 위해서 사용합니다. 따라서 입력에 누락된 특성이 있더라도 이를 따로 전처리할 필요가 없습니다.
+
+
 ```python
 from sklearn.ensemble import HistGradientBoostingClassifier
 
@@ -282,9 +287,17 @@ scores = cross_validate(hgb, train_input, train_target, return_train_score=True,
 print(np.mean(scores['train_score']), np.mean(scores['test_score']))
 ```
 
+- 사이킷런의 히스토그램 기반 그레이디언트 부스팅 클래스는 **HistGradientBoostingClassifier**입니다. 
+- 일반적으로 **HistGradientBoostingClassifier**는 기본 매개변수에서 안정적인 성능을 얻을 수 있습니다.
+- **HistGradientBoostingClassifier**에는 트리의 개수를 지정하는데 `n_estimators` 대신에 부스팅 반복 횟수를 지정하는 `max_iter`를 사용합니다. 성능을 높이려면 `max_iter` 매개변수를 테스트해 보세요.
+
+
 ```
 0.9321723946453317 0.8801241948619236
 ```
+
+- 과대적합을 잘 억제하면서 그레이디언트 부스팅보다 조금 더 높은 성능을 제공합니다.
+
 
 ```python
 from sklearn.inspection import permutation_importance
@@ -295,9 +308,17 @@ result = permutation_importance(hgb, train_input, train_target, n_repeats=10,
 print(result.importances_mean)
 ```
 
+- 특성 중요도를 확인합니다.
+- 히스토그램 기반 그레이디언트 부스팅의 특성 중요도를 계산하기 위해 `permutation_importance()` 함수를 사용합니다. 이 함수는 특성을 하나씩 랜덤하게 섞어서 모델의 성능이 변화하는지 관찰하여 어떤 특성이 중요한지 계산합니다. 
+- 훈련 세트뿐 아니라 테스트 세트에서도 적용할 수 있고 사이킷런에서 제공하는 추정기 모델에서 모두 사용할 수 있습니다.
+- 히스토그램 기반 그레디언트 부스팅 모델을 훈련하고 훈련 세트에서 특성 중요도를 계산해 봅니다. `n_repeats` 매개변수는 랜덤하게 섞을 횟수를 지정합니다. 여기에서는 10으로 지정하겠습니다. 기본값은 5입니다.
+
 ```
 [0.08876275 0.23438522 0.08027708]
 ```
+
+- `permutation_importance()` 함수가 반환하는 객체는 반복하여 얻은 특성 중요도(importances), 평균(importances_mean), 표준 편차(importances_std)를 담고 있습니다.
+- 평균을 출력해 보면 랜덤 포레스트와 비슷한 비율임을 알 수 있습니다.
 
 ```python
 result = permutation_importance(hgb, test_input, test_target, n_repeats=10,
@@ -305,17 +326,28 @@ result = permutation_importance(hgb, test_input, test_target, n_repeats=10,
 print(result.importances_mean)
 ```
 
+- 테스트 세트에서 특성 중요도를 계산해 봅니다.
+
 ```
 [0.05969231 0.20238462 0.049     ]
 ```
+
+- 테스트 세트의 결과를 보면 그레이디언트 부스팅과 비슷하게 조금 더 당도에 집중하고 있다는 것을 알 수 있습니다.
+- 이런 분석을 통해 모델을 실전에 투입했을 때 어떤 특성에 관심을 둘지 예상할 수 있습니다.
 
 ```python
 hgb.score(test_input, test_target)
 ```
 
+- **HistGradientBoostingClassifier**를 사용해 테스트 세트에서 성능을 최종적으로 확인해 봅시다.
+
 ```
 0.8723076923076923
 ```
+
+- 테스트 세트에서는 약 87% 정확도를 얻었습니다.
+- 앙상블 모델은 확실히 단일 결정 트리보다 좋은 결과를 얻을 수 있습니다.
+- 히스토그램 기반 그레이디언트 부스팅의 회귀 버전은 **HistGradientBoostingRegressor** 클래스에 구현되어 있습니다. 
 
 ## XGBoost
 
@@ -333,6 +365,9 @@ print(np.mean(scores['train_score']), np.mean(scores['test_score']))
 ```
 
 ## LightGBM
+
+- 마이크로소프트에서 만들었습니다.
+- 사이킷런의 히스토그램 기반 그레디언트 부스팅이 **LightGBM**에서 영향을 많이 받았습니다.
 
 ```python
 from lightgbm import LGBMClassifier
