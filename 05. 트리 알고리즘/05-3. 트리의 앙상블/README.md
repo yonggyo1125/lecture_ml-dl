@@ -104,6 +104,9 @@ target = wine['class'].to_numpy()
 train_input, test_input, train_target, test_target = train_test_split(data, target, test_size=0.2, random_state=42)
 ```
 
+- **RandomForestClassifer** 클래스를 화이트 와인을 분류하는 문제에 적용해 봅니다. 
+- 와인 데이터셋을 판다스로 불러오고 훈련 세트와 테스트 세트로 나눕니다.
+
 ```python
 from sklearn.model_selection import cross_validate
 from sklearn.ensemble import RandomForestClassifier
