@@ -281,15 +281,28 @@ print(gs.cv_results_['mean_test_score'])
 ```
 [0.86819297 0.86453617 0.86492226 0.86780891 0.86761605]
 ```
+- 첫 번쨰 값이 가장 큽니다. 
 
 ```python
 best_index = np.argmax(gs.cv_results_['mean_test_score'])
 print(gs.cv_results_['params'][best_index])
 ```
 
+- 넘파이 `argmax()`함수를 사용하면 가장 큰 값의 인덱스를 추출할 수 있습니다. 
+- 그다음 이 인덱스를 사용해 `params` 키에 저장된 매개변수를 출력할 수 있습니다. 이 값이 최상의 검증 점수를 만든 매개변수 조합입니다. 
+
+
 ```
 {'min_impurity_decrease': 0.0001}
 ```
+
+- 앞서 출력한 `gs.best_params`와 동일한지 확인해 보세요.
+
+- 이 과정을 정리해 보면
+- 1 먼저 탐색할 매개변수를 지정합니다.
+- 2 훈련 세트에서 그리드 서치를 수행하여 최상의 평균 검증 점수가 나오는 매개변수 조합을 찾습니다. 이 조합은 그리드 서치 객체에 저장됩니다.
+- 3 그리드 서치는 최상의 매개변수에서 (교차 검증에 사용한 훈련 세트가 아니라) 전체 훈련 세트를 사용해 최종 모델을 훈련합니다. 이 모델도 그리드 서치 객체에 저장됩니다. 
+
 
 ```python
 params = {'min_impurity_decrease': np.arange(0.0001, 0.001, 0.0001),
@@ -298,14 +311,22 @@ params = {'min_impurity_decrease': np.arange(0.0001, 0.001, 0.0001),
           }
 ```
 
+- 노드를 분할하기 위한 불순도 감소 최소량을 지정합니다. 여기에서 max_depth로 트리의 깊이를 제한하고 min_samples_split로 노드를 나누기 위한 최소 샘플 수도 골라봅니다.
+
+
 ```python
 gs = GridSearchCV(DecisionTreeClassifier(random_state=42), params, n_jobs=-1)
 gs.fit(train_input, train_target)
 ```
 
+- 이 매개변수로 수행할 교차 검증 횟수는 9 X 15 X 10 = 1,350개 입니다. 기본 5-폴드 교차 검증을 수행하므로 만들어지는 모델의 수는 6,750개나 됩니다. 
+- n_jobs 매개변수를 -1로 설정하고 그리드 서치를 수행합니다.
+
 ```python
 print(gs.best_params_)
 ```
+
+- 최상의 매개변수 조합을 확인해 보면 
 
 ```
 {'max_depth': 14, 'min_impurity_decrease': 0.0004, 'min_samples_split': 12}
@@ -315,8 +336,93 @@ print(gs.best_params_)
 print(np.max(gs.cv_results_['mean_test_score']))
 ```
 
+- 최상의 교차 검증 점수도 확인합니다.
+
 ```
 0.8683865773302731
 ```
 
+- **GridSearchCV** 클래스를 사용하면 매개변수를 일일이 바꿔가며 교차검증을 수행하지 않고 원하는 매개변수 값을 나열하면 자동으로 교차 검증을 수행해서 최상의 매개변수를 찾을 수 있습니다, 
+- 조금 아쉬운 점은 탐색할 매개변수의 간격을 0.0001 혹은 1로 설정했는데, 이렇게 간격을 둔 것에 특별한 근거는 없습니다. 이보다 더 좁거나 넓은 간격으로 시도해 볼수도 있습니다.
+
 ## 랜덤 서치
+
+- 매개변수의 값이 수치일 떄 값의 범위나 간격을 미리 정하기 어려울 수 있습니다. 또 너무 많은 매개변수 조건이 있어 그리드 서치 수행 시간이 오래 걸릴 수 있습니다. 이럴 떄 **랜덤 서치**(Random Search)를 사용할 수 있습니다.
+- 랜덤 서치에는 매개변수 값의 목록을 전달하는 것이 아니라 매개변수를 샘플링할 수 있는 확률 분포 객체를 전달합니다. 
+- 사이 파이에서 2개의 확률 분포 클래스를 임포트 합니다.
+
+
+```python
+from scipy.stats import uniform, randint
+```
+
+```python
+rgen = randint(0, 10)
+rgen.rvs(10)
+```
+
+```
+array([6, 4, 3, 6, 3, 1, 1, 6, 1, 6])
+```
+
+```python
+np.unique(rgen.rvs(1000), return_counts=True)
+```
+
+```
+(array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+ array([121,  99,  81,  98, 106,  85,  93,  94, 109, 114]))
+```
+
+```python
+ugen = uniform(0, 1)
+ugen.rvs(10)
+```
+
+```
+array([0.60857829, 0.2795936 , 0.4059522 , 0.47695652, 0.7427586 ,
+       0.9801252 , 0.05012329, 0.79357074, 0.16195204, 0.33820475])
+```
+
+```python
+params = {'min_impurity_decrease': uniform(0.0001, 0.001),
+          'max_depth': randint(20, 50),
+          'min_samples_split': randint(2, 25),
+          'min_samples_leaf': randint(1, 25),
+          }
+```
+
+
+```python
+from sklearn.model_selection import RandomizedSearchCV
+
+gs = RandomizedSearchCV(DecisionTreeClassifier(random_state=42), params,
+                        n_iter=100, n_jobs=-1, random_state=42)
+gs.fit(train_input, train_target)
+```
+
+```python
+print(gs.best_params_)
+```
+
+```
+{'max_depth': 39, 'min_impurity_decrease': 0.00034102546602601173, 'min_samples_leaf': 7, 'min_samples_split': 13}
+```
+
+```python
+print(np.max(gs.cv_results_['mean_test_score']))
+```
+
+```
+0.8695428296438884
+```
+
+```python
+dt = gs.best_estimator_
+
+print(dt.score(test_input, test_target))
+```
+
+```
+0.86
+```
