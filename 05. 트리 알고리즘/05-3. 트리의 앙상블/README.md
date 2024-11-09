@@ -117,18 +117,34 @@ scores = cross_validate(rf, train_input, train_target, return_train_score=True, 
 print(np.mean(scores['train_score']), np.mean(scores['test_score']))
 ```
 
+- `cross_validate()` 함수를 사용해 교차 검증을 수행하비다.
+- **RandomForestClassifier**는 기본적으로 100개의 결정 트리를 사용하므로 `n_jobs` 매개변수를 -1로 지정하여 모든 CPU 코어를 사용하는 것이 좋습니다. 
+- `cross_validate()` 함수의 n_jobs 매개변수도 -1로 지정하여 최대한 병렬로 교차 검증을 수행합니다. 
+- `return_train_score` 매개변수의 기본값은 False입니다.
+
 ```
 0.9973541965122431 0.8905151032797809
 ```
+
+- 출력된 결과를 보면 훈련 세트에 다소 과대적합된 것 같습니다. 
 
 ```python
 rf.fit(train_input, train_target)
 print(rf.feature_importances_)
 ```
 
+- 랜덤 포레스트는 결정 트리의 앙상블이기 때문에 **DecisionTreeClassifier** 가 제공하는 중요한 매개변수를 모두 제공
+- criterion, max_depth, max_features, min_sample_split, min_impurity_decrease, min_samples_leaf 등입니다. 
+- 또한 결정 트리의 큰 장점 중 하나인 특성 중요도를 계산합니다. 랜덤 포레스트의 중요도는 각 결정 트리의 특성 중요도를 취한한 것입니다.
+- 랜덤 포레스트 모델을 훈련 세트에 훈련한 후 특성 중요도를 출력합니다.
+
 ```
 [0.23167441 0.50039841 0.26792718]
 ```
+
+- 각각 \[알코올 도수, 당도, pH\]였는데, 두 번째 특성인 당도의 중요도가 감소하고 알코올 도수와 pH 특성의 중요도가 조금 상승했습니다. 이런 이유는 랜덤 포레스트가 특성의 일부를 랜덤하게 선택하여 결정트리를 훈련하기 때문입니다. 그 결과 하나의 특성이 훈련에 기여할 기회를 얻습니다. 이는 과대적합을 줄이고 일반화 성능을 높이는데 도움이 됩니다.
+
+
 
 ```python
 rf = RandomForestClassifier(oob_score=True, n_jobs=-1, random_state=42)
@@ -137,9 +153,16 @@ rf.fit(train_input, train_target)
 print(rf.oob_score_)
 ```
 
+- **RandomForestClassifier**에는 자체적으로 모델을 평가하는 점수를 얻을 수 있습니다. 랜덤 포레스트는 훈련 세트에서 중복을 허용하여 부트스트랩 샘플을 만들어 결정 트리를 훈련한다고 했습니다. 이때 부트스트랩 샘플에 포함되지 않고 남는 샘플이 있습니다. 이런 샘플을 **OOB**(out of bag) 샘플이라고 합니다. 이 남은 샘플을 사용하여 부트스트랩 샘플로 훈련한 결정 트리를 평가할 수 있습니다. 마치 검증 세트의 역할을 하는 것
+- 이 점수를 얻으려면 **RandomForestClassifier** 클래스의 `oob_score` 매개변수를 True로 지정해야 합니다(이 매개변수의 기본값은 False 입니다). 이렇게 하면 랜덤 포레스트는 각 결정 트리의 OOB 점수를 평균하여 출력합니다. `oob_score=True`로 지정하고 모델을 훈련하여 OOB 점수를 출려합니다.
+
+
 ```
 0.8934000384837406
 ```
+
+- 교차 검증에서 얻은 점수와 매우 비슷한 결고를 얻었습니다. 
+- **OOB** 점수르 사용하면 교차 검증을 대신할 수 있어서 결과적으로 훈련 세트에 더 많은 샘플을 사용할 수 있습니다. 
 
 ## 엑스트라트리
 
