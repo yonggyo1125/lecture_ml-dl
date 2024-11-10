@@ -239,6 +239,9 @@ plt.show()
 - 픽셀의 평균을 계산하는 것도 간단합니다. `axis=0` 으로 지정하면 됩니다. 
 - 그럼 맷플롯립의 `bar()` 함수를 사용해 픽셀 10,000개에 대한 평균값을 막대그래프로 그려 봅니다. `subplots()` 함수로 3개의 서브 그래프를 만들어 사과, 파인애플, 바나나에 대한 막대 그래프를 그려 봅니다.
 
+![스크린샷 2024-11-10 오후 12 36 57](https://github.com/user-attachments/assets/77e09b77-9919-4393-bba0-1f0240ed21de)
+
+
 
 ```python
 apple_mean = np.mean(apple, axis=0).reshape(100, 100)
