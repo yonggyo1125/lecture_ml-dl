@@ -47,6 +47,10 @@
 ![스크린샷 2024-11-10 오후 10 38 12](https://github.com/user-attachments/assets/dde6aec7-1cce-4f2a-84ec-e101a9a65d85)
 
 
+![스크린샷 2024-11-10 오후 10 39 58](https://github.com/user-attachments/assets/d113ac3b-03ac-46d7-a477-d9fa0b17d5a0)
+
+
+
 
 ## PCA 클래스
 
