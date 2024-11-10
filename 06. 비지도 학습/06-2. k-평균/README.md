@@ -143,6 +143,8 @@ draw_fruits(fruits[km.labels_==0])
 
 ![스크린샷 2024-11-10 오후 4 35 03](https://github.com/user-attachments/assets/0406270d-430e-4864-96c5-8e92ee5a4c5d)
 
+- 레이블 0으로 클러스터링된 91개의 이미지를 모두 출력했습니다. 이 클러스터는 대부분 파인애플이고 사과와 바나나가 간간히 섞여 있습니다. 
+
 
 ```python
 draw_fruits(fruits[km.labels_==1])
@@ -152,7 +154,6 @@ draw_fruits(fruits[km.labels_==1])
 ![스크린샷 2024-11-10 오후 4 35 12](https://github.com/user-attachments/assets/574b1a6f-d768-4100-9092-445b1aaf98d5)
 
 
-
 ```python
 draw_fruits(fruits[km.labels_==2])
 ```
@@ -160,11 +161,21 @@ draw_fruits(fruits[km.labels_==2])
 ![스크린샷 2024-11-10 오후 4 35 20](https://github.com/user-attachments/assets/bc2350ea-2bcb-484f-a0e7-6353c87fcef9)
 
 
+- 레이블이 1인 클러스터는 바나나로만 이루어져 있고, 레이블이 2인 클러스터는 사과로만 이루어져 있습니다. 
+- 하지만 레이블이 0인 클러스터는 파인애플에 사과 9개와 바나나 2개가 섞여 있네요. k-평균 알고리즘이 이 샘플들을 완벽하게 구별해내지는 못했습니다.
+- 하지만 훈련 데이터에 타깃 레이블을 전혀 제공하지 않았음에도 스스로 비슷한 샘플들을 아주 잘 모은 것 같습니다.
+
 ## 클러스터 중심
+
+- **KMeans** 클래스가 최종적으로 찾은 클러스터 중심은 `cluster_centers_` 속성에 저장되어 있습니다. 
+- 이 배열은 `fruits_2d` 샘플의 클러스터 중심이기 때문에 각 중심을 이미지로 출력하려면 100 X 100 크기의 2차원 배열로 바꿔야 합니다. 
 
 ```python
 draw_fruits(km.cluster_centers_.reshape(-1, 100, 100), ratio=3)
 ```
+
+
+
 
 ```python
 print(km.transform(fruits_2d[100:101]))
