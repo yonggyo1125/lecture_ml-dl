@@ -174,6 +174,7 @@ draw_fruits(fruits[km.labels_==2])
 draw_fruits(km.cluster_centers_.reshape(-1, 100, 100), ratio=3)
 ```
 
+![스크린샷 2024-11-10 오후 4 42 07](https://github.com/user-attachments/assets/471ce37b-00e6-4053-be81-5c81d228b830)
 
 
 
