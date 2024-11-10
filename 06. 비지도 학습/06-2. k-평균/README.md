@@ -141,14 +141,24 @@ draw_fruits(fruits[km.labels_==0])
 - 넘파이 배열에 불리언 인덱싱을 적용하면 True인 위치의 원소만 모두 추출합니다.  
 
 
+![스크린샷 2024-11-10 오후 4 35 03](https://github.com/user-attachments/assets/0406270d-430e-4864-96c5-8e92ee5a4c5d)
+
 
 ```python
 draw_fruits(fruits[km.labels_==1])
 ```
 
+
+![스크린샷 2024-11-10 오후 4 35 12](https://github.com/user-attachments/assets/574b1a6f-d768-4100-9092-445b1aaf98d5)
+
+
+
 ```python
 draw_fruits(fruits[km.labels_==2])
 ```
+
+![스크린샷 2024-11-10 오후 4 35 20](https://github.com/user-attachments/assets/bc2350ea-2bcb-484f-a0e7-6353c87fcef9)
+
 
 ## 클러스터 중심
 
