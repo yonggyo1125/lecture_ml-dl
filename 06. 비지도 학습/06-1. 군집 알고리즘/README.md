@@ -96,12 +96,21 @@ plt.show()
 - 맷플롯립의 `imshow()` 함수를 사용하면 넘파이 배열로 저장된 이미지를 쉽게 그릴 수 있습니다. 흑백 이미지이므로 cmap 매개변수를 `gray`로 지정합니다.
 
 
+![스크린샷 2024-11-10 오전 11 19 29](https://github.com/user-attachments/assets/959bc3a1-ac13-4aed-a364-43d6466e7f0f)
+
+![스크린샷 2024-11-10 오전 11 19 45](https://github.com/user-attachments/assets/ea22b04d-f038-4535-bbb3-517047384aa5)
+
+![스크린샷 2024-11-10 오전 11 20 00](https://github.com/user-attachments/assets/d265cc6c-297d-4cf1-9bf8-e60a451791f1)
+
+
+
 
 ```python
 plt.imshow(fruits[0], cmap='gray_r')
 plt.show()
 ```
 
+![스크린샷 2024-11-10 오전 11 20 14](https://github.com/user-attachments/assets/e8f9a964-80f0-4853-96df-99f80eeab835)
 
 
 ```python
