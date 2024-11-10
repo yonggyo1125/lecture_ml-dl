@@ -138,6 +138,7 @@ plt.show()
 - 이 데이터는 사과, 바나나, 파인애플이 각각 100개씩 들어 있습니다. 바나나와 파인애플 이미지도 출력합니다.
 
 
+![스크린샷 2024-11-10 오전 11 32 17](https://github.com/user-attachments/assets/9ebb255f-e0a5-44ad-a3cc-55abbcfe4d8a)
 
 
 ## 픽셀 값 분석하기
