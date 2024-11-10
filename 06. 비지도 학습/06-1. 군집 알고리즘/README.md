@@ -216,6 +216,7 @@ plt.show()
 - `legend()` 함수를 사용해 어떤 과일의 히스토그램인지 범례를 만들어 봅시다.
 
 
+![스크린샷 2024-11-10 오전 11 51 59](https://github.com/user-attachments/assets/b3fd20c5-6317-466e-937a-6e474a6c7e70)
 
 
 > 히스토그램
