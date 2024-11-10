@@ -252,6 +252,9 @@ axs[2].imshow(banana_mean, cmap='gray_r')
 plt.show()
 ```
 
+
+
+
 ## 평균값과 가까운 사진 고르기
 
 ```python
