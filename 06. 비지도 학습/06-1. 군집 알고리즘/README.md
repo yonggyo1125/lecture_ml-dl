@@ -255,6 +255,7 @@ axs[2].imshow(banana_mean, cmap='gray_r')
 plt.show()
 ```
 
+![스크린샷 2024-11-10 오후 12 39 26](https://github.com/user-attachments/assets/70ee2b43-cd9c-4e2e-b35a-6ff814d8d868)
 
 
 
