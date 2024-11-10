@@ -247,6 +247,9 @@ print(km.n_iter_)
 - **KMeans** 클래스는 자동으로 이너셔를 계산해서 `inertia_` 속성으로 제공합니다. 다음 코드에서 클러스터 개수를 k를 2\~6까지 바꿔가며 **KMeans** 클래스를 5번 훈련합니다. `fit()` 메서드로 모델을 훈련한 후 `inertia_` 속성에 저장된 이너셔 값을 `inertia` 리스트에 추가합니다. 
 - 마지막으로 inertia 리스트에 저장된 값을 그래프로 출력합니다. 
 
+![스크린샷 2024-11-10 오후 6 11 42](https://github.com/user-attachments/assets/80baa882-396e-4ff7-85c7-8b93da989b05)
+
+
 ```python
 inertia = []
 for k in range(2, 7):
