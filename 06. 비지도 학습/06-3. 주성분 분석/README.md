@@ -140,6 +140,7 @@ draw_fruits(pca.components_.reshape(-1, 100, 100))
 
 - 원본 데이터와 차원이 같으므로 주성분을 100 X 100 크기의 이미지처럼 출력해 볼 수 있습니다. `draw_fruits()` 함수를 사용해서 이 주성분을 그림으로 그려보면 다음과 같습니다. 
 
+![스크린샷 2024-11-12 오후 11 23 36](https://github.com/user-attachments/assets/92ca9a27-a773-4705-a63c-6acf3dd585f8)
 
 
 
