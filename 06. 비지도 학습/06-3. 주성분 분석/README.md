@@ -229,6 +229,7 @@ plt.show()
 - 맷플롯립 `plot()` 함수로 설명된 분산을 그래프로 출력하겠습니다.
 
 
+![스크린샷 2024-11-12 오후 11 49 29](https://github.com/user-attachments/assets/a8e9ab89-c6de-4990-865f-16c9b777ac2b)
 
 
 ## 다른 알고리즘과 함께 사용하기
