@@ -142,7 +142,9 @@ draw_fruits(pca.components_.reshape(-1, 100, 100))
 
 ![스크린샷 2024-11-12 오후 11 23 36](https://github.com/user-attachments/assets/92ca9a27-a773-4705-a63c-6acf3dd585f8)
 
-
+- 이 주성분은 원본 데이터에서 가장 분산이 큰 방향을 순서대로 나타낸 것입니다. 한편으로는 데이터셋에 있는 어떤 특징을 잡아낸 것처럼 생각할 수도 있습니다.
+- 주성분을 찾았으므로 원본 데이터를 주성분에 투영하여 특성의 개수를 10,000개에서 50개로 줄일 수 있습니다. 이는 마치 원본 데이터를 각 주성분으로 분해하는 것으로 생각할 수 있습니다.
+- **PCA**의 `transform()` 메서드를 사용해 원본 데이터의 차원을 50으로 줄일 수 있습니다.
 
 ```python
 print(fruits_2d.shape)
@@ -164,26 +166,38 @@ print(fruits_pca.shape)
 (300, 50)
 ```
 
+- fruit_2d는 (300, 10000) 크기의 배열이었습니다. 10,000개의 픽셀(특성)을 가진 300개의 이미지 입니다. 50개의 주성분을 찾은 **PCA** 모델을 사용해 이를 (300, 50) 크기의 배열로 변환했습니다. 
+- 이제 `fruits_pca` 배열은 50개의 특성을 가진 데이터입니다.  
+
 ## 원본 데이터 재구성
+
+- 앞에서 10,000개의 특성을 50개로 줄였습니다. 이로 인해 어느 정도 손실이 발생할 수 밖에 없습니다. 하지만 최대한 분산이 큰 방향으로 데이터를 투영했기 때문에 원본 데이터를 상당 부분 재구성할 수 있습니다. 
 
 ```python
 fruits_inverse = pca.inverse_transform(fruits_pca)
 print(fruits_inverse.shape)
 ```
 
+- **PCA** 클래스는 이를 위해 `inverse_transform()` 메서드를 제공합니다. 
+- 50개의 차원으로 축소한 `fruits_pca` 데이터를 전달해 10,000의 특성을 복원합니다. 
+
 ```
 (300, 10000)
 ```
 
-```python
-fruits_reconstruct = fruits_inverse.reshape(-1, 100, 100)
-```
+- 예상대로 10,000개의 특성이 복원되었습니다. 
 
 ```python
+fruits_reconstruct = fruits_inverse.reshape(-1, 100, 100)
 for start in [0, 100, 200]:
     draw_fruits(fruits_reconstruct[start:start+100])
     print("\n")
 ```
+
+- 이 데이터를 100 X 100 크기로 바꾸어 100개씩 나누어 출력합니다. 
+- 이 데이터는 순서대로 사과, 파인애플, 바나나를 100개씩 담고 있습니다.
+
+
 
 ## 설명된 분산 
 
