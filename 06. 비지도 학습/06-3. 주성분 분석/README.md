@@ -359,7 +359,7 @@ for label in range(0, 3):
 
 - **KMeans**가 찾은 레이블을 사용해 과일 이미지를 출력하겠습니다.
 
-
+![스크린샷 2024-11-13 오전 12 10 58](https://github.com/user-attachments/assets/8042cc53-e5ce-42b1-a02e-f2fe44f44a25)
 
 
 ```python
