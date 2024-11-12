@@ -231,8 +231,12 @@ plt.show()
 
 ![스크린샷 2024-11-12 오후 11 49 29](https://github.com/user-attachments/assets/a8e9ab89-c6de-4990-865f-16c9b777ac2b)
 
+- 그래프를 보면 처음 10개의 주성분이 대부분의 분산을 표현하고 있습니다. 그 다음부터는 각 주성분이 설명하고 있는 분산은 비교적 작습니다. 
+- 이번에는 PCA로 차원 축소된 데이터를 사용하여 지도학습 모델을 훈련하겠습니다. 원본 데이터를 사용했을 때와 어떤 차이가 있는지 확인합니다.
 
 ## 다른 알고리즘과 함께 사용하기
+
+- 과일 사진 원본 데이터와 **PCA**로 축소한 데이터를 지도 학습에 적용해 보고 어떤 차이가 있는지 알아보겠습니다.
 
 ```python 
 from sklearn.linear_model import LogisticRegression
@@ -240,9 +244,15 @@ from sklearn.linear_model import LogisticRegression
 lr = LogisticRegression()
 ```
 
+- 3개의 과일 사진을 분류해야 하므로 간단히 로지스틱 회귀 모델을 사용하겠습니다.
+- 먼저 사이킷런의 **LogisticRegression** 모델을 만듭니다.
+
 ```python
 target = np.array([0] * 100 + [1] * 100 + [2] * 100)
 ```
+
+- 지도 학습 모델을 사용하려면 타깃값이 있어야 합니다. 여기에서는 사과를 0, 파인애플을 1, 바나나를 2로 지정했습니다. 파이썬의 리스트와 정수를 곱하면 리스트 안의 원소를 정수만큼 반복합니다.
+- 이를 이용하면 100개의 0, 100개의 1, 100개의 2로 이루어진 타깃 데이터를 손쉽게 만들 수 있습니다. 
 
 ```python
 from sklearn.model_selection import cross_validate
@@ -252,10 +262,16 @@ print(np.mean(scores['test_score']))
 print(np.mean(scores['fit_time']))
 ```
 
+- 먼저 원본 데이터인 fruit_2d를 사용해 봅시다. 로지스틱 회귀 모델에서 성능을 가늠해 보기 위해 `cross_validate()` 로 교차 검증을 수행하겠습니다. 
+
 ```
 0.9966666666666667
 0.9981564998626709
 ```
+
+- 교차 검증의 점수는 0.997 정도로 매우 높습니다. 특성이 10,000개나 되기 때문에 300개의 샘플에서는 금방 과대적합된 모델을 만들기 쉽습니다.
+- `cross_validate()` 함수가 반환하는 딕셔너리에는 `fit_time` 항목에 각 교차 검증 폴드의 훈련 시간이 기록되어 있습니다. 0.94초 정도 걸렸습니다. 
+- 이 값을 PCA로 축소한 fruits_pca를 사용했을 때와 비교합니다. 
 
 ```python
 scores = cross_validate(lr, fruits_pca, target)
@@ -264,22 +280,45 @@ print(np.mean(scores['fit_time']))
 ```
 
 ```
-0.9966666666666667
+1.0
 0.024461746215820312
 ```
+
+- 50개의 특성만 사용했는데도 정확도가 100%이고 훈련 시간은 0.03초로 20배 이상 감소했습니다.
+- PCA로 훈련 데이터의 차언을 축소하면 저장 공간뿐만 아니라 머신러닝 모델의 훈련 속도도 높일 수 있습니다.
+
 
 ```python
 pca = PCA(n_components=0.5)
 pca.fit(fruits_2d)
 ```
 
+- 앞서 **PCA** 클래스를 사용할 때 `n_components` 매개변수에 주성분의 개수를 지정했습니다. 이 대신 원하는 설명된 분산의 비율을 입력할 수도 있습니다. 
+- PCA 클래스는 지정된 비율에 도달할 때까지 자동으로 주성분을 찾습니다. 설명된 분산의 50%에 달하는 주성분을 찾도록 PCA 모델을 만들어 봅니다. 
+
+
 ```python
 print(pca.n_components_)
 ```
 
+- 주성분의 개수 대신 0\~1 사이의 비율을 실수로 입력하면 됩니다. 몇 개의 주성분을 찾았는지 확인합니다.
+
+```
+2
+```
+
+- 2개의 특성만으로 원본 데이터에 있는 분산의 50%를 표현할 수 있습니다.
+
+
 ```python
 fruits_pca = pca.transform(fruits_2d)
 print(fruits_pca.shape)
+```
+
+- 이 모델로 원본 데이터를 변환하겠습니다. 주성분이 2개이므로 변환된 데이터의 크기는 (300, 2)가 됩니다.
+
+```
+(300, 2)
 ```
 
 ```python
@@ -287,32 +326,41 @@ scores = cross_validate(lr, fruits_pca, target)
 print(np.mean(scores['test_score']))
 print(np.mean(scores['fit_time']))
 ```
+- 2개의 특성만 사용하고도 교차 검증의 결과가 좋은지 확인합니다.
 
 ```
 0.9933333333333334
 0.02928957939147949
 ```
 
+- 2개의 특성을 사용했지만 99%의 정확도를 달성했습니다. 
+
 ```python
 from sklearn.cluster import KMeans
 
 km = KMeans(n_clusters=3, random_state=42)
 km.fit(fruits_pca)
-```
-
-```python
 print(np.unique(km.labels_, return_counts=True))
 ```
+
+- 차원 축소된 데이터를 사용해 k-평균 알고리즘으로 클러스터를 찾아봅니다.
 
 ```
 (array([0, 1, 2], dtype=int32), array([110,  99,  91]))
 ```
+
+- fruit_pca로 찾은 클러스터는 각각 110개, 99개, 91개의 샘플을 포함하고 있습니다. 이는 원본 데이터를 사용했을 때와 거의 비슷한 결과입니다. 
 
 ```python
 for label in range(0, 3):
     draw_fruits(fruits[km.labels_ == label])
     print("\n")
 ```
+
+- **KMeans**가 찾은 레이블을 사용해 과일 이미지를 출력하겠습니다.
+
+
+
 
 ```python
 for label in range(0, 3):
