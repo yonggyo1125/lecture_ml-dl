@@ -361,6 +361,7 @@ for label in range(0, 3):
 
 ![스크린샷 2024-11-13 오전 12 10 58](https://github.com/user-attachments/assets/8042cc53-e5ce-42b1-a02e-f2fe44f44a25)
 
+- 앞서 찾은 클러스터와 비슷하게 파인애플은 사과와 조금 혼돈되는 면이 있습니다. 몇 개의 사과가 파인애플 클러스터에 섞여 들어가 있습니다.
 
 ```python
 for label in range(0, 3):
@@ -369,3 +370,8 @@ for label in range(0, 3):
 plt.legend(['pineapple', 'banana', 'apple'])
 plt.show()
 ```
+
+- 훈련 데이터의 차원을 줄이면 또 하나 얻을 수 있는 장점은 시각화입니다. 
+- 3개 이하로 차원을 줄이면 화면에 출력하기 비교적 쉽습니다. fruits_pca 데이터는 2개의 특성이 있기 때문에 2차원으로 표현할 수 있습니다. 
+- 앞에서 찾은 `km.labels_`를 사용해 클러스터별로 나누어 산점도를 그려 봅니다.
+
