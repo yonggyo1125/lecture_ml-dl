@@ -73,20 +73,22 @@
 
 ![스크린샷 2024-11-12 오후 11 00 38](https://github.com/user-attachments/assets/ef496c40-5b4d-41f4-8a4b-bdfea6ebe03a)
 
+- 일반적으로 주성분은 원본 특성의 개수만큼 찾을 수 있습니다. 
 
+> 기술적인 이유로 주성분은 원본 특성의 개수와 샘플 개수 중 작은 값만큼 찾을 수 있습니다. 일반적으로 비지도 학습은 대량의 데이터에서 수행하기 때문에 원본 특성의 개수만큼 찾을 수 있다고 말합니다. 
 
 ## PCA 클래스
 
 ```python
 !wget https://bit.ly/fruits_300_data -O fruits_300.npy
-```
 
-```python
 import numpy as np
 
 fruits = np.load('fruits_300.npy')
 fruits_2d = fruits.reshape(-1, 100*100)
 ```
+
+- 과일 사진 데이터를 다운로드하여 넘파이 배열로 적재합니다. 
 
 ```python
 from sklearn.decomposition import PCA
@@ -95,13 +97,23 @@ pca = PCA(n_components=50)
 pca.fit(fruits_2d)
 ```
 
+- 사이킷런은 `sklearn.decomposition` 모듈 아래 PCA 클래스로 주성분 분석 알고리즘을 제공합니다.
+- **PCA** 클래스의 객체를 만들 떼 `n_components` 매개변수에 주성분의 개수를 지정해야 합니다. 
+- k-평균과 마찬가지로 비지도 학습이기 때문에 `fit()` 메서드에 타깃값을 제공하지 않습니다. 
+
 ```python
 print(pca.components_.shape)
 ```
 
+- **PCA** 클래스가 찾은 주성분은 `components_` 속성에 저장되어 있습니다. 이 배열의 크기를 확인합니다.
+
 ```
 (50, 10000)
 ```
+
+- `n_components=50`으로 지정했기 때문에 `pca.components_` 배열의 첫 번째 차원이 50입니다. 즉 50개의 주성분을 찾았습니다. 두 번째 차원은 항상 원본 데이터의 특성 개수와 같은 10,000입니다. 
+
+ 
 
 ```python 
 import matplotlib.pyplot as plt
@@ -125,6 +137,11 @@ def draw_fruits(arr, ratio=1):
 ```python
 draw_fruits(pca.components_.reshape(-1, 100, 100))
 ```
+
+- 원본 데이터와 차원이 같으므로 주성분을 100 X 100 크기의 이미지처럼 출력해 볼 수 있습니다. `draw_fruits()` 함수를 사용해서 이 주성분을 그림으로 그려보면 다음과 같습니다. 
+
+
+
 
 ```python
 print(fruits_2d.shape)
