@@ -75,17 +75,19 @@ print(train_input.shape, train_target.shape)
 
 - 훈련 데이터는 60,000개의 이미지로 이루어져 있습니다. 각 이미지는 28 X 28 크기 입니다. 타깃도 60,000개의 원소가 있는 1차원 배열입니다.
 
-
 <img width="522" alt="스크린샷 2024-11-15 오후 1 58 51" src="https://github.com/user-attachments/assets/9649d363-f8e3-46c5-85ee-0c8ae7d1eff3">
-
 
 ```python
 print(test_input.shape, test_target.shape)
 ```
 
+- 테스트 세트의 크기를 확인해 보면
+
 ```
 (10000, 28, 28) (10000,)
 ```
+
+- 테스트 세트는 10,000개의 이미지로 이루어져 있습니다.
 
 ```python
 import matplotlib.pyplot as plt
@@ -96,6 +98,8 @@ for i in range(10):
     axs[i].axis('off')
 plt.show()
 ```
+
+- 훈련 데이터에서 몇 개의 샘플을 그림으로 출력해 보면 어떤 이미지인지 볼 수 있으므로 문제를 이해하는데 큰 도움이 됩니다.
 
 ```python
 print([train_target[i] for i in range(10)])
