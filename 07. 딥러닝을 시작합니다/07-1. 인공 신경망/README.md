@@ -166,7 +166,8 @@ print(train_scaled.shape)
 (60000, 784)
 ```
 
-- 기대한 대로 784개의 픽셀로 이루어진 60,000개의 
+- 기대한 대로 784개의 픽셀로 이루어진 60,000개의 샘플이 준비되었습니다. 
+
 
 ```python
 from sklearn.model_selection import cross_validate
@@ -178,9 +179,24 @@ scores = cross_validate(sc, train_scaled, train_target, n_jobs=-1)
 print(np.mean(scores['test_score']))
 ```
 
+- **SGDClassifier** 클래스와 `cross_validate` 함수를 사용해 이 데이터에서 교차 검증으로 성능을 확인해 봅시다.
+
+
 ```
 0.8196000000000001
 ```
+
+- 여기에서는 **SGDClassifier**의 반복 횟수(max_iter)를 5번으로 지정했습니다. 반복 횟수를 늘려도 성능이 크게 향상되지는 않습니다.
+- 직접 9나 20등의 여러 숫자를 넣어서 테스트해 봅시다.
+
+```
+0.8303833333333334  # max_iter=9
+0.8436999999999999  # max_iter=20 
+```
+
+- 만족할 만한 수준은 아닙니다. 
+- 잠시 로지스틱 회귀 공식을 떠올려 보면 
+
 
 ## 인공신경망
 
