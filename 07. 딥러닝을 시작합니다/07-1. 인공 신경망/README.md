@@ -198,6 +198,20 @@ print(np.mean(scores['test_score']))
 - 잠시 로지스틱 회귀 공식을 떠올려 보면 
 
 
+![스크린샷 2024-11-16 오전 12 16 49](https://github.com/user-attachments/assets/a5412935-54f6-4460-915f-b4b20553b965)
+
+
+![스크린샷 2024-11-16 오전 12 16 59](https://github.com/user-attachments/assets/116dce6e-1e75-4348-9976-3f8dbd1782be)
+
+
+![스크린샷 2024-11-16 오전 12 17 13](https://github.com/user-attachments/assets/9e4446a4-73b3-42b4-b8d8-57b0258afd50)
+
+
+
+![스크린샷 2024-11-16 오전 12 17 45](https://github.com/user-attachments/assets/0d495d4d-bb36-49f6-aec7-a1053898bfac)
+
+
+
 ## 인공신경망
 
 ### 텐서플로와 케라스
