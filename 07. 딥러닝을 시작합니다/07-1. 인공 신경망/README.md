@@ -119,6 +119,7 @@ print([train_target[i] for i in range(10)])
 - 앞서 출력한 이미지를 보면 이 2개의 샘플은 같은 종류의 신발 입니다. 
 - 패션 MNIST에 포함된 10개 레이블의 의미는 다음과 같습니다.
 
+<img width="616" alt="스크린샷 2024-11-15 오후 2 07 41" src="https://github.com/user-attachments/assets/98e2487e-de59-40a6-9268-0f749d47f7e7">
 
 
 ```python
