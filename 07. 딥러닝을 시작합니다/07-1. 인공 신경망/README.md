@@ -101,6 +101,10 @@ plt.show()
 
 - 훈련 데이터에서 몇 개의 샘플을 그림으로 출력해 보면 어떤 이미지인지 볼 수 있으므로 문제를 이해하는데 큰 도움이 됩니다.
 
+<img width="542" alt="스크린샷 2024-11-15 오후 2 03 22" src="https://github.com/user-attachments/assets/a16d232e-8b3f-483c-9b90-9506dbc900c7">
+
+
+
 ```python
 print([train_target[i] for i in range(10)])
 ```
