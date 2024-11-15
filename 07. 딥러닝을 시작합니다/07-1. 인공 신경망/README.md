@@ -75,6 +75,8 @@ print(train_input.shape, train_target.shape)
 
 - 훈련 데이터는 60,000개의 이미지로 이루어져 있습니다. 각 이미지는 28 X 28 크기 입니다. 타깃도 60,000개의 원소가 있는 1차원 배열입니다.
 
+
+
 ```python
 print(test_input.shape, test_target.shape)
 ```
