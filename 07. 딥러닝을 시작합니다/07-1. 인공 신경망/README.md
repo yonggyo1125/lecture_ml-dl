@@ -345,6 +345,7 @@ model = keras.Sequential([dense])
 - `Sequential` 클래스의 객체를 만들 때 앞에서 만든 밀집층의 객체 dense를 전달했습니다. 여기서 만든 model 객체가 바로 인공 신경망 모델입니다.
 - 다음 그림에 지금까지 만든 신경망을 나타냈습니다. 마지막에 소프트맥스 함수를 적용하였습니다.
 
+![스크린샷 2024-11-16 오후 10 23 38](https://github.com/user-attachments/assets/0fb75473-9335-45f1-baaa-6094d9034ace)
 
 
 ## 인공신경망으로 패션 아이템 분류하기
