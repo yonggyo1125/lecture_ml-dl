@@ -396,7 +396,7 @@ model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 ![스크린샷 2024-11-16 오후 10 48 23](https://github.com/user-attachments/assets/b496709a-75b7-40d7-9db4-ca1d19c33672)
 
-
+- 그런데 패션 MNIST 데이터의 타깃값은 어떻게 되어 있나요?
 
 ```python
 print(train_target[:10])
@@ -406,9 +406,20 @@ print(train_target[:10])
 [7 3 5 8 6 9 3 3 9 9]
 ```
 
+- 모두 정수로 되어 있습니다. 하지만 텐서플로에서는 정수로 된 타깃값을 원-핫 인코딩으로 바꾸지 않고 그냥 사용할 수 있습니다. 
+- 정수로된 타깃값을 사용해 크로스 엔트로피 손실을 계산하는 것이 바로 `sparse_categorical_crossentropy` 입니다. 빽빽한 배열 말고 정수값 하나만 사용한다는 뜻에서 `sparse`(희소)라는 이름을 붙인 것 같습니다. 
+- 타깃값을 원-핫 인코딩으로 준비했다면 `compile()` 메서드에서 손실 함수를 `loss='categorical_crossentropy'`로 지정합니다.
+- `compile()` 메서드의 두 번째 매개변수인 `metrics` 에 대해 알아보겠습니다. 
+- 케라스는 모델이 훈련할때 기본적으로 에포크마다 손실 값을 출력해 줍니다. 손실이 줄어드는 것을 보고 훈련이 잘되었다는 것을 알 수 있지만 정확도를 함께 출력하면 더 좋습니다. 이를 위해 `metrics` 매개변수에 정확도 지표를 의미하는 `accuracy`를 지정했습니다.
+- 모델을 훈련해 봅시다. `fit()` 메서드는 사이킷런과 매우 비슷합니다. 처음 두 매개변수에 입력(train_scaled)과 타깃(train_target)을 지정합니다. 그 다음 반복할 에포크 횟수를 `epochs` 매개변수로 지정합니다. 사이킷런의 로지스틱 모델과 동일하게 5번 반복해 보겠습니다.
+
+
 ```python
 model.fit(train_scaled, train_target, epochs=5)
 ```
+
+
+
 
 ```python
 model.evaluate(val_scaled, val_target)
