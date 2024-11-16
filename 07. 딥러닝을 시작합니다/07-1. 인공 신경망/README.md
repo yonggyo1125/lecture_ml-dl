@@ -237,6 +237,7 @@ print(np.mean(scores['test_score']))
 - 인공 신경망은 1943년 **워런 매컬러**(Warren McCulloch)와 **월터 피츠**(Walter Pitts)가 제안한 뉴런 모델로 거슬러 올라갑니다. 이를 **매컬러-피츠 뉴런**이라고 부릅니다. 
 - 이런 인공 뉴련은 다음과 같은 생물학적 뉴런에서 영감을 얻어 만들어졌습니다. 
 
+![스크린샷 2024-11-16 오후 9 16 51](https://github.com/user-attachments/assets/78160ed9-1dd1-4787-9374-f3de90103294)
 
 
 
