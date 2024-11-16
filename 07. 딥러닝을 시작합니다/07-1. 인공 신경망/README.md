@@ -420,7 +420,6 @@ model.fit(train_scaled, train_target, epochs=5)
 
 
 
-
 ```python
 model.evaluate(val_scaled, val_target)
 ```
