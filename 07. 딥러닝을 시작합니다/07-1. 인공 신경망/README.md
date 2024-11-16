@@ -394,7 +394,7 @@ model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 - 이와 같이 타깃값을 해당 클래스만 1이고 나머지는 모두 0인 배열로 만드는 것을 **원-핫 인코딩**(one-hot encoding)이라고 부릅니다.
 - 따라서 다중 분류에서 크로스 엔트로피 손실 함수를 사용하려면 0, 1, 2와 같이 정수로 된 타깃값을 원-핫 인코딩으로 변환해야 합니다.
 
-
+![스크린샷 2024-11-16 오후 10 48 23](https://github.com/user-attachments/assets/b496709a-75b7-40d7-9db4-ca1d19c33672)
 
 
 
