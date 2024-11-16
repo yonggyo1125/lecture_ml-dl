@@ -366,6 +366,7 @@ model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 - 이름으로 이진 분류와 다중 분류의 손실 함수가 명확히 구분됩니다. 그런데 **sparse**란 단어가 붙은 이유는 다음과 같습니다.
 - 이진 크로스 엔트로피 손실을 위해 -log(예측 확률)에 타깃값(정답)을 곱했습니다. 이를 다음처럼 그려 보겠습니다.
 
+![스크린샷 2024-11-16 오후 10 33 04](https://github.com/user-attachments/assets/cef750c0-eaa6-4458-a0bb-e09b7265f8d1)
 
 
 
