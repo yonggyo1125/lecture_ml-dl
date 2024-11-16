@@ -378,6 +378,16 @@ model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 - 첫 번째 뉴런은 티셔츠일 확률이고 두 번째 뉴런은 바지일 확률을 출력합니다. 이진 분류와 달리 각 클래스에 대한 확률이 모두 출력되기 때문에 타깃에 해당하는 확률만 남겨 놓기 위해서 나머지 확률에는 모두 0을 곱합니다.
 - 예를 들어 샘플이 티셔츠일 경우 첫 번째 뉴런의 활성화 함수 출력인 a1에 크로스 엔트로피 손실 함수를 적용하고 나머지 활성화 함수 출력 a2\~a10까지는 모두 0으로 만듭니다. 이렇게 하기 위해 티셔츠 샘플의 타깃값은 첫 번째 원소만 1이고 나머지는 모두 0인 배열로 만들 수 있습니다.
 
+![스크린샷 2024-11-16 오후 10 41 46](https://github.com/user-attachments/assets/a371d9b3-8ee1-4a73-9c2e-94cd194c96c3)
+
+
+![스크린샷 2024-11-16 오후 10 41 57](https://github.com/user-attachments/assets/ffb6919c-8b71-4f43-a67e-85e4e2e0c676)
+
+
+![스크린샷 2024-11-16 오후 10 42 07](https://github.com/user-attachments/assets/1a7f1951-faa1-493b-90b0-cf9c20882738)
+
+
+
 
 ```python
 print(train_target[:10])
