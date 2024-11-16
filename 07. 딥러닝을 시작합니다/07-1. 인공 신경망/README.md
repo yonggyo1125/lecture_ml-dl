@@ -420,6 +420,9 @@ model.fit(train_scaled, train_target, epochs=5)
 
 ![스크린샷 2024-11-16 오후 10 55 16](https://github.com/user-attachments/assets/95ad58f3-d111-4917-82a5-f9730fb65794)
 
+- 케라스는 친절하게 에포크마다 걸린 시간과 손실(loss), 정확도(accuracy)를 출력해 줍니다. 5번 반복에 정확도가 85%를 넘었습니다. 
+- 그럼 앞서 따로 떼어 놓은 검증 세트(val_scaled, val_target)에서 모델의 성능을 확인해 보겠습니다.
+- 케라스에서 모델의 성능을 평가하는 메서드는 `evaluate()` 메서드 입니다.
 
 ```python
 model.evaluate(val_scaled, val_target)
@@ -428,3 +431,5 @@ model.evaluate(val_scaled, val_target)
 ```
 [0.44444453716278076, 0.8458333611488342]
 ```
+
+- `evalutate()` 메서드도 `fit()` 메서드와 비슷한 출력을 보여 줍니다. 검증 세트의 점수는 훈련 세트 점수보다 조금 낮은 것이 일반적입니다. 예상대로 평가결과는 훈련세트보다 조금 낮은 84% 정도의 정확도를 냈습니다. 
