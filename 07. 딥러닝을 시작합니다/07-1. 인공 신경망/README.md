@@ -316,6 +316,7 @@ print(val_scaled.shape, val_target.shape)
 
 - 먼저 인공 신경망 그림의 오른쪽에 놓인 층을 만들어 보겠습니다. 이 층은 다음 그림처럼 10개의 패션 아이템을 분류하기 위해 10개의 뉴런으로 구성됩니다. 
 
+![스크린샷 2024-11-16 오후 9 55 00](https://github.com/user-attachments/assets/13da172c-a2aa-4c77-ae8d-aae473ee7c73)
 
 
 
