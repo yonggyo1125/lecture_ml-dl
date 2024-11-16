@@ -373,6 +373,7 @@ model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 - 그럼 패션 MNIST 데이터셋과 같이 다중 분류일 경우 어떻게 계산할 수 있을지 다음 그림으로 먼저 살펴봅시다.
 
 
+![스크린샷 2024-11-16 오후 10 38 06](https://github.com/user-attachments/assets/69c72af9-209e-4a4a-90cc-810b1f9bb3b2)
 
 
 ```python
