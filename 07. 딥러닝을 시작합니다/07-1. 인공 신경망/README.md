@@ -418,6 +418,7 @@ print(train_target[:10])
 model.fit(train_scaled, train_target, epochs=5)
 ```
 
+![스크린샷 2024-11-16 오후 10 55 16](https://github.com/user-attachments/assets/95ad58f3-d111-4917-82a5-f9730fb65794)
 
 
 ```python
