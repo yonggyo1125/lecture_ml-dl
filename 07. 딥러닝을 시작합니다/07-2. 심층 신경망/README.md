@@ -42,3 +42,143 @@
   - `learning_rate` 매개변수로 학습률을 지정하며 기본값은 0.001입니다.
   - 모멘텀 최적화에 있는 그레이디언트의 지수 감소 평균을 조절하기 위해 `beta_1` 매개변수가 있으며 기본값은 0.9입니다.
   - `RMSprop`에 있는 그레이디언트 제곱의 지수 감소 평균을 조절하기 위해 `beta_2` 매개변수가 있으며 기본값은 0.999입니다.
+
+## 2개의 층
+
+```python
+from tensorflow import keras
+
+(train_input, train_target), (test_input, test_target) = keras.datasets.fashion_mnist.load_data()
+```
+
+```python
+from sklearn.model_selection import train_test_split
+
+train_scaled = train_input / 255.0
+train_scaled = train_scaled.reshape(-1, 28*28)
+
+train_scaled, val_scaled, train_target, val_target = train_test_split(
+    train_scaled, train_target, test_size=0.2, random_state=42)
+```
+
+```python
+dense1 = keras.layers.Dense(100, activation='sigmoid', input_shape=(784,))
+dense2 = keras.layers.Dense(10, activation='softmax')
+```
+
+## 심층 신경망 만들기
+
+```python
+model = keras.Sequential([dense1, dense2])
+```
+
+```python
+model.summary()
+```
+
+## 층을 추가하는 다른 방법
+
+```python
+model = keras.Sequential([
+    keras.layers.Dense(100, activation='sigmoid', input_shape=(784,), name='hidden'),
+    keras.layers.Dense(10, activation='softmax', name='output')
+], name='패션 MNIST 모델')
+```
+
+```python
+model.summary()
+```
+
+```python
+model = keras.Sequential()
+model.add(keras.layers.Dense(100, activation='sigmoid', input_shape=(784,)))
+model.add(keras.layers.Dense(10, activation='softmax'))
+```
+
+```python
+model.summary()
+```
+
+```python
+model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+model.fit(train_scaled, train_target, epochs=5)
+```
+
+## 렐루 활성화 함수
+
+```python
+model = keras.Sequential()
+model.add(keras.layers.Flatten(input_shape=(28, 28)))
+model.add(keras.layers.Dense(100, activation='relu'))
+model.add(keras.layers.Dense(10, activation='softmax'))
+```
+
+```python
+model.summary()
+```
+
+```python
+(train_input, train_target), (test_input, test_target) = keras.datasets.fashion_mnist.load_data()
+
+train_scaled = train_input / 255.0
+
+train_scaled, val_scaled, train_target, val_target = train_test_split(
+    train_scaled, train_target, test_size=0.2, random_state=42)
+```
+
+```python
+model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+model.fit(train_scaled, train_target, epochs=5)
+```
+
+```python
+model.evaluate(val_scaled, val_target)
+```
+
+## 옵티마이저
+
+```python
+model.compile(optimizer='sgd', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+```
+
+```python
+sgd = keras.optimizers.SGD()
+model.compile(optimizer=sgd, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+```
+
+```python
+sgd = keras.optimizers.SGD(learning_rate=0.1)
+```
+
+```python
+sgd = keras.optimizers.SGD(momentum=0.9, nesterov=True)
+```
+
+```python
+adagrad = keras.optimizers.Adagrad()
+model.compile(optimizer=adagrad, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+```
+
+```python
+rmsprop = keras.optimizers.RMSprop()
+model.compile(optimizer=rmsprop, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+```
+
+```python
+model = keras.Sequential()
+model.add(keras.layers.Flatten(input_shape=(28, 28)))
+model.add(keras.layers.Dense(100, activation='relu'))
+model.add(keras.layers.Dense(10, activation='softmax'))
+```
+
+```python
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+model.fit(train_scaled, train_target, epochs=5)
+```
+
+```python
+model.evaluate(val_scaled, val_target)
+```
