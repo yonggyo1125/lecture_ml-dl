@@ -131,6 +131,7 @@ plt.ylabel('loss')
 plt.show()
 ```
 
+<img width="382" alt="스크린샷 2024-11-17 오후 7 50 17" src="https://github.com/user-attachments/assets/3e31002e-f7ca-4946-93ab-70080954e001">
 
 
 
@@ -140,6 +141,9 @@ plt.xlabel('epoch')
 plt.ylabel('accuracy')
 plt.show()
 ```
+
+<img width="392" alt="스크린샷 2024-11-17 오후 7 50 29" src="https://github.com/user-attachments/assets/744c91f0-054d-4e0c-a3b6-9b4c4a105307">
+
 
 ```python
 model = model_fn()
@@ -154,6 +158,10 @@ plt.xlabel('epoch')
 plt.ylabel('loss')
 plt.show()
 ```
+
+
+<img width="395" alt="스크린샷 2024-11-17 오후 7 50 41" src="https://github.com/user-attachments/assets/8008b34b-7000-4d5b-8f93-373cd623bc7b">
+
 
 ## 검증 손실
 
