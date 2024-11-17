@@ -367,6 +367,9 @@ print(np.mean(val_labels == val_target))
 - 간단한 예를 그려 보면 쉽게 이해할 수 있습니다.
 
 
+![스크린샷 2024-11-17 오후 9 38 33](https://github.com/user-attachments/assets/ab7b1a2c-34b6-4985-9f1f-f5292459ab4e)
+
+
 
 
 ```python
