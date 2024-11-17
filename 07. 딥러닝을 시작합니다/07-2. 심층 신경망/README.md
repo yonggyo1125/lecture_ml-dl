@@ -136,13 +136,16 @@ model.summary()
 
 ![스크린샷 2024-11-17 오후 3 35 38](https://github.com/user-attachments/assets/78ca27ae-7265-4b54-b5ac-2e1eb9623387)
 
-
+- 두 번째 층의 출력 크기는 (None, 10)입니다. 배치 차원은 동일하게 None이고 출력 뉴런 개수가 10개이기 때문입니다. 이 층의 모델 파라미터 개수는 몇 개일까요?
 
 ![스크린샷 2024-11-17 오후 3 38 18](https://github.com/user-attachments/assets/7d83c227-c2d0-4c0b-b97c-2e893eeeafff)
 
-
+- 100개의 은닉층 뉴런과 10개의 출력층 뉴런이 모두 연결되고 출력층의 뉴런마다 하나의 절편이 있기 때문에 1,010개의 모델 파라미터가 있습니다.
+- `summary()` 메서드의 마지막에는 총 모델 파라미터 개수와 훈련되는 파라미터 개수가 동일하게 79,510개로 나옵니다. 은닉층과 출력층의 파라미터 개수를 합친 값입니다. 그 아래 훈련되지 않는 파라미터(Non-trainable params)는 0으로 나옵니다. 간혹 경사 하강법으로 훈련되지 않는 파라미터를 가진 층이 있습니다. 이런 층의 파라미터 개수가 여기에 나타납니다.
 
 ## 층을 추가하는 다른 방법
+
+- 모델을 훈련하기 전에 **Sequential** 클래스에 층을 추가하는 다른 방법을 알아보겠습니다. 앞에서는 **Dense** 클래스의 객체 `dense1`, `dense2`를 만들어 **Sequential** 클래스에 전달했습니다. 이 두 객체를 따로 저장하여 쓸 일이 없기 때문에 다음 처럼 **Sequential** 클래스의 생성자 안에서 바로 **Dense** 클래스의 객체를 만드는 경우가 많습니다. 
 
 ```python
 model = keras.Sequential([
@@ -150,6 +153,8 @@ model = keras.Sequential([
     keras.layers.Dense(10, activation='softmax', name='output')
 ], name='패션 MNIST 모델')
 ```
+
+- 이렇게 작업하면 추가되는 층을 한눈에 쉽게 알아보는 장점이 있습니다. 이전과 달리 이번에는 **Sequential** 클래스의 `name` 매개변수로 모델의 이름을 지정했습니다. 또 **Dense** 층의 `name` 매개변수에 층의 이름을 `hidden`과 `output` 으로 각각 지정했습니다. 모델의 이름과 달리 층의 이름은 반드시 영문이어야 합니다. `summary()` 메서드의 출력에 이름이 . 잘반영되는지 확인해 봅니다.
 
 ```python
 model.summary()
