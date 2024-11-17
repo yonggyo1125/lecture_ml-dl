@@ -229,6 +229,10 @@ model.add(keras.layers.Dense(10, activation='softmax'))
 model.summary()
 ```
 
+![스크린샷 2024-11-17 오후 4 17 36](https://github.com/user-attachments/assets/ec9de3df-5574-43a2-9d8c-f92d183859e9)
+
+
+
 ```python
 (train_input, train_target), (test_input, test_target) = keras.datasets.fashion_mnist.load_data()
 
