@@ -302,6 +302,7 @@ sgd = keras.optimizers.SGD(learning_rate=0.1)
 
 - SGD 외에도 다양한 옵티마이저들이 있습니다. 
 
+<img width="532" alt="스크린샷 2024-11-17 오후 5 14 06" src="https://github.com/user-attachments/assets/2d8be858-80ed-4bff-b50c-81ded171db9d">
 
 
 
