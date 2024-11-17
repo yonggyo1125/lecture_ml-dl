@@ -45,11 +45,16 @@
 
 ## 2개의 층
 
+- 케라스 API를 사용해서 패션 MNIST 데이터셋을 불러오겠습니다.
+
 ```python
 from tensorflow import keras
 
 (train_input, train_target), (test_input, test_target) = keras.datasets.fashion_mnist.load_data()
 ```
+
+- 그 다음 이미지의 픽셀값을 0\~255 범위에서 0\~1 사이로 변환하고 28 X 28 크기의 2차원 배열을 784 크기의 1차원 배열로 펼칩니다.
+- 마지막으로 사이킷런의 `train_test_split()` 함수로 훈련 세트와 검증 세트로 나눕니다.
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -60,6 +65,9 @@ train_scaled = train_scaled.reshape(-1, 28*28)
 train_scaled, val_scaled, train_target, val_target = train_test_split(
     train_scaled, train_target, test_size=0.2, random_state=42)
 ```
+
+- 이제 인공 신경망 모델에 층을 2개 추가해 봅니다.
+- 여기에서 만들 모델의 대략적인 구조는 다음 그림과 같습니다.
 
 ```python
 dense1 = keras.layers.Dense(100, activation='sigmoid', input_shape=(784,))
