@@ -156,15 +156,19 @@ model = keras.Sequential([
 
 - 이렇게 작업하면 추가되는 층을 한눈에 쉽게 알아보는 장점이 있습니다. 이전과 달리 이번에는 **Sequential** 클래스의 `name` 매개변수로 모델의 이름을 지정했습니다. 또 **Dense** 층의 `name` 매개변수에 층의 이름을 `hidden`과 `output` 으로 각각 지정했습니다. 모델의 이름과 달리 층의 이름은 반드시 영문이어야 합니다. `summary()` 메서드의 출력에 이름이 잘반영되는지 확인해 봅니다.
 
+```python
+model.summary()
+```
+
 ![스크린샷 2024-11-17 오후 3 48 20](https://github.com/user-attachments/assets/12fbceb2-1e83-4566-aa3d-1a3e0fef66a5)
 
 
 ![스크린샷 2024-11-17 오후 3 48 29](https://github.com/user-attachments/assets/cccbe5ee-914c-43db-82dc-b44cea27aad8)
 
 
-```python
-model.summary()
-```
+- 2개의 Dense 층이 이전과 동일하게 추가되었고 파라미터 개수도 같습니다. 바뀐 것은 모델 이름과 층 이름입니다. 여러 모델과 많은 층을 사용할 때 name 매개변수를 사용하면 구분하기 쉽습니다.
+- 이 방법이 편리하지만 아주 많은 층을 추가하려면 **Sequential** 클래스 생성자가 매우 길어집니다. 또 이 조건에 따라 층을 추가할 수도 없습니다. **Sequential** 클래스에서 층을 추가할 때 가장 널리 사용하는 방법은 모델의 `add()` 메서드 입니다.
+- 이 방법은 다음처럼 **Sequential** 클래스의 객체를 만들과 이 객체의 add() 메서드를 호출하여 층을 추가합니다. 
 
 ```python
 model = keras.Sequential()
@@ -172,9 +176,14 @@ model.add(keras.layers.Dense(100, activation='sigmoid', input_shape=(784,)))
 model.add(keras.layers.Dense(10, activation='softmax'))
 ```
 
+- 여기에서도 **Dense** 클래스의 객체를 따로 변수에 담지 않고 바로 `add()` 메서드로 전달합니다. 이 방법은 한눈에 추가되는 층을 볼 수 있고 프로그램 실행 시 동적으로 층을 선택하여 추가할 수 있습니다. 
+- `summary()` 메서드의 결과에서 층과 파라미터 개수는 당연히 동일합니다.
+
 ```python
 model.summary()
 ```
+
+- 이제 모델을 훈련해 보겠습니다. `compile()` 메서드의 설정은 앞서 했던 것과 동일합니다. 여기에서도 5번의 에포크 동안 훈련해 봅시다.
 
 ```python
 model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
