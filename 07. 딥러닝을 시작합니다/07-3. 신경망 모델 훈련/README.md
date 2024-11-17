@@ -284,6 +284,10 @@ plt.legend(['train', 'val'])
 plt.show()
 ```
 
+![스크린샷 2024-11-17 오후 9 14 40](https://github.com/user-attachments/assets/a1fe4c83-eff3-4505-b1ce-e08a3d2d7f02)
+
+
+
 ## 모델 저장과 복원
 
 ```python
