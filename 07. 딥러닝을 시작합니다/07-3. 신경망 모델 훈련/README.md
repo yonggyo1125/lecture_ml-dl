@@ -286,9 +286,13 @@ plt.show()
 
 ![스크린샷 2024-11-17 오후 9 14 40](https://github.com/user-attachments/assets/a1fe4c83-eff3-4505-b1ce-e08a3d2d7f02)
 
-
+- 과대적합이 확실히 줄었습니다. 
+- 열 번째 에포크 정도에서 검증 손실의 감소가 멈추지만 크게 상승하지 않고 어느 정도 유지되고 있습니다.
+- 이 모델은 20번의 에포크 동안 훈련을 했기 때문에 결국 다소 과대적합 되어 있습니다. 그렇다면 과대적합 되지 않은 모델을 얻기 위해 에포크 횟수를 10으로 하고 다시 훈련하면 됩니다. 
 
 ## 모델 저장과 복원
+
+- 에포크 횟수를 10으로 다시 지정하고 모델을 훈련하겠습니다. 그리고 나중에 패션 럭키백 런칭에 사용하려면 이 모델을 저장해야 합니다.
 
 ```python
 model = model_fn(keras.layers.Dropout(0.3))
@@ -299,13 +303,21 @@ history = model.fit(train_scaled, train_target, epochs=10, verbose=0,
                     validation_data=(val_scaled, val_target))
 ```
 
-```python
-model.save('model-whole.keras')
-```
+- 케라스 모델은 모델 파라미터를 저장하는 간편한 `save_weights()` 메서드를 제공합니다. 
+- 기본적으로 이 메서드는 텐서플로의 체크포인트 포멧으로 저장하지만 파일의 확장자가 '.h5'일 경우 HDF5 포맷으로 저장합니다. 
+
 
 ```python
 model.save_weights('model.weights.h5')
 ```
+
+- 또한 모델 구조와 모델 파라미터를 함께 저장하는 `save()` 메서드도 제공합니다.
+
+```python
+model.save('model-whole.keras')
+```
+
+- 이 두 파일이 잘 만들어졌는지 확인해 보겠습니다.
 
 ```
 !ls -al model*
@@ -316,11 +328,23 @@ model.save_weights('model.weights.h5')
 -rw-r--r-- 1 root root 975720 Aug  6 06:42 model-whole.keras
 ```
 
+- 두 가지 실험을 해 봅시다. 첫 번째는 훈련을 하지 않은 새로운 모델을 만들고 `model.weights.h5` 파일에서 훈련된 모델 파라미터를 읽어서 사용합니다. 
+- 두 번째는 아예 `model-whole.keras` 파일에서 새로운 모델을 만들어 바로 사용합니다. 
+- 첫 번째 실험부터 시작합니다.
+
 ```python
 model = model_fn(keras.layers.Dropout(0.3))
 
 model.load_weights('model.weights.h5')
 ```
+
+- 훈련하지 않은 새로운 모델을 만들고 이전에 저장했던 모델 파라미터를 적재했습니다. 이때 사용하는 메서드는 `save_weights()`와 쌍을 이루는 `load_weights()` 메서드입니다.
+
+> `load_weights()` 메서드를 사용하려면 `save_weights()` 메서드로 저장했던 모델과 정확히 같은 구조를 가져야 합니다. 그렇지 않으면 에러가 발생합니다. 여기에서는 `model_fn()` 함수를 사용해 동일한 모델을 만들어 사용했습니다.
+- 이 모델의 검증 정확도를 확인해 보겠습니다. 케라스에서 예측을 수행하는 `predict()` 메서드는 사이킷런과 달리 샘플마다 10개의 클래스에 대한 확률을 반환합니다. 패션 MNIST 데이터셋이 다중 분류 문제이기 때문입니다(이진 분류 문제라면 양성 클래스에 대한 확률 하나만 반환합니다).
+- 패션 MNIST  데이터셋에서 덜어낸 검증 세트의 샘플 개수는 12,000개이기 때문에 `predict()` 메서드는 (12000, 10) 크기의 배열을 반환합니다. 
+
+
 
 ```python
 import numpy as np
