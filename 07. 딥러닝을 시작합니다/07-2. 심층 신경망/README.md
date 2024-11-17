@@ -191,7 +191,10 @@ model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 model.fit(train_scaled, train_target, epochs=5)
 ```
 
+![스크린샷 2024-11-17 오후 3 58 25](https://github.com/user-attachments/assets/c1e779c5-90b5-4842-be9a-e65e541028cc)
+
 - 훈련 세트에 대한 성능을 보면 추가된 층이 성능을 향상시켰다는 것을 잘 알 수 있습니다. 인공 신경망에 몇 개의 층을 추가하더라도 `compile()` 메서드와 `fit()` 메서드의 사용법은 동일합니다. 이것이 케라스 API의 장점입니다. 필요하면 여러 개의 층을 추가하고 실험해 봅니다.  
+
 
 ## 렐루 활성화 함수
 
