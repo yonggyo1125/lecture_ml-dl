@@ -92,6 +92,9 @@ train_scaled, val_scaled, train_target, val_target = train_test_split(
 - 많이 사용하는 활성화 함수 중 하나는 앞서 배웠던 시그모이드 함수입니다. 다시 한번 살펴보면
 
 
+<img width="466" alt="스크린샷 2024-11-17 오후 12 56 17" src="https://github.com/user-attachments/assets/8e8e528a-4eea-47a0-92a8-3837f5682987">
+
+
 
 ```python
 dense1 = keras.layers.Dense(100, activation='sigmoid', input_shape=(784,))
