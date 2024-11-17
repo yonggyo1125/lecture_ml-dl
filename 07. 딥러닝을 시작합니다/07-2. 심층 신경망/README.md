@@ -114,6 +114,7 @@ model = keras.Sequential([dense1, dense2])
 - **Sequential** 클래스의 객체를 만들 때 여러 개의 층을 추가하려면 이와 같이 `dense1`과 `dense2`를 리스트로 만들어 전달합니다. 여기에서 주의할 것은 출력층을 가장 마지막에 두어야 한다는 것입니다. 이 리스트는 가장 처음 등장하는 은닉층에서 마지막 출력층의 순서대로 나열해야 합니다. 
 
 
+![스크린샷 2024-11-17 오후 3 03 48](https://github.com/user-attachments/assets/229d43d6-c768-40f3-98de-f46d3c1eba51)
 
 
 ```python
