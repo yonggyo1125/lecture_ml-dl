@@ -69,6 +69,9 @@ train_scaled, val_scaled, train_target, val_target = train_test_split(
 - 이제 인공 신경망 모델에 층을 2개 추가해 봅니다.
 - 여기에서 만들 모델의 대략적인 구조는 다음 그림과 같습니다.
 
+<img width="577" alt="스크린샷 2024-11-17 오후 12 34 58" src="https://github.com/user-attachments/assets/2756508d-88ce-4df6-b882-2390948c44ed">
+
+
 ```python
 dense1 = keras.layers.Dense(100, activation='sigmoid', input_shape=(784,))
 dense2 = keras.layers.Dense(10, activation='softmax')
