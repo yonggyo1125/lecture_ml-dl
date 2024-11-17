@@ -231,7 +231,8 @@ history = model.fit(train_scaled, train_target, epochs=20, verbose=0,
 
 ![스크린샷 2024-11-17 오후 8 15 01](https://github.com/user-attachments/assets/94aa6a07-704d-4a03-b104-e74a40b49322)
 
-
+- 과대적합이 훨씬 줄었습니다. 검증 손실 그래프에 여전히 요동이 남아 있지만 열 번째 에포크까지 전반적인 감소 추세가 이어지고 있습니다. 이는 **Adam** 옵티마이저가 이 데이터셋에 잘 맞는다는 것을 보여 줍니다. 
+- 더 나은 손실 곡선을 얻으려면 학습률을 조정해서 다시 시도해 볼 수도 있습니다.
 
 ```python
 plt.plot(history.history['loss'])
@@ -243,6 +244,11 @@ plt.show()
 ```
 
 ## 드롭아웃
+
+- **드롭아웃**(dropout)은 딥러닝의 아버지로 불리는 제프리 힌턴(Geoffrey Hinton)이 소개했습니다. 이 방식은 다음 그림처럼 훈련 과정에서 층에 있는 일부 뉴런을 랜덤하게 꺼서(즉 뉴런의 출력을 0으로 만들어) 과대적합을 막습니다.
+
+
+
 
 ```python
 model = model_fn(keras.layers.Dropout(0.3))
