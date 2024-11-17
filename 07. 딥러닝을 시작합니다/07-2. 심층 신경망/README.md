@@ -191,6 +191,10 @@ model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 model.fit(train_scaled, train_target, epochs=5)
 ```
 
+![스크린샷 2024-11-17 오후 3 58 25](https://github.com/user-attachments/assets/c1e779c5-90b5-4842-be9a-e65e541028cc)
+
+
+
 ## 렐루 활성화 함수
 
 ```python
