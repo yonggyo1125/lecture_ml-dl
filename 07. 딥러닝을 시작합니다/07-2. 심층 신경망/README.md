@@ -304,21 +304,37 @@ sgd = keras.optimizers.SGD(learning_rate=0.1)
 
 <img width="532" alt="스크린샷 2024-11-17 오후 5 14 06" src="https://github.com/user-attachments/assets/2d8be858-80ed-4bff-b50c-81ded171db9d">
 
+- 기본 경사 하강법 옵티마이저는 모두 SGD 클래스에서 제공합니다. SGD 클래스의 momentum 매개변수의 기본값은 0입니다. 이를 0보다 큰 값으로 지정하면 마치 이전의 그레이디언트를 가속도 처럼 사용하는 **모멘텀 최적화**(momentum optimization)를 사용합니다. 보통 `momentum` 매개변수는 0.9 이상을 지정합니다.
+
+- 다음처럼 SGD 클래스의 `nesterov` 매개변수를 기본값 False에서 True로 바꾸면 **네스테로프 모멘텀 최적화**(nesterov momentum optimization, 네스트로프 가속 경사)를 사용합니다.
 
 
 ```python
 sgd = keras.optimizers.SGD(momentum=0.9, nesterov=True)
 ```
 
+- 네트테로프 모멘텀은 모멘텀 최적화를 2번 반복하여 구현합니다. 대부분의 경우 네스테로프 모멘텀 최적화가 기본 확률적 경사 하강법보다 더 나은 성능을 제공합니다.
+
+- 모델이 최적점에 가까이 갈수록 학습률을 낮출 수 있습니다. 이렇게 하면 안정적으로 최적점에 수렴할 가능성이 높습니다. 이런 학습률을 **적응적 학습률**(adaptive learning rate)이라고 합니다. 이런 방식들은 학습률 매개변수를 튜닝하는 수고를 덜 수 있는 것이 장점입니다.
+- 적응적 학습률을 사용하는 대표적인 옵티마이저는 **Adagrad**와 **RMSprop**입니다. 각각 `compile()` 메서드의 optimizer 매개변수에 `adagrad`와 `rmsprop` 으로 지정할 수 있습니다. optimizer 매개변수의 기본값이 바로 `rmsprop` 입니다. 이 두 옵티마이저의 매개변수를 바꾸고 싶다면 SGD와 같이 Adagrad와 RMSprop 클래스 객체를 만들어 사용하면 됩니다.
+
 ```python
 adagrad = keras.optimizers.Adagrad()
 model.compile(optimizer=adagrad, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 ```
 
+- RMSprop도 마찬가지 입니다.
+
 ```python
 rmsprop = keras.optimizers.RMSprop()
 model.compile(optimizer=rmsprop, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 ```
+
+- 모멘텀 최적화와 RMSprop의 장점을 접목한 것이 **Adam** 입니다. **Adam**은 **RMSprop** 과 함께 맨처음 시도해 볼 수 있는 좋은 알고리즘입니다. **Adam** 클래스도 `keras.optimizers` 패키지 아래에 있습니다.
+- 적응적 학습률을 사용하는 이 3개의 클래스는 `learning_rate` 매개변수의 기본값으로 모두 0.001을 사용합니다.
+
+- 여기에서는 Adam 클래스의 매개변수 기본값을 사용해 패션 MNIST 모델을 훈련해 보겠습니다. 
+- 먼저 모델을 다시 생성합니다.
 
 ```python
 model = keras.Sequential()
@@ -327,11 +343,16 @@ model.add(keras.layers.Dense(100, activation='relu'))
 model.add(keras.layers.Dense(10, activation='softmax'))
 ```
 
+- `compile()` 메서드의 optimizer를 `adam`으로 설정하고 5번의 에포크 동안 훈련합니다.
+
 ```python
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 model.fit(train_scaled, train_target, epochs=5)
 ```
+
+
+
 
 ```python
 model.evaluate(val_scaled, val_target)
