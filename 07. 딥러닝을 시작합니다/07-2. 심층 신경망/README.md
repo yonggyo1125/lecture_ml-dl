@@ -204,6 +204,10 @@ model.fit(train_scaled, train_target, epochs=5)
 ![스크린샷 2024-11-17 오후 4 05 37](https://github.com/user-attachments/assets/76381746-753c-4ec6-90e3-b582b7eb3313)
 
 
+![스크린샷 2024-11-17 오후 4 07 42](https://github.com/user-attachments/assets/a2e222fd-0ff8-4d8c-b582-6c40f2c0ee1f)
+
+
+
 
 ```python
 model = keras.Sequential()
