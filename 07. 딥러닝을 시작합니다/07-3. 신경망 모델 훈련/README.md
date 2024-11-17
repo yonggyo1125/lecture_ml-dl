@@ -229,6 +229,7 @@ history = model.fit(train_scaled, train_target, epochs=20, verbose=0,
                     validation_data=(val_scaled, val_target))
 ```
 
+![스크린샷 2024-11-17 오후 8 15 01](https://github.com/user-attachments/assets/94aa6a07-704d-4a03-b104-e74a40b49322)
 
 
 
