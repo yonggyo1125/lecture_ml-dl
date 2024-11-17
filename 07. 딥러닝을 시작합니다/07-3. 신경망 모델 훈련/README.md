@@ -369,7 +369,9 @@ print(np.mean(val_labels == val_target))
 
 ![스크린샷 2024-11-17 오후 9 38 33](https://github.com/user-attachments/assets/ab7b1a2c-34b6-4985-9f1f-f5292459ab4e)
 
-
+- `axis=1` 이면 열을 따라 각 행의 최댓값의 인덱스를 선택하고, `axis=0`이면 행을 따라 각 열의 최댓값의 인덱스를 선택합니다.
+- 그 다음 라인은 `argmax()`로 고른 인덱스(`val_labels`)와 타깃(`val_target`)을 비교합니다. 두 배열에서 각 위치의 값이 같으면 1이 되고 다르면 0이 됩니다. 이를 평균하면 정확도가 됩니다.
+- 이번에는 모델 전체를 파일ㅇ서 읽은 다음 검증 세트의 정확도를 출력해 보겠습니다. 모델이 저장된 파일을 읽을 때는 케라스가 제공하는 `load_model()` 함수를 사용합니다.
 
 
 ```python
@@ -377,6 +379,9 @@ model = keras.models.load_model('model-whole.keras')
 
 model.evaluate(val_scaled, val_target)
 ```
+
+
+
 
 ## 콜백
 
