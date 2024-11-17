@@ -138,6 +138,10 @@ model.summary()
 
 
 
+![스크린샷 2024-11-17 오후 3 38 18](https://github.com/user-attachments/assets/7d83c227-c2d0-4c0b-b97c-2e893eeeafff)
+
+
+
 ## 층을 추가하는 다른 방법
 
 ```python
