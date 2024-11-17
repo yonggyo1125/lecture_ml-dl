@@ -97,12 +97,18 @@ model.summary()
 
 <img width="500" alt="스크린샷 2024-11-17 오후 7 41 33" src="https://github.com/user-attachments/assets/24ee1ef2-4ad5-4132-b1cc-4af9cf0dfd10">
 
+- 이전 절과 동일하게 모델을 훈련하지만 `fit()` 메서드의 결과를 history 변수에 담아 보겠습니다.
 
 ```python
 model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 history = model.fit(train_scaled, train_target, epochs=5, verbose=0)
 ```
+
+> verbose 매개변수는 훈련 과정 출력을 조절합니다. 기본값은 1로 이전 절에서처럼 에포크마다 진행 막대와 함께 손실등의 지표가 출력됩니다. 2로 바꾸면 진행 막대를 빼고 출력됩니다. 이번 절에서는 훈련 결과를 그래프로 나타내는 대신 verbose 매개변수를 0으로 지정하여 훈련 과정을 나타내지 않겠습니다.
+
+- history 객체에는 훈련 측정값이 담겨 있는 history 딕셔너리가 들어있습니다. 이 딕셔너리에 어떤 값이 들어 있는지 확인해 봅시다.
+
 
 ```python
 print(history.history.keys())
@@ -112,6 +118,10 @@ print(history.history.keys())
 dict_keys(['accuracy', 'loss'])
 ```
 
+- 손실과 정확도가 포함되어 있습니다. 이전 절에서 언급했듯이 케라스는 기본적으로 에포크마다 손실을 계산합니다. 정확도는 `compile()` 메서드에서 `metrics` 매개변수에 `accuracy`를 추가했기 때문에 `history` 속성에 포함되었습니다.
+- `history` 속성에 포함된 손실과 정확도는 에포크마다 계산한 값이 순서대로 나열된 단순한 리스트입니다. 맷플롯립을 사용해 쉽게 그래프로 그릴 수 있습니다.
+
+
 ```python
 import matplotlib.pyplot as plt
 
@@ -120,6 +130,9 @@ plt.xlabel('epoch')
 plt.ylabel('loss')
 plt.show()
 ```
+
+
+
 
 ```python
 plt.plot(history.history['accuracy'])
