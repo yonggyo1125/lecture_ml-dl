@@ -203,6 +203,10 @@ dict_keys(['accuracy', 'loss', 'val_accuracy', 'val_loss'])
 
 - 검증 세트에 대한 손실은 `val_loss`에 들어 있고 정확도는 `val_accuracy`에 들어 있습니다. 과대/과소적합 문제를 조사하기 위해 훈련 손실과 검증 손실을 한 그래프에 그려서 비교해 보겠습니다.
 
+![스크린샷 2024-11-17 오후 8 08 07](https://github.com/user-attachments/assets/75dbc110-06c0-4e75-8203-1a94d17ee10a)
+
+
+
 ```python
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
