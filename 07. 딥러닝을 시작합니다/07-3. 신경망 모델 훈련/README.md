@@ -380,6 +380,7 @@ model = keras.models.load_model('model-whole.keras')
 model.evaluate(val_scaled, val_target)
 ```
 
+![스크린샷 2024-11-17 오후 9 42 45](https://github.com/user-attachments/assets/f3b97dbd-7cd8-4eb4-908c-3442007d8900)
 
 
 
