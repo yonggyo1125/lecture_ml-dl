@@ -231,6 +231,9 @@ model.summary()
 
 ![스크린샷 2024-11-17 오후 4 17 36](https://github.com/user-attachments/assets/ec9de3df-5574-43a2-9d8c-f92d183859e9)
 
+- 첫 번째 등장하는 **Flatten** 클래스에 포함된 모델 파라미터는 0개입니다. 케라스의 **Flatten** 층을 신경망 모델에 추가하면 입력값의 차원을 짐작할 수 있는 것이 또 하나의 장점입니다. 
+- 앞의 출력에서 784개의 입력이 첫 번째 은닉층에 전달되는 것을 알 수 있는데, 이는 이전에 만들었던 모델에서는 쉽게 눈치채기 어려워습니다. 입력 데이터에 대한 전처리 과정을 가능한 모델에 포함시키는 것이 케라스 API의 철학 중 하나입니다. 
+- 그럼 훈련 데이터르 다시 준비해서 모델을 훈련해 보겠습니다. 이전 절의 서두에 있던 코드와 동일하지만 `reshape()` 메서드를 적용하지 않았습니다.
 
 
 ```python
@@ -241,6 +244,8 @@ train_scaled = train_input / 255.0
 train_scaled, val_scaled, train_target, val_target = train_test_split(
     train_scaled, train_target, test_size=0.2, random_state=42)
 ```
+
+- 모델을 컴파일하고 훈련하는 것은 다음 코드처럼 이전과 동일합니다.
 
 ```python
 model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
