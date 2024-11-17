@@ -354,13 +354,15 @@ model.fit(train_scaled, train_target, epochs=5)
 
 <img width="607" alt="스크린샷 2024-11-17 오후 5 27 38" src="https://github.com/user-attachments/assets/b0e4d2ed-02b5-4d0f-afb8-a9696110f037">
 
+- 이 출력 결과를 보면 기존 **RMSprop**을 사용했을 때와 거의 같은 성능을 보여 줍니다. 
+- 마지막으로 검증 세트에서의 성능도 확인해봅시다. 
 
 ```python
 model.evaluate(val_scaled, val_target)
 ```
 
-
 <img width="599" alt="스크린샷 2024-11-17 오후 5 27 46" src="https://github.com/user-attachments/assets/c11367ad-f1d4-4fa8-921a-edab4ec8eb22">
 
+- 환경마다 조금씩 차이가 있을 수 있지만 여기서는 기본 RMSprop보다 조금 나은 성능을 냅니다.
 
 
