@@ -346,6 +346,9 @@ model.load_weights('model.weights.h5')
 
 ![스크린샷 2024-11-17 오후 9 32 46](https://github.com/user-attachments/assets/69e93530-c466-4a63-934f-6efdb96a7a40)
 
+- 따라서 조금 번거롭겠지만 10개의 확률 중에 가장 큰 값의 인덱스를 골라 타깃 레이블과 비교하여 정확도를 계산해 보겠습니다.
+
+> 모델 파라미터를 읽은 후 `evaluate()` 메서드를 사용하여 정확도를 출력할 수도 있습니다. 하지만 `evaluate()` 메서드는 손실을 계산하기 위해 반드시 먼저 `compile()` 메서드를 실행해야 합니다. 여기에서는 새로운 데이터에 대해 정확도만 계산하면 되는 상황이라고 가정합니다. 
 
 ```python
 import numpy as np
@@ -353,6 +356,18 @@ import numpy as np
 val_labels = np.argmax(model.predict(val_scaled), axis=-1)
 print(np.mean(val_labels == val_target))
 ```
+
+```
+0.87575
+```
+
+- 모델의 `predict()` 메서드의 결과에서 가장 큰 값을 고르기 위해 넘파이 `argmax()` 함수를 사용했습니다. 이 함수는 배열에서 가장 큰 값의 인덱스를 반환합니다. 예를 들어 배열의 첫 번째 원소가 가장 큰 값일 경우 0을 반환합니다. 
+- 다행이 우리가 준비한 티깃값도 0부터 시작하기 때문에 비교하기 좋습니다.
+- `argmax()` 함수의 `axis=-1`은 배열의 마지막 차원을 따라 최댓값을 고릅니다. 검증 세트는 2차원 배열이기 때문에 마지막 차원은 1이 됩니다. 
+- 간단한 예를 그려 보면 쉽게 이해할 수 있습니다.
+
+
+
 
 ```python
 model = keras.models.load_model('model-whole.keras')
