@@ -258,11 +258,15 @@ model.fit(train_scaled, train_target, epochs=5)
 ![스크린샷 2024-11-17 오후 4 24 13](https://github.com/user-attachments/assets/7e49f70d-0a2d-463c-8a80-4a4541ea81f8)
 
 
+- 시그모이드 함수를 사용했을 때와 비교하면 성능이 조금 향상되었습니다. 크지 않지만 렐루 함수의 효과를 보았습니다. 
+- 검증 세트에서의 성능도 확인해 보겠습니다.
 
 
 ```python
 model.evaluate(val_scaled, val_target)
 ```
+
+
 
 ## 옵티마이저
 
