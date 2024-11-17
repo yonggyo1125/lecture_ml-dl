@@ -48,6 +48,18 @@
 
 ## 손실 곡선
 
+- 2절에서 `fit()` 메서드로 모델을 훈련하면 훈련 과정이 상세하게 출력되어 확인할 수 있었습니다. 여기에는 에포크 횟수, 손실, 정확도 등이 있었습니다.
+- 그런데 이 출력의 마지막에 다음과 같은 메시지를 보았을 것
+
+```
+<keras.src.callbacks.history.History at 0x7ba278da8df0>
+```
+
+- 노트북의 코드 셀은 `print()` 명령을 사용하지 않더라도 마지막 라인의 실행 결과를 자동으로 출력합니다. 즉 이 메시지는 `fit()` 메서드의 실행 결과를 출력한 것입니다. 다시 말해 fit() 메서드가 무엇인지 반환된다는 증거입니다.
+- 실은 케라스의 `fit()` 메서드는 **History** 클래스 객체를 반환합니다. 
+- **History** 객체에는 훈련 과정에서 계산한 지표, 즉 손실과 정확도 값이 저장되어 있습니다. 이 값을 사용하면 그래프를 그릴 수 있습니다.
+- 먼저 이전 절에서 사용했던 것과 같이 패션 MNIST 데이터셋을 적재하고 훈련 세트와 검증 세트로 나눕니다.
+
 ```python
 from tensorflow import keras
 from sklearn.model_selection import train_test_split
@@ -61,6 +73,8 @@ train_scaled, val_scaled, train_target, val_target = train_test_split(
     train_scaled, train_target, test_size=0.2, random_state=42)
 ```
 
+- 그다음 모델을 만들겠습니다. 그런데 이전 절과는 달리 모델을 만드는 간단한 함수를 정의하겠습니다. 이 함수는 하나의 매개변수를 가집니다. 
+
 ```python
 def model_fn(a_layer=None):
     model = keras.Sequential()
@@ -72,11 +86,16 @@ def model_fn(a_layer=None):
     return model
 ```
 
+- if 구문을 제외하면 이 코드는 이전 절에서 만든 것과 동일한 모델을 만듭니다. if 구문의 역할은 `model_fn()` 함수에 (a_layer 매개변수로) 케라스 층을 추가하면 은닉층 뒤에 또 하나의 층을 추가하는 것입니다. 신경망 모델을 만드는 것이 마치 프로그래밍을 하는 것과 같습니다.
+- 여기서는 `a_layer` 매개변수로 층을 추가하지 않고 단순하게 `model_fn()` 함수를 호출합니다. 그리고 모델 구조를 출력하면 이전 절과 동일한 모델이라는 것을 확인할 수 있습니다.
+
 ```python
 model = model_fn()
 
 model.summary()
 ```
+
+
 
 ```python
 model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
