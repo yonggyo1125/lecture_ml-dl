@@ -261,6 +261,9 @@ model = model_fn(keras.layers.Dropout(0.3))
 model.summary()
 ```
 
+![스크린샷 2024-11-17 오후 8 43 15](https://github.com/user-attachments/assets/2be057c6-e015-4184-adff-e1b6a5f99553)
+
+
 ```python
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
