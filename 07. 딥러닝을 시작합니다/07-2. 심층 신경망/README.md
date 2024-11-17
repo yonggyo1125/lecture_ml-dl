@@ -154,7 +154,13 @@ model = keras.Sequential([
 ], name='패션 MNIST 모델')
 ```
 
-- 이렇게 작업하면 추가되는 층을 한눈에 쉽게 알아보는 장점이 있습니다. 이전과 달리 이번에는 **Sequential** 클래스의 `name` 매개변수로 모델의 이름을 지정했습니다. 또 **Dense** 층의 `name` 매개변수에 층의 이름을 `hidden`과 `output` 으로 각각 지정했습니다. 모델의 이름과 달리 층의 이름은 반드시 영문이어야 합니다. `summary()` 메서드의 출력에 이름이 . 잘반영되는지 확인해 봅니다.
+- 이렇게 작업하면 추가되는 층을 한눈에 쉽게 알아보는 장점이 있습니다. 이전과 달리 이번에는 **Sequential** 클래스의 `name` 매개변수로 모델의 이름을 지정했습니다. 또 **Dense** 층의 `name` 매개변수에 층의 이름을 `hidden`과 `output` 으로 각각 지정했습니다. 모델의 이름과 달리 층의 이름은 반드시 영문이어야 합니다. `summary()` 메서드의 출력에 이름이 잘반영되는지 확인해 봅니다.
+
+![스크린샷 2024-11-17 오후 3 48 20](https://github.com/user-attachments/assets/12fbceb2-1e83-4566-aa3d-1a3e0fef66a5)
+
+
+![스크린샷 2024-11-17 오후 3 48 29](https://github.com/user-attachments/assets/cccbe5ee-914c-43db-82dc-b44cea27aad8)
+
 
 ```python
 model.summary()
