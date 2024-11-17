@@ -95,6 +95,7 @@ model = model_fn()
 model.summary()
 ```
 
+<img width="500" alt="스크린샷 2024-11-17 오후 7 41 33" src="https://github.com/user-attachments/assets/24ee1ef2-4ad5-4132-b1cc-4af9cf0dfd10">
 
 
 ```python
