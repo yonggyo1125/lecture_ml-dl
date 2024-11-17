@@ -177,6 +177,9 @@ plt.show()
 
 <img width="356" alt="스크린샷 2024-11-17 오후 8 00 17" src="https://github.com/user-attachments/assets/1fff8998-f048-4498-b541-ce4b2cba1324">
 
+> 인공 신경망 모델이 최적화하는 대상은 정확도가 아니라 손실 함수입니다. 이따금 손실 감소에 비례하여 정확도가 높아지지 않는 경우도 있습니다. 따라서 모델이 잘 훈련되었는지 판단하려면 정확도보다는 손실 함수의 값을 확인하는 것이 더 낫습니다.
+
+- 에포크마다 검증 손실을 계산하기 위해 케라스 모델의 `fit()` 메서드에 검증 데이터를 전달할 수 있습니다. 다음처럼 `validation_data` 매개변수에 검증에 사용할 입력과 타깃값을 튜플로 만들어 전달합니다.
 
 ```python
 model = model_fn()
@@ -186,6 +189,10 @@ history = model.fit(train_scaled, train_target, epochs=20, verbose=0,
                     validation_data=(val_scaled, val_target))
 ```
 
+> 이 과정은 실행하는 데 시간이 조금 걸립니다. GPU를 사용하면 조금 더 빠릅니다.
+
+- 반환된 `history.history` 딕셔너리에 어떤 값이 있는지 키를 확인해 봅시다.
+
 ```python
 print(history.history.keys())
 ```
@@ -193,6 +200,8 @@ print(history.history.keys())
 ```
 dict_keys(['accuracy', 'loss', 'val_accuracy', 'val_loss'])
 ```
+
+- 검증 세트에 대한 손실은 `val_loss`에 들어 있고 정확도는 `val_accuracy`에 들어 있습니다. 과대/과소적합 문제를 조사하기 위해 훈련 손실과 검증 손실을 한 그래프에 그려서 비교해 보겠습니다.
 
 ```python
 plt.plot(history.history['loss'])
@@ -211,6 +220,9 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
 history = model.fit(train_scaled, train_target, epochs=20, verbose=0,
                     validation_data=(val_scaled, val_target))
 ```
+
+
+
 
 ```python
 plt.plot(history.history['loss'])
