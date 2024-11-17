@@ -406,6 +406,7 @@ model = keras.models.load_model('best-model.keras')
 model.evaluate(val_scaled, val_target)
 ```
 
+![스크린샷 2024-11-17 오후 9 50 39](https://github.com/user-attachments/assets/e08f3dd2-4e80-4f4d-beb6-98fa7f605209)
 
 
 
