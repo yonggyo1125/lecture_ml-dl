@@ -45,3 +45,249 @@
 
 - **argmax**는 배열에서 축을 따라 최대값의 인덱스를 반환합니다.
   - `axis` 매개변수에서 어떤 축을 따라 최댓값을 찾을지 지정합니다. 기본값은 None으로 전체 배열에서 최대값을 찾습니다.
+
+## 손실 곡선
+
+```python
+from tensorflow import keras
+from sklearn.model_selection import train_test_split
+
+(train_input, train_target), (test_input, test_target) = \
+    keras.datasets.fashion_mnist.load_data()
+
+train_scaled = train_input / 255.0
+
+train_scaled, val_scaled, train_target, val_target = train_test_split(
+    train_scaled, train_target, test_size=0.2, random_state=42)
+```
+
+```python
+def model_fn(a_layer=None):
+    model = keras.Sequential()
+    model.add(keras.layers.Flatten(input_shape=(28, 28)))
+    model.add(keras.layers.Dense(100, activation='relu'))
+    if a_layer:
+        model.add(a_layer)
+    model.add(keras.layers.Dense(10, activation='softmax'))
+    return model
+```
+
+```python
+model = model_fn()
+
+model.summary()
+```
+
+```python
+model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+history = model.fit(train_scaled, train_target, epochs=5, verbose=0)
+```
+
+```python
+print(history.history.keys())
+```
+
+```
+dict_keys(['accuracy', 'loss'])
+```
+
+```python
+import matplotlib.pyplot as plt
+
+plt.plot(history.history['loss'])
+plt.xlabel('epoch')
+plt.ylabel('loss')
+plt.show()
+```
+
+```python
+plt.plot(history.history['accuracy'])
+plt.xlabel('epoch')
+plt.ylabel('accuracy')
+plt.show()
+```
+
+```python
+model = model_fn()
+model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+history = model.fit(train_scaled, train_target, epochs=20, verbose=0)
+```
+
+```python
+plt.plot(history.history['loss'])
+plt.xlabel('epoch')
+plt.ylabel('loss')
+plt.show()
+```
+
+## 검증 손실
+
+```python
+model = model_fn()
+model.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+history = model.fit(train_scaled, train_target, epochs=20, verbose=0,
+                    validation_data=(val_scaled, val_target))
+```
+
+```python
+print(history.history.keys())
+```
+
+```
+dict_keys(['accuracy', 'loss', 'val_accuracy', 'val_loss'])
+```
+
+```python
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.xlabel('epoch')
+plt.ylabel('loss')
+plt.legend(['train', 'val'])
+plt.show()
+```
+
+```python
+model = model_fn()
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+history = model.fit(train_scaled, train_target, epochs=20, verbose=0,
+                    validation_data=(val_scaled, val_target))
+```
+
+```python
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.xlabel('epoch')
+plt.ylabel('loss')
+plt.legend(['train', 'val'])
+plt.show()
+```
+
+## 드롭아웃
+
+```python
+model = model_fn(keras.layers.Dropout(0.3))
+
+model.summary()
+```
+
+```python
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+history = model.fit(train_scaled, train_target, epochs=20, verbose=0,
+                    validation_data=(val_scaled, val_target))
+```
+
+```python
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.xlabel('epoch')
+plt.ylabel('loss')
+plt.legend(['train', 'val'])
+plt.show()
+```
+
+## 모델 저장과 복원
+
+```python
+model = model_fn(keras.layers.Dropout(0.3))
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+history = model.fit(train_scaled, train_target, epochs=10, verbose=0,
+                    validation_data=(val_scaled, val_target))
+```
+
+```python
+model.save('model-whole.keras')
+```
+
+```python
+model.save_weights('model.weights.h5')
+```
+
+```
+!ls -al model*
+```
+
+```
+-rw-r--r-- 1 root root 971928 Aug  6 06:42 model.weights.h5
+-rw-r--r-- 1 root root 975720 Aug  6 06:42 model-whole.keras
+```
+
+```python
+model = model_fn(keras.layers.Dropout(0.3))
+
+model.load_weights('model.weights.h5')
+```
+
+```python
+import numpy as np
+
+val_labels = np.argmax(model.predict(val_scaled), axis=-1)
+print(np.mean(val_labels == val_target))
+```
+
+```python
+model = keras.models.load_model('model-whole.keras')
+
+model.evaluate(val_scaled, val_target)
+```
+
+## 콜백
+
+```python
+model = model_fn(keras.layers.Dropout(0.3))
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+checkpoint_cb = keras.callbacks.ModelCheckpoint('best-model.keras',
+                                                save_best_only=True)
+
+model.fit(train_scaled, train_target, epochs=20, verbose=0,
+          validation_data=(val_scaled, val_target),
+          callbacks=[checkpoint_cb])
+```
+
+```python
+model = keras.models.load_model('best-model.keras')
+
+model.evaluate(val_scaled, val_target)
+```
+
+```python
+model = model_fn(keras.layers.Dropout(0.3))
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+
+checkpoint_cb = keras.callbacks.ModelCheckpoint('best-model.keras',
+                                                save_best_only=True)
+early_stopping_cb = keras.callbacks.EarlyStopping(patience=2,
+                                                  restore_best_weights=True)
+
+history = model.fit(train_scaled, train_target, epochs=20, verbose=0,
+                    validation_data=(val_scaled, val_target),
+                    callbacks=[checkpoint_cb, early_stopping_cb])
+```
+
+```python
+print(early_stopping_cb.stopped_epoch)
+```
+
+```python
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.xlabel('epoch')
+plt.ylabel('loss')
+plt.legend(['train', 'val'])
+plt.show()
+```
+
+```python
+model.evaluate(val_scaled, val_target)
+```
