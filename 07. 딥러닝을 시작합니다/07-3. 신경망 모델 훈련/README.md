@@ -465,3 +465,7 @@ plt.show()
 ```python
 model.evaluate(val_scaled, val_target)
 ```
+
+![스크린샷 2024-11-17 오후 10 06 07](https://github.com/user-attachments/assets/16ac5fea-422b-4b57-a792-beac1e354d7d)
+
+
