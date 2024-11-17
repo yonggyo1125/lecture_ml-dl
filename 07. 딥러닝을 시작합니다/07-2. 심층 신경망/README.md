@@ -201,6 +201,9 @@ model.fit(train_scaled, train_target, epochs=5)
 - 초창기 인공 신경망의 은닉층에 많이 사용된 활성화 함수는 시그모이드 함수였습니다. 하지만 이 함수에는 단점이 있습니다. 이 함수의 오른쪽과 왼쪽 끝으로 갈수록 그래프가 누워있기 때문에 올바른 출력을 만드는데 신속하게 대응하지 못합니다. 
 - 다음 그림을 참고하세요.
 
+![스크린샷 2024-11-17 오후 4 05 37](https://github.com/user-attachments/assets/76381746-753c-4ec6-90e3-b582b7eb3313)
+
+
 
 ```python
 model = keras.Sequential()
