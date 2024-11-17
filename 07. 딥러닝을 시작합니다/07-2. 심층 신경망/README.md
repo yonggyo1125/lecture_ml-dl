@@ -266,6 +266,7 @@ model.fit(train_scaled, train_target, epochs=5)
 model.evaluate(val_scaled, val_target)
 ```
 
+![스크린샷 2024-11-17 오후 4 48 28](https://github.com/user-attachments/assets/266e32cd-ccaf-4ebd-89eb-3f37b856dd67)
 
 
 ## 옵티마이저
