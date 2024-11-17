@@ -76,6 +76,14 @@ train_scaled, val_scaled, train_target, val_target = train_test_split(
 
 > 분류 문제는 클래스에 대한 확률을 출력하기 위해 활성화 함수를 사용합니다. 회귀의 출력은 임의의 어떤 숫자이므로 활성화 함수를 적용할 필요가 없습니다. 즉 출력층의 선형 방정식의 계산을 그대로 출력합니다. 이렇게 하려면 Dense 층의 `activation` 매개변수에 아무런 값을 지정하지 않습니다. 
 
+
+<img width="366" alt="스크린샷 2024-11-17 오후 12 45 11" src="https://github.com/user-attachments/assets/c3af2153-4497-4074-b475-048a6cd13224">
+
+
+<img width="168" alt="스크린샷 2024-11-17 오후 12 45 20" src="https://github.com/user-attachments/assets/22f2b05a-2d1a-4143-817d-2bd85ac5c6ee">
+
+
+
 ```python
 dense1 = keras.layers.Dense(100, activation='sigmoid', input_shape=(784,))
 dense2 = keras.layers.Dense(10, activation='softmax')
