@@ -352,8 +352,15 @@ model.fit(train_scaled, train_target, epochs=5)
 ```
 
 
+<img width="607" alt="스크린샷 2024-11-17 오후 5 27 38" src="https://github.com/user-attachments/assets/b0e4d2ed-02b5-4d0f-afb8-a9696110f037">
 
 
 ```python
 model.evaluate(val_scaled, val_target)
 ```
+
+
+<img width="599" alt="스크린샷 2024-11-17 오후 5 27 46" src="https://github.com/user-attachments/assets/c11367ad-f1d4-4fa8-921a-edab4ec8eb22">
+
+
+
