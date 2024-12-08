@@ -54,11 +54,16 @@
 - 다음 그림은 C언어로 작성된 리눅스 소스 코드를 이용해서 Char-RNN을 학습시킨 후 샘플링한 결과입니다.
 
 - 희곡의 경우와 마찬가지로 의미로는 말이 안되지만 구조적으로는 그럴 듯한 모습을 하는 것을 알 수 있습니다.
+  
+<img width="587" alt="스크린샷 2024-12-08 오후 7 58 57" src="https://github.com/user-attachments/assets/6afac174-3efc-4f45-985e-2d74391e4f20">
 
 
 ## Argmax 샘플링
 
+<img width="743" alt="스크린샷 2024-12-08 오후 7 59 51" src="https://github.com/user-attachments/assets/c7ff681d-aba4-4640-96a6-9af1c846621a">
 
 ## Categorical Distribution 샘플링
+
+<img width="575" alt="스크린샷 2024-12-08 오후 8 00 09" src="https://github.com/user-attachments/assets/e3af61c8-6e28-4af3-b2d1-99507970287d">
 
 
