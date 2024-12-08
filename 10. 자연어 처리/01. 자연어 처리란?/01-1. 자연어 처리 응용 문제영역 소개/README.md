@@ -37,9 +37,20 @@
 
 ![스크린샷 2024-12-08 오후 2 40 22](https://github.com/user-attachments/assets/0bf4c0eb-5033-45df-9a29-2023b7b485ec)
 
+## NLP 문제 영역 ‒ Dialogue Generation
+
+- **Dialogue Generation** : 봇이 자동으로 텍스트를 생성해내는 문제영역입니다.
 
 ![스크린샷 2024-12-08 오후 2 40 35](https://github.com/user-attachments/assets/39d20092-2a3b-4c54-9581-3096c699ee54)
 
+
+## 자연어처리(Natural Language Processing-NLP-) 문제 영역에 기반한 AI 기술의 응용 분야
+
+- **Chatbot** : 자동으로 고객 상담을 진행하는 챗봇등에 NLP 기술이 응용될 수 있습니다.
+- **Translation** : 자동 번역 등의 분야에 NLP 기술이 응용 될 수 있습니다.
+- **Sentiment Analysis** : 고객의 리뷰 텍스트등을 통해서 Sentiment Analysis 등에 응용 될 수 있습니다.
+- **Recommendation System** : 고객의 텍스트 로그를 토대로 고객에게 최적화된 품목을 추천해줄 수 있습니
+다.
 
 ![스크린샷 2024-12-08 오후 2 40 43](https://github.com/user-attachments/assets/600a2d7c-b635-4eca-89bc-7553e70ceb04)
 
