@@ -23,6 +23,7 @@
 - 차원 축소
 - 유사한 의미를 가진 단어를 유사한 벡터구조로 표현 가능
 - 희박(Sparse)한 데이터 표현 형태를 빽빽한(Dense) 데이터 표현 형태로 변경가능
+![스크린샷 2024-12-08 오후 8 55 19](https://github.com/user-attachments/assets/cde29443-09a3-4745-86fa-0d551d83cd0c)
 
 
 ## 임베딩(Embedding)을 이용한 사칙연산
@@ -30,17 +31,20 @@
 - 임베딩(Embedding)을 이용해서 유사한 의미 단어 벡터들간의 덧셈과 뺄셈을 수행할 수 있습니다.
 - 예를 들어 king을 표현하는 임베딩 벡터에서 man을 나타내는 임베딩 벡터를 빼고 woman을 나타내는 임베딕 벡터를 더하면 이 벡터의 값이 queen을 나타내는 임베딩 벡터와 유사해집니다.
 
+![스크린샷 2024-12-08 오후 8 55 26](https://github.com/user-attachments/assets/5f145fdc-74fa-43bc-a224-cb0cf1aec043)
 
 
 
 - 아래 사이트에서 임베딩 사칙연산을 실습해볼 수 있습니다.
 - http://w.elnn.kr/search/
 
+![스크린샷 2024-12-08 오후 8 57 10](https://github.com/user-attachments/assets/b46bdb19-5d9c-44b1-aea7-e97dd63f0445)
 
 
 
 - 임베딩(Embedding) 벡터를 tSNE를 이용해서 좌표평면에 그려보면 유사한 의미를 단어를 가진 단어가 유사한 위치에 있는 모습을 확인할 수 있습니다.
 
 
+![스크린샷 2024-12-08 오후 8 57 58](https://github.com/user-attachments/assets/94c7213a-a5bb-4d54-b3a8-054455b527fe)
 
 
