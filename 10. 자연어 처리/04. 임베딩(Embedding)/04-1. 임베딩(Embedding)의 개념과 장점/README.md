@@ -47,4 +47,9 @@
 
 ![스크린샷 2024-12-08 오후 8 57 58](https://github.com/user-attachments/assets/94c7213a-a5bb-4d54-b3a8-054455b527fe)
 
+## 대표적인 Embedding 모델들
 
+- 대표적인 임베딩(Embedding)을 위한 모델들은 다음과 같습니다.
+- **Word2Vec** - 2013년에 Google에서 제안한 대표적이고 효율적인 임베딩을 위한 딥러닝 모델 중에 하나입니다.
+- **FastText** - 2016년도에 Facebook에서 제안한 대표적인 임베딩을 위한 딥러닝 모델 중에 하나입니다.
+- **BERT** ‒ 2018년도에 Google에서 제안된 고성능 임베딩 모델입니다.
