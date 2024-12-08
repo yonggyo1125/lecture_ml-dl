@@ -23,3 +23,15 @@
 ![스크린샷 2024-12-08 오후 3 11 01](https://github.com/user-attachments/assets/67149e7e-5e22-443a-b81f-a5e0cabc9bfe)
 
 - 조건부 확률은 자연어 처리에서 광범위하게 사용되는 개념입니다.
+
+
+## 자연어 처리를 위한 기초 수학 ‒ MLE(Maximum Likelihood Estimation)
+
+- <b>MLE(Maximum Likelihood Estimation)-최대가능도추정</b>-은 어떤 현상이 발생했을 때 그 현상이 발생할 확
+률이 가장 높은 우도(Likelihood)를 추정하는 방법론입니다.
+
+
+- 예를 들어, 어떤 주머니에서 3개의 공을 꺼냈을때 빨간공 2개, 초록색공 1개가 나왔다면 이공을 꺼낸 주머니에 빨간공과 초록색공 몇개가 있어야만 **이런 현상이 발생할 확률이 가장 높은지를 추정**하는 가는 것이 Maximum Likelihood Estimation(MLE)입니다.
+- MLE는 머신러닝과 자연어처리 분야에 광범위하게 사용됩니다.
+
+
