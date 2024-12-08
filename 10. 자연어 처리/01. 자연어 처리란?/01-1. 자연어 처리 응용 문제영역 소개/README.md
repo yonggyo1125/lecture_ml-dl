@@ -24,3 +24,8 @@
 - **Spam Filtering** : 텍스트가 스팸인지 아닌지를 분류하는 문제 영역입니다.
 
 ![스크린샷 2024-12-08 오후 2 36 48](https://github.com/user-attachments/assets/6d83aa08-e53b-475e-9fc0-36d037fb0534)
+
+## NLP 문제 영역‒ Text Summarization
+
+- **Text Summarization** : 텍스트에 대한 요약문을 자동으로 만들어내는 문제 영역입니다.
+
