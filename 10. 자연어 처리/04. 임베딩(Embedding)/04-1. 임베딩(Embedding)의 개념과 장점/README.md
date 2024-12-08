@@ -9,6 +9,11 @@
 
 - <b>임베딩(Embedding)</b>은 이러한 문제점을 해결하기 위해서 Sparse한 One-hot Encoding의 데이터 표현을 Dense한 표현형태로 변환하는 기법입니다. 이를 위해서 원본 데이터에 Dense한 임베딩 행렬(Embedding Matrix)을 곱해서 데이터의 표현형태를 아래 수식처럼 변환합니다.
 
+![스크린샷 2024-12-08 오후 8 52 14](https://github.com/user-attachments/assets/2603f70d-4d94-4616-b6fd-fe3fbf4db553)
 
 
 - 아래 그림은 10,000개의 단어사전을 One-hot Encoding으로 표현한 데이터에 10,000×250 크기의 임베딩 행렬을 곱해서 임베딩을 수행한 예시를 보여줍니다.
+
+![스크린샷 2024-12-08 오후 8 52 27](https://github.com/user-attachments/assets/40f924eb-5dd0-41f4-8405-d48641e2a413)
+
+
