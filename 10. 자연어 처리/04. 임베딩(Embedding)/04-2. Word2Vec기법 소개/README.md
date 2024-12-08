@@ -1,6 +1,5 @@
 # Word2Vec
 
-
 ![스크린샷 2024-12-08 오후 9 12 08](https://github.com/user-attachments/assets/6e1d7b0f-b64d-4419-ab86-3b8add81f674)
 
 - Word2Vec은 구글 직원인 토마스 미콜로프 (Tomas Mikolov)가 2013년에 제안한 대표
