@@ -16,8 +16,10 @@
 
 - 조건부 확률(conditional probability)은 특정 사건이 발생했을 때 다른 사건이 발생할 확률을 의미합니다.
 
+![스크린샷 2024-12-08 오후 3 10 52](https://github.com/user-attachments/assets/199b463a-8e21-42c1-85a1-08d166837de8)
 
 - 예를 들어 아래 수식은, A 주사위가 1이라는 결과가 나왔을 때, B라는 주사위가 2라는 결과가 나올 확률을 의미합니다.
 
+![스크린샷 2024-12-08 오후 3 11 01](https://github.com/user-attachments/assets/67149e7e-5e22-443a-b81f-a5e0cabc9bfe)
 
 - 조건부 확률은 자연어 처리에서 광범위하게 사용되는 개념입니다.
