@@ -19,6 +19,11 @@
 
 <img width="553" alt="스크린샷 2024-12-08 오후 7 26 14" src="https://github.com/user-attachments/assets/380d7fe5-6e2a-4009-ab39-d3c6e6bea246">
 
+<img width="1135" alt="스크린샷 2024-12-08 오후 7 29 37" src="https://github.com/user-attachments/assets/477cf936-9acd-4a50-83df-9c2a7a7b7dbd">
+
+
+<img width="1143" alt="스크린샷 2024-12-08 오후 7 29 53" src="https://github.com/user-attachments/assets/240b0985-b7b6-48d4-958a-442ef1395391">
+
 
 
 
