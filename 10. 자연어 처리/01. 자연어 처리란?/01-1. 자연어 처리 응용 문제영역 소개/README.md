@@ -18,3 +18,8 @@
 - **Sentiment Analysis** : 문장의 감정상태를 분석해서 긍정 혹은 부정 또는 N개의 다른 감정 상태를 분류하는 문제영역입니다.
 
 ![스크린샷 2024-12-08 오후 2 34 50](https://github.com/user-attachments/assets/9b59f3c5-42a7-4878-978b-c18793f48519)
+
+## NLP 문제 영역 ‒ Spam Filtering
+
+- **Spam Filtering** : 텍스트가 스팸인지 아닌지를 분류하는 문제 영역입니다.
+
