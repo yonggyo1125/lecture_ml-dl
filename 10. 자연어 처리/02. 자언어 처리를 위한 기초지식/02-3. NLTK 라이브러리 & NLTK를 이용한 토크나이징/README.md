@@ -31,3 +31,6 @@ print(word_tokenize(text))
 ```
 
 - NLTK 라이브러리를 이용해서 간단하게 문장 단위로 토크나이징을 진행할수 있습니다.
+
+
+![스크린샷 2024-12-08 오후 3 26 11](https://github.com/user-attachments/assets/f3439c9d-0849-45d2-86e2-70e7c3c5bb25)
