@@ -16,3 +16,4 @@
 - N-gram 모델을 이용할 경우, 다음 단어가 올 확률은 해당 단어 조합이 등장한 횟수(Count-C-)에 기반해서 계산됩니다.
 - 만약 “its water is so transparent that” 이라는 단어조합이 나온 횟수가 10,000번이고 ”its water is so transparent that the”라는 단어조합이 나온 횟수가 500번이라면 “its water is so transparent that” 이라는 단어조합뒤에 “its water is so transparent that the”라는 단어조합이 나올 확률은 <b>0.05(=5%)</b>가 되게 됩니다.
 
+![스크린샷 2024-12-08 오후 5 29 22](https://github.com/user-attachments/assets/a9251a88-5cd0-4099-a1d6-237db1b42c6d)
