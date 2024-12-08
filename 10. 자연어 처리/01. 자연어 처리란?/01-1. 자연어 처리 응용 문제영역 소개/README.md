@@ -29,3 +29,4 @@
 
 - **Text Summarization** : 텍스트에 대한 요약문을 자동으로 만들어내는 문제 영역입니다.
 
+![스크린샷 2024-12-08 오후 2 38 40](https://github.com/user-attachments/assets/9bc1e074-c608-4839-9054-487aba7d21bf)
