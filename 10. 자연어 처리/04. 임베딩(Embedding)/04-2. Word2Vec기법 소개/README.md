@@ -44,5 +44,6 @@ the quick brown fox jumped over the lazy dog
 - 같은 컨텍스트에서 <b>k개의 상상의 (noise) 단어 !𝑤와 진짜 타겟 단어 𝑤+를 식별</b>합니다.
 - 아래의 그림은 CBOW 모델에 해당 방법을 적용한 예시를 나타냅니다. skip-gram 모델은 단순히 화살표의 방향이 반대로 바뀐 모양입니다.
 
+![스크린샷 2024-12-09 오후 10 28 05](https://github.com/user-attachments/assets/a9441cd8-fd64-47ca-bddf-bd4e4d1af8fe)
 
 
