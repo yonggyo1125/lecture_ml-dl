@@ -29,3 +29,6 @@ the quick brown fox jumped over the lazy dog
 ```
 (quick, the), (quick, brown), (brown, quick), (brown, fox), …
 ```
+
+![스크린샷 2024-12-09 오후 10 18 37](https://github.com/user-attachments/assets/a1480df2-3b37-4bf3-8810-be6706c3ede1)
+
