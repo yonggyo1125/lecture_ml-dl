@@ -45,4 +45,6 @@ the quick brown fox jumped over the lazy dog
 - 아래의 그림은 CBOW 모델에 해당 방법을 적용한 예시를 나타냅니다. skip-gram 모델은 단순히 화살표의 방향이 반대로 바뀐 모양입니다.
 - 위 과정을 수학적으로 표현하면, 각각의 예제에 대한 목표는 아래의 목적 함수를 최대화하는 것입니다.
 
+![스크린샷 2024-12-09 오후 10 28 05](https://github.com/user-attachments/assets/a9441cd8-fd64-47ca-bddf-bd4e4d1af8fe)
+
 
