@@ -32,3 +32,6 @@ the quick brown fox jumped over the lazy dog
 
 ![스크린샷 2024-12-09 오후 10 18 37](https://github.com/user-attachments/assets/a1480df2-3b37-4bf3-8810-be6706c3ede1)
 
+## Noise-Contrastive 트레이닝을 통한 규모확장(Scaling Up)
+
+- 전통적인 방식의 계산 구조를 나타내면 아래와 같습니다. 어휘집합에 존재하는 모든 단어 𝑤" 에대한 계산을 수행해야만 합니다.
