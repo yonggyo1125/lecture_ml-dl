@@ -54,4 +54,7 @@ the quick brown fox jumped over the lazy dog
 ![스크린샷 2024-12-09 오후 10 31 15](https://github.com/user-attachments/assets/e638a665-c133-4ffd-a079-f7f2d39ed15a)
 
 
+- t-SNE dimensionality reduction technique 등을 이용해서 **학습한 벡터들을 2차원으로 프로젝션해서 시각화**할 수 있습니다.
+- 시각화한 결과를 보면 **학습한 벡터들이 유의미한 정보를 캡처**하고 있다는 사실을 알 수 있습니다. 예를 들어, male-female, country-capital 같은 관계들을 포착하고 있다.
+
 
