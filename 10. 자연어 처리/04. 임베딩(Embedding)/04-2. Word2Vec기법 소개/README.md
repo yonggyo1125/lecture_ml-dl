@@ -39,6 +39,10 @@ the quick brown fox jumped over the lazy dog
 
 ![스크린샷 2024-12-09 오후 10 23 52](https://github.com/user-attachments/assets/1bb7d1c9-9d68-4a3e-b085-249027c6428a)
 
+- 이에 반해, word2vec을 이용한 특징 학습(feature learning) 방법에서는 전체 확률 모델이 필요하지 않습니다.
+- CBOW와 skip-gram <b>모델은 이진 분류(binary classification) 방법(로지스틱 회귀분석-logistic regression)</b>을 이용합니다.
+- 같은 컨텍스트에서 <b>k개의 상상의 (noise) 단어 !𝑤와 진짜 타겟 단어 𝑤+를 식별</b>합니다.
+- 아래의 그림은 CBOW 모델에 해당 방법을 적용한 예시를 나타냅니다. skip-gram 모델은 단순히 화살표의 방향이 반대로 바뀐 모양입니다.
 
 
 
