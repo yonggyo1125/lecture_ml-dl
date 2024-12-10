@@ -622,3 +622,8 @@ Input: <start> ¿ todavia estan en casa ? <end>
 Predicted translation: are you still at home ? <end>
 ```
 
+
+![스크린샷 2024-12-10 오후 11 26 46](https://github.com/user-attachments/assets/559ceca4-208f-46c7-87e0-d316dc6ad587)
+
+
+
