@@ -635,5 +635,10 @@ Input: <start> trata de averiguarlo . <end>
 Predicted translation: try to find married . <end> 
 ```
 
+![스크린샷 2024-12-10 오후 11 29 24](https://github.com/user-attachments/assets/ba291349-f6c2-4d6b-850a-ecac53b71645)
+
+
+
+
 
 
