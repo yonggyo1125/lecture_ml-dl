@@ -29,4 +29,8 @@
 ![스크린샷 2024-12-10 오후 9 34 34](https://github.com/user-attachments/assets/8eb82315-576d-4618-9219-7513994bfd13)
 
 
+## 포르투칼어-영어 번역의 Attention 일부
+
+- 포르투칼어-영어의 번역의 Attention 일부를 살펴보면 다음과 같습니다.
+
 
