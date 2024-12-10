@@ -601,3 +601,12 @@ Predicted translation: it s very cold here . <end>
 ![스크린샷 2024-12-10 오후 11 23 15](https://github.com/user-attachments/assets/fa248809-d430-4df2-a031-d21a9f883f64)
 
 
+```python
+translate(u'esta es mi vida.')
+```
+
+```
+Input: <start> esta es mi vida . <end>
+Predicted translation: this is my life . <end> 
+```
+
