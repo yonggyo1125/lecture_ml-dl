@@ -26,4 +26,7 @@
 - a<sub>t</sub> 는 decoder의 최종 출력값을 의미합니다.
 
 
+![스크린샷 2024-12-10 오후 9 34 34](https://github.com/user-attachments/assets/8eb82315-576d-4618-9219-7513994bfd13)
+
+
 
