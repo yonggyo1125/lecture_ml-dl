@@ -6,3 +6,11 @@
 
 ![스크린샷 2024-12-10 오후 8 54 59](https://github.com/user-attachments/assets/b4c2ef93-687b-410e-89d4-b651e71efa18)
 
+## seq2seq(Sequence-to-sequence) 모델
+
+- <b>기계번역(NMT)</b>을 구현하기 위한 seq2seq(Sequence-to-sequence) 모델의 개념을 먼저 살펴봅시다.
+- seq2seq 모델은 번역할 언어로 작성된 <b>소스 문장들(source sentences)</b>을 <b>인코더(Encoder)</b>를 이용해서 “생각” 벡터(“thought” vector) 형태로 변환하고, 이 “생각” 벡터를 특징값으로 이용해서 <b>디코더(Decoder)가 번역할 언어로 작성된 타겟 문장(target sentences)</b>을 생성하는 기법입니다.
+- 아래 그림은 seq2seq를 이용해서 영어 문장을 프랑스어 문장으로 번역하는 법을 보여줍니다.
+
+
+
