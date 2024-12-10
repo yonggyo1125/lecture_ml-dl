@@ -17,3 +17,13 @@
   - 아래 그림은 RNN을 이용한 seq2seq 모델 구조의 예시를 나타냅니다.
 
 ![스크린샷 2024-12-10 오후 9 24 49](https://github.com/user-attachments/assets/39839742-24a2-4bb1-81f6-7f7362e0a563)
+
+## Attention 추가
+
+- 기본 Seq2Seq 모델에 Attention을 추가해서 추가적인 성능 개선을 이루어 낼 수 있습니다.
+- h<sub>s</sub> encoder의 시퀀스 출력값을 의미합니다.
+- h<sub>t</sub> 는 decoder의 상태값을 의미합니다.
+- a<sub>t</sub> 는 decoder의 최종 출력값을 의미합니다.
+
+
+
