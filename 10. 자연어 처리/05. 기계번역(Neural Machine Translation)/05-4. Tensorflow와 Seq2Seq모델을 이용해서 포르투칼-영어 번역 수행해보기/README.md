@@ -610,3 +610,8 @@ Input: <start> esta es mi vida . <end>
 Predicted translation: this is my life . <end> 
 ```
 
+
+![스크린샷 2024-12-10 오후 11 25 17](https://github.com/user-attachments/assets/52a15791-421e-46ee-bc1e-6e8fe570d68e)
+
+
+
