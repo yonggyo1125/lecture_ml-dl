@@ -25,16 +25,13 @@
 - h<sub>t</sub> 는 decoder의 상태값을 의미합니다.
 - a<sub>t</sub> 는 decoder의 최종 출력값을 의미합니다.
 
-
 ![스크린샷 2024-12-10 오후 9 34 34](https://github.com/user-attachments/assets/8eb82315-576d-4618-9219-7513994bfd13)
-
 
 ## 포르투칼어-영어 번역의 Attention 일부
 
 - 포르투칼어-영어의 번역의 Attention 일부를 살펴보면 다음과 같습니다.
 
 ![스크린샷 2024-12-10 오후 9 37 34](https://github.com/user-attachments/assets/76ce91f8-2a6e-4617-ba36-bf6d0d03c943)
-
 
 - **Input** : <start> hace mucho frio aqui . \<end\>
 - **Predicted translation** : it s too cold here . \<end\>
@@ -43,5 +40,5 @@
 
 ![스크린샷 2024-12-10 오후 9 39 45](https://github.com/user-attachments/assets/d712fdbb-96b3-4831-8166-4fa5fbd03f15)
 
-
-
+- **Input** : <start> esta es mi vida . \<end\>
+- **Predicted translation** : this is my life . \<end\>
