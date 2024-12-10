@@ -13,4 +13,5 @@
 - 아래 그림은 seq2seq를 이용해서 영어 문장을 프랑스어 문장으로 번역하는 법을 보여줍니다.
 
 
+![스크린샷 2024-12-10 오후 8 56 17](https://github.com/user-attachments/assets/a0ce8035-64ba-4a7d-b409-38c18d058edf)
 
