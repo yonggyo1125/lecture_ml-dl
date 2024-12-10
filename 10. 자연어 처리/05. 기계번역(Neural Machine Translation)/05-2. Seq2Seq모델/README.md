@@ -34,3 +34,6 @@
 - 포르투칼어-영어의 번역의 Attention 일부를 살펴보면 다음과 같습니다.
 
 
+![스크린샷 2024-12-10 오후 9 37 34](https://github.com/user-attachments/assets/76ce91f8-2a6e-4617-ba36-bf6d0d03c943)
+
+
