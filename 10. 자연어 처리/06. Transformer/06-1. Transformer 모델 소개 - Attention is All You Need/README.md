@@ -20,5 +20,7 @@
 - Transformer의 전체 Architecture를 살펴보면 다음과 같습니다.
 
 
+![스크린샷 2024-12-11 오후 11 03 44](https://github.com/user-attachments/assets/35f5745a-defe-48b5-91b6-6f12c4a11c07)
+
 
 
