@@ -41,4 +41,15 @@
 ![스크린샷 2024-12-11 오후 11 19 54](https://github.com/user-attachments/assets/ebb9dfef-4ac8-479c-9680-724e57847365)
 
 
+## Multi-head Attention
+
+- Transformer는 여러개의 head를 통한 Multi-head Attention을 계산합니다.
+- <b>Multi-Head Attention</b>은 다음과 같은 연산을 수행합니다.
+    - Linear 연산을 취하고 이를 각각의 Head로 나눔
+    - 각각의 Head에서 Scaled dot-product attention 연산을 수행
+    - 각각의 head에서 일어난 연산을 Concatenation
+    - 마지막 linear layer
+- **여러 개의 head가 다른 정보들을 학습**하고 이들을 활용할 수 있기 때문에 Multi-head Attention은 좋은 성능을 발휘할 수 있습니다.
+
+
 
