@@ -38,3 +38,7 @@
 - 기본적인 Attention 종류인 <b>Scaled Dot-Product Attention</b>의 계산 수식은 다음과 같습니다.
 
 
+![스크린샷 2024-12-11 오후 11 19 54](https://github.com/user-attachments/assets/ebb9dfef-4ac8-479c-9680-724e57847365)
+
+
+
