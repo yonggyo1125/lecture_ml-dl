@@ -51,5 +51,5 @@
     - 마지막 linear layer
 - **여러 개의 head가 다른 정보들을 학습**하고 이들을 활용할 수 있기 때문에 Multi-head Attention은 좋은 성능을 발휘할 수 있습니다.
 
-
+![스크린샷 2024-12-11 오후 11 24 06](https://github.com/user-attachments/assets/09851610-530e-443a-85d7-621dba875efb)
 
