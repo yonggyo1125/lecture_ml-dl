@@ -53,3 +53,7 @@
 
 ![스크린샷 2024-12-11 오후 11 24 06](https://github.com/user-attachments/assets/09851610-530e-443a-85d7-621dba875efb)
 
+## Point wise feed forward network
+
+- Point wise feed forward network는 2개의 Fully Connected layer와 ReLU activation으로 구성된 Neural Networks입니다
+- 원 논문에서는 은닉층의 개수를 2048개로 하고 출력층의 개수를 512개로 설정한 Feed Forward Network를 사용하였습니다.
