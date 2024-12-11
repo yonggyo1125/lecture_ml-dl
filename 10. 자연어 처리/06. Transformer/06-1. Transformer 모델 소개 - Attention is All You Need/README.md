@@ -23,4 +23,11 @@
 ![스크린샷 2024-12-11 오후 11 03 44](https://github.com/user-attachments/assets/35f5745a-defe-48b5-91b6-6f12c4a11c07)
 
 
+## Positional Encoding
+
+- Transformers는 RNN과 같이 시간축에 따른 반복이 없기 때문에 <b>위치 인코딩(Positional Encoding)</b>을 통해 **문장 내 해당 단어의 위치에 대한 정보**를 학습합니다.
+- 일반적인 Embedding은 단어 들간의 유사 정도를 표현해주지만 **문장내 단어의 위치정보**는 알 수 없습니다. 따라서 **별도의 Positional Encoding으로 계산한 값과 Embedding 값을 더해서 Transformer 모델의 입력값**으로 사용합니다.
+- Positional Encoding은 다음의 수식에 의해서 계산됩니다.
+
+
 
