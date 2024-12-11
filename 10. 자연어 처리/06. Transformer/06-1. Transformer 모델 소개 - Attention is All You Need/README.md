@@ -12,8 +12,13 @@
 - **타겟 문장의 초기 상태값으로 소스 문장의 마지막 상태값을 사용하는 것**을 제외하면 앞서 배운 <b>Char-RNN과 비슷한 형태</b>임을 알 수 있습니다.
 - 아래 그림은 RNN을 이용한 seq2seq 모델 구조의 예시를 나타냅니다.
 
+![스크린샷 2024-12-11 오후 10 59 13](https://github.com/user-attachments/assets/6134e569-2529-48e3-aa9f-9d234ca33def)
+
+
 ## Transformer Architecture
 
 - Transformer의 전체 Architecture를 살펴보면 다음과 같습니다.
+
+
 
 
