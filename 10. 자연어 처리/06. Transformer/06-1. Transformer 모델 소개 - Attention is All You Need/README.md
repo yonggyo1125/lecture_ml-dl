@@ -125,3 +125,9 @@ dropout_rate = 0.1
 ## English constituency parsing task
 
 - English constituency parsing task : 문장 구조에 대한 Parsing을 수행하는 Task
+ 
+![스크린샷 2024-12-12 오후 9 27 12](https://github.com/user-attachments/assets/65eec188-239b-4eeb-bb89-77d60fa10dfd)
+
+
+
+
