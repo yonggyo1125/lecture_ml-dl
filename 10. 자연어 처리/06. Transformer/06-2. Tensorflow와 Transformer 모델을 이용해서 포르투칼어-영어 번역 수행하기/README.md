@@ -803,3 +803,24 @@ class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
 
     return tf.math.rsqrt(self.d_model) * tf.math.minimum(arg1, arg2)
 ```
+
+```python
+learning_rate = CustomSchedule(d_model)
+
+optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98,
+                                     epsilon=1e-9)
+```
+
+## Custom Learning Rate를 테스트합니다.
+
+```python
+temp_learning_rate_schedule = CustomSchedule(d_model)
+
+plt.plot(temp_learning_rate_schedule(tf.range(40000, dtype=tf.float32)))
+plt.ylabel("Learning Rate")
+plt.xlabel("Train Step")
+```
+
+```
+Text(0.5, 0, 'Train Step')
+```
