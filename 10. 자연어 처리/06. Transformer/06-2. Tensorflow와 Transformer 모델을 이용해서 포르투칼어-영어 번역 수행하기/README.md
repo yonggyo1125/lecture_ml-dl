@@ -813,10 +813,6 @@ optimizer = tf.keras.optimizers.Adam(learning_rate, beta_1=0.9, beta_2=0.98,
 
 ## Custom Learning Rate를 테스트합니다.
 
-
-![스크린샷 2024-12-12 오후 11 18 27](https://github.com/user-attachments/assets/e781bb67-bb2d-4abe-92d6-6baddf6e73f7)
-
-
 ```python
 temp_learning_rate_schedule = CustomSchedule(d_model)
 
@@ -828,3 +824,341 @@ plt.xlabel("Train Step")
 ```
 Text(0.5, 0, 'Train Step')
 ```
+
+![스크린샷 2024-12-12 오후 11 18 27](https://github.com/user-attachments/assets/e781bb67-bb2d-4abe-92d6-6baddf6e73f7)
+
+## Loss를 정의합니다.
+
+```python
+loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
+    from_logits=True, reduction='none')
+```
+
+## Loss와 Accuracy Function을 정의합니다.
+
+```python
+def loss_function(real, pred):
+  mask = tf.math.logical_not(tf.math.equal(real, 0))
+  loss_ = loss_object(real, pred)
+
+  mask = tf.cast(mask, dtype=loss_.dtype)
+  loss_ *= mask
+
+  return tf.reduce_sum(loss_)/tf.reduce_sum(mask)
+
+
+def accuracy_function(real, pred):
+  accuracies = tf.equal(real, tf.argmax(pred, axis=2))
+
+  mask = tf.math.logical_not(tf.math.equal(real, 0))
+  accuracies = tf.math.logical_and(mask, accuracies)
+
+  accuracies = tf.cast(accuracies, dtype=tf.float32)
+  mask = tf.cast(mask, dtype=tf.float32)
+  return tf.reduce_sum(accuracies)/tf.reduce_sum(mask)
+```
+
+```python
+train_loss = tf.keras.metrics.Mean(name='train_loss')
+train_accuracy = tf.keras.metrics.Mean(name='train_accuracy')
+```
+
+## Transformer 모델을 선언합니다.
+
+```python
+transformer = Transformer(
+    num_layers=num_layers,
+    d_model=d_model,
+    num_heads=num_heads,
+    dff=dff,
+    input_vocab_size=tokenizers.pt.get_vocab_size(),
+    target_vocab_size=tokenizers.en.get_vocab_size(),
+    pe_input=1000,
+    pe_target=1000,
+    rate=dropout_rate)
+```
+
+## mask 생성 function을 정의합니다.
+
+```python
+def create_masks(inp, tar):
+  # Encoder padding mask
+  enc_padding_mask = create_padding_mask(inp)
+
+  # Used in the 2nd attention block in the decoder.
+  # This padding mask is used to mask the encoder outputs.
+  dec_padding_mask = create_padding_mask(inp)
+
+  # Used in the 1st attention block in the decoder.
+  # It is used to pad and mask future tokens in the input received by
+  # the decoder.
+  look_ahead_mask = create_look_ahead_mask(tf.shape(tar)[1])
+  dec_target_padding_mask = create_padding_mask(tar)
+  combined_mask = tf.maximum(dec_target_padding_mask, look_ahead_mask)
+
+  return enc_padding_mask, combined_mask, dec_padding_mask
+```
+
+## 파라미터 저장을 위한 체크포인트를 설정합니다.
+
+```python
+checkpoint_path = "./checkpoints/train"
+
+ckpt = tf.train.Checkpoint(transformer=transformer,
+                           optimizer=optimizer)
+
+ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_path, max_to_keep=5)
+
+# if a checkpoint exists, restore the latest checkpoint.
+if ckpt_manager.latest_checkpoint:
+  ckpt.restore(ckpt_manager.latest_checkpoint)
+  print('Latest checkpoint restored!!')
+```
+
+## Epoch 횟수(=20)을 지정합니다.
+
+```python
+EPOCHS = 20
+```
+
+## 트레이닝을 위한 train step을 정의합니다.
+
+```python
+# The @tf.function trace-compiles train_step into a TF graph for faster
+# execution. The function specializes to the precise shape of the argument
+# tensors. To avoid re-tracing due to the variable sequence lengths or variable
+# batch sizes (the last batch is smaller), use input_signature to specify
+# more generic shapes.
+
+train_step_signature = [
+    tf.TensorSpec(shape=(None, None), dtype=tf.int64),
+    tf.TensorSpec(shape=(None, None), dtype=tf.int64),
+]
+
+
+@tf.function(input_signature=train_step_signature)
+def train_step(inp, tar):
+  tar_inp = tar[:, :-1]
+  tar_real = tar[:, 1:]
+
+  enc_padding_mask, combined_mask, dec_padding_mask = create_masks(inp, tar_inp)
+
+  with tf.GradientTape() as tape:
+    predictions, _ = transformer(inp, tar_inp,
+                                 True,
+                                 enc_padding_mask,
+                                 combined_mask,
+                                 dec_padding_mask)
+    loss = loss_function(tar_real, predictions)
+
+  gradients = tape.gradient(loss, transformer.trainable_variables)
+  optimizer.apply_gradients(zip(gradients, transformer.trainable_variables))
+
+  train_loss(loss)
+  train_accuracy(accuracy_function(tar_real, predictions))
+```
+
+## Epoch 횟수 만큼 트레이닝을 진행합니다.
+
+```python
+for epoch in range(EPOCHS):
+  start = time.time()
+
+  train_loss.reset_states()
+  train_accuracy.reset_states()
+
+  # inp -> portuguese, tar -> english
+  for (batch, (inp, tar)) in enumerate(train_batches):
+    train_step(inp, tar)
+
+    if batch % 50 == 0:
+      print(f'Epoch {epoch + 1} Batch {batch} Loss {train_loss.result():.4f} Accuracy {train_accuracy.result():.4f}')
+
+  if (epoch + 1) % 5 == 0:
+    ckpt_save_path = ckpt_manager.save()
+    print(f'Saving checkpoint for epoch {epoch+1} at {ckpt_save_path}')
+
+  print(f'Epoch {epoch + 1} Loss {train_loss.result():.4f} Accuracy {train_accuracy.result():.4f}')
+
+  print(f'Time taken for 1 epoch: {time.time() - start:.2f} secs\n')
+```
+
+## 학습이 끝난 모델의 Evaluation 함수를 정의합니다.
+
+```python
+def evaluate(sentence, max_length=40):
+  # inp sentence is portuguese, hence adding the start and end token
+  sentence = tf.convert_to_tensor([sentence])
+  sentence = tokenizers.pt.tokenize(sentence).to_tensor()
+
+  encoder_input = sentence
+
+  # as the target is english, the first word to the transformer should be the
+  # english start token.
+  start, end = tokenizers.en.tokenize([''])[0]
+  output = tf.convert_to_tensor([start])
+  output = tf.expand_dims(output, 0)
+
+  for i in range(max_length):
+    enc_padding_mask, combined_mask, dec_padding_mask = create_masks(
+        encoder_input, output)
+
+    # predictions.shape == (batch_size, seq_len, vocab_size)
+    predictions, attention_weights = transformer(encoder_input,
+                                                 output,
+                                                 False,
+                                                 enc_padding_mask,
+                                                 combined_mask,
+                                                 dec_padding_mask)
+
+    # select the last word from the seq_len dimension
+    predictions = predictions[:, -1:, :]  # (batch_size, 1, vocab_size)
+
+    predicted_id = tf.argmax(predictions, axis=-1)
+
+    # concatentate the predicted_id to the output which is given to the decoder
+    # as its input.
+    output = tf.concat([output, predicted_id], axis=-1)
+
+    # return the result if the predicted_id is equal to the end token
+    if predicted_id == end:
+      break
+
+  # output.shape (1, tokens)
+  text = tokenizers.en.detokenize(output)[0]  # shape: ()
+
+  tokens = tokenizers.en.lookup(output)[0]
+
+  return text, tokens, attention_weights
+```
+
+## 예측 결과를 테스트하기 위한 print 함수를 정의합니다.
+
+```python
+def print_translation(sentence, tokens, ground_truth):
+  print(f'{"Input:":15s}: {sentence}')
+  print(f'{"Prediction":15s}: {tokens.numpy().decode("utf-8")}')
+  print(f'{"Ground truth":15s}: {ground_truth}')
+```
+
+```python
+sentence = "este é um problema que temos que resolver."
+ground_truth = "this is a problem we have to solve ."
+
+translated_text, translated_tokens, attention_weights = evaluate(sentence)
+print_translation(sentence, translated_text, ground_truth)
+```
+
+```
+Input:         : este é um problema que temos que resolver.
+Prediction     : this is a problem that we have to solve .
+Ground truth   : this is a problem we have to solve .
+```
+
+```python
+sentence = "os meus vizinhos ouviram sobre esta ideia."
+ground_truth = "and my neighboring homes heard about this idea ."
+
+translated_text, translated_tokens, attention_weights = evaluate(sentence)
+print_translation(sentence, translated_text, ground_truth)
+```
+
+```
+Input:         : os meus vizinhos ouviram sobre esta ideia.
+Prediction     : my neighbors heard about this idea .
+Ground truth   : and my neighboring homes heard about this idea .
+```
+
+```python
+sentence = "vou então muito rapidamente partilhar convosco algumas histórias de algumas coisas mágicas que aconteceram."
+ground_truth = "so i \'ll just share with you some stories very quickly of some magical things that have happened ."
+
+translated_text, translated_tokens, attention_weights = evaluate(sentence)
+print_translation(sentence, translated_text, ground_truth)
+```
+
+```
+Input:         : vou então muito rapidamente partilhar convosco algumas histórias de algumas coisas mágicas que aconteceram.
+Prediction     : so i ' m going to very quickly share with you some stories from some magic things that happen .
+Ground truth   : so i 'll just share with you some stories very quickly of some magical things that have happened .
+```
+
+```python
+sentence = "este é o primeiro livro que eu fiz."
+ground_truth = "this is the first book i've ever done."
+
+translated_text, translated_tokens, attention_weights = evaluate(sentence)
+print_translation(sentence, translated_text, ground_truth)
+```
+
+```
+Input:         : este é o primeiro livro que eu fiz.
+Prediction     : this is the first book i did .
+Ground truth   : this is the first book i've ever done.
+```
+
+## Prediction 구간동안 Transformer의 Attention이 어느 부분을 집중하는지를 체크하는 attention plot 함수를 정의합니다.
+
+```python
+def plot_attention_head(in_tokens, translated_tokens, attention):
+  # The plot is of the attention when a token was generated.
+  # The model didn't generate `<START>` in the output. Skip it.
+  translated_tokens = translated_tokens[1:]
+
+  ax = plt.gca()
+  ax.matshow(attention)
+  ax.set_xticks(range(len(in_tokens)))
+  ax.set_yticks(range(len(translated_tokens)))
+
+  labels = [label.decode('utf-8') for label in in_tokens.numpy()]
+  ax.set_xticklabels(
+      labels, rotation=90)
+
+  labels = [label.decode('utf-8') for label in translated_tokens.numpy()]
+  ax.set_yticklabels(labels)
+```
+
+```python
+head = 0
+# shape: (batch=1, num_heads, seq_len_q, seq_len_k)
+attention_heads = tf.squeeze(
+  attention_weights['decoder_layer4_block2'], 0)
+attention = attention_heads[head]
+attention.shape
+```
+
+```
+TensorShape([9, 11])
+```
+
+```python
+in_tokens = tf.convert_to_tensor([sentence])
+in_tokens = tokenizers.pt.tokenize(in_tokens).to_tensor()
+in_tokens = tokenizers.pt.lookup(in_tokens)[0]
+in_tokens
+```
+
+```
+<tf.Tensor: shape=(11,), dtype=string, numpy=
+array([b'[START]', b'este', b'e', b'o', b'primeiro', b'livro', b'que',
+       b'eu', b'fiz', b'.', b'[END]'], dtype=object)>
+```
+
+```python
+translated_tokens
+```
+
+```
+<tf.Tensor: shape=(10,), dtype=string, numpy=
+array([b'[START]', b'this', b'is', b'the', b'first', b'book', b'i',
+       b'did', b'.', b'[END]'], dtype=object)>
+```
+
+## Attention이 집중하는 부분을 체크합니다.
+
+```python
+plot_attention_head(in_tokens, translated_tokens, attention)
+```
+
+
+
