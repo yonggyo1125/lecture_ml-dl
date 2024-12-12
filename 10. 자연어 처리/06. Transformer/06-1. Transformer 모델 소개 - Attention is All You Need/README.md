@@ -117,3 +117,9 @@ dropout_rate = 0.1
 ## Experiment Result
 
 - 번역(Translation) Task에 대해 state-of-the-art 모델의 성능을 보여줌
+  
+
+![스크린샷 2024-12-12 오후 9 22 07](https://github.com/user-attachments/assets/07375879-06c8-419a-8ae7-4fb3aaeaa07b)
+
+
+
