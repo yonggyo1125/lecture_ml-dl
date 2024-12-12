@@ -194,6 +194,11 @@ val_batches = make_batches(val_examples)
 
 ## 위치 인코딩(Positional Encoding)을 위한 함수 정의
 
+
+![스크린샷 2024-12-12 오후 10 10 44](https://github.com/user-attachments/assets/93434795-5215-4e2d-9392-08272afe0721)
+
+
+
 ```python
 def get_angles(pos, i, d_model):
   angle_rates = 1 / np.power(10000, (2 * (i//2)) / np.float32(d_model))
