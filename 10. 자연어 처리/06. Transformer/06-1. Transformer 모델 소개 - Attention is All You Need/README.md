@@ -142,5 +142,10 @@ dropout_rate = 0.1
 ![스크린샷 2024-12-12 오후 9 30 24](https://github.com/user-attachments/assets/c12f990c-d3a1-4193-834d-dc244f3cf0cf)
 
 
+## Attention Visualizations
+
+- 각각의 Head 별로 문장의 다른 구조들을 학습함
+
+
 
 
