@@ -74,3 +74,8 @@ sample_ffn(tf.random.uniform((64, 50, 512))).shape
   - **Positional Encoding에 대한 덧셈**을 수행합니다.
   - **Multi-Head Attention**을 수행합니다.
   - **Feed forward network** 연산을 통해 Encoder의 최종 아웃풋 출력값을 계산합니다.
+  - 
+
+![스크린샷 2024-12-12 오후 9 07 20](https://github.com/user-attachments/assets/3848d8bd-b6af-42d1-9f46-6bb83c266e8d)
+
+
