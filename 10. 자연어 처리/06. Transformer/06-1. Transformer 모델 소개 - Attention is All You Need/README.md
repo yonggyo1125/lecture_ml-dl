@@ -108,3 +108,8 @@ dropout_rate = 0.1
 
 - Transformer를 이용해 포르투칼어에서 영어로 번역하는 딥러닝 모델을 만들고 학습시켜봅 시다.
 
+
+![스크린샷 2024-12-12 오후 9 18 45](https://github.com/user-attachments/assets/45e62f5b-5b35-4917-a383-aaf8c28f231e)
+
+
+
