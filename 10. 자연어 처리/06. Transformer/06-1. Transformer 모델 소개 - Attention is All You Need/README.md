@@ -104,3 +104,9 @@ dropout_rate = 0.1
 
 - Transformer를 이용해 포르투칼어에서 영어로 번역해봅시다.
 
+![스크린샷 2024-12-12 오후 9 16 29](https://github.com/user-attachments/assets/494009f2-da1a-4593-aeb9-f0d8685e0198)
+
+
+
+
+
