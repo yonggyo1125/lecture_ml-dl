@@ -244,7 +244,53 @@ plt.show()
 ![스크린샷 2024-12-12 오후 10 13 45](https://github.com/user-attachments/assets/66005b33-62ae-4767-9ae1-ebb40ec7a664)
 
 
+## 길이를 맞추기 위해 Padding으로 설정한 부분을 체크하기 위한 mask 함수를 정의합니다.
+
+```python
+def create_padding_mask(seq):
+  seq = tf.cast(tf.math.equal(seq, 0), tf.float32)
+
+  # add extra dimensions to add the padding
+  # to the attention logits.
+  return seq[:, tf.newaxis, tf.newaxis, :]  # (batch_size, 1, 1, seq_len)
+```
+
+```python
+x = tf.constant([[7, 6, 0, 0, 1], [1, 2, 3, 0, 0], [0, 0, 0, 4, 5]])
+create_padding_mask(x)
+```
+
+```
+<tf.Tensor: shape=(3, 1, 1, 5), dtype=float32, numpy=
+array([[[[0., 0., 1., 1., 0.]]],
 
 
+       [[[0., 0., 0., 1., 1.]]],
 
+
+       [[[1., 1., 1., 0., 0.]]]], dtype=float32)>
+```
+
+## Transformer 모델이 미래 단어를 예측에 사용하지 않도록 Look ahead 마스크를 정의합니다.
+
+```python
+def create_look_ahead_mask(size):
+  mask = 1 - tf.linalg.band_part(tf.ones((size, size)), -1, 0)
+  return mask  # (seq_len, seq_len)
+```
+
+```python
+x = tf.random.uniform((1, 3))
+temp = create_look_ahead_mask(x.shape[1])
+temp
+```
+
+```
+<tf.Tensor: shape=(3, 3), dtype=float32, numpy=
+array([[0., 1., 1.],
+       [0., 0., 1.],
+       [0., 0., 0.]], dtype=float32)>
+```
+
+## Scaled Dot-Product Attention을 정의합니다.
 
