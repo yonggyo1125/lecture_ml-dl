@@ -139,3 +139,8 @@ dropout_rate = 0.1
 
 - 중요 단어 간의 관계를 학습함 (making -> more, difficult)
 
+![스크린샷 2024-12-12 오후 9 30 24](https://github.com/user-attachments/assets/c12f990c-d3a1-4193-834d-dc244f3cf0cf)
+
+
+
+
