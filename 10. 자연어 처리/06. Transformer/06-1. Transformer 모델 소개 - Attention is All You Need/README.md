@@ -75,11 +75,13 @@ sample_ffn(tf.random.uniform((64, 50, 512))).shape
   - **Multi-Head Attention**을 수행합니다.
   - **Feed forward network** 연산을 통해 Encoder의 최종 아웃풋 출력값을 계산합니다.
 
+![스크린샷 2024-12-12 오후 9 07 20](https://github.com/user-attachments/assets/3848d8bd-b6af-42d1-9f46-6bb83c266e8d)
+
 ## Transformer Architecture - Decoder
 
 - Transformer의 **Decoder** 부분에서 일어나는 연산을 살펴보면 다음과 같습니다.
-    - **Teacher Forcing 방법론**을 이용해서 출력할 값(예를 들어, 포르투칼어->영어 번역 task라면 영어 문장)에 대한 입력값을 받 Embedding과 Positional Encoding을 적용합니다.
-    - 첫번째 Decoder 레이어에서 Multi-head Attention을 수행합니다. (이때 look ahead mask를 이용해서 미래시점의 단어는 계산시에 배제하여 줍니다.)
-    - 두번째 Multi-head attention을 계산합니다. 이때 Key(K)와 Value(V)는 Encoder의 output으로 지정하고 Query(Q)는 Decoder의 이전 Multi-head 네트워크의 Output으로부터 계산합니다.
-    - Point wise feed forward 네트워크를 계산합니다.
-    - Softmax Layer를 이용해서 **다음에 올 글자나 단어를 예측**합니다.
+  - **Teacher Forcing 방법론**을 이용해서 출력할 값(예를 들어, 포르투칼어->영어 번역 task라면 영어 문장)에 대한 입력값을 받 Embedding과 Positional Encoding을 적용합니다.
+  - 첫번째 Decoder 레이어에서 Multi-head Attention을 수행합니다. (이때 look ahead mask를 이용해서 미래시점의 단어는 계산시에 배제하여 줍니다.)
+  - 두번째 Multi-head attention을 계산합니다. 이때 Key(K)와 Value(V)는 Encoder의 output으로 지정하고 Query(Q)는 Decoder의 이전 Multi-head 네트워크의 Output으로부터 계산합니다.
+  - Point wise feed forward 네트워크를 계산합니다.
+  - Softmax Layer를 이용해서 **다음에 올 글자나 단어를 예측**합니다.
