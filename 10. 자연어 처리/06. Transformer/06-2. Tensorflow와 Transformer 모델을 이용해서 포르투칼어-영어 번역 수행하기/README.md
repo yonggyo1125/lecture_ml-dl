@@ -785,6 +785,8 @@ dropout_rate = 0.1
 
 ## Adam Optimizer를 위한 Custom Learning Rate를 설정합니다.
 
+![스크린샷 2024-12-12 오후 11 14 38](https://github.com/user-attachments/assets/8f32c317-651b-4e85-8c9e-8f1a4cf00f9b)
+
 ```python
 class CustomSchedule(tf.keras.optimizers.schedules.LearningRateSchedule):
   def __init__(self, d_model, warmup_steps=4000):
