@@ -117,15 +117,13 @@ dropout_rate = 0.1
 ## Experiment Result
 
 - 번역(Translation) Task에 대해 state-of-the-art 모델의 성능을 보여줌
-  
 
 ![스크린샷 2024-12-12 오후 9 22 07](https://github.com/user-attachments/assets/07375879-06c8-419a-8ae7-4fb3aaeaa07b)
-
 
 ## English constituency parsing task
 
 - English constituency parsing task : 문장 구조에 대한 Parsing을 수행하는 Task
- 
+
 ![스크린샷 2024-12-12 오후 9 27 12](https://github.com/user-attachments/assets/65eec188-239b-4eeb-bb89-77d60fa10dfd)
 
 ## Experiment Result
@@ -134,13 +132,11 @@ dropout_rate = 0.1
 
 ![스크린샷 2024-12-12 오후 9 28 45](https://github.com/user-attachments/assets/030cd431-d15b-458f-921b-4412b0dc7e84)
 
-
 ## Attention Visualizations
 
 - 중요 단어 간의 관계를 학습함 (making -> more, difficult)
 
 ![스크린샷 2024-12-12 오후 9 30 24](https://github.com/user-attachments/assets/c12f990c-d3a1-4193-834d-dc244f3cf0cf)
-
 
 ## Attention Visualizations
 
@@ -148,8 +144,6 @@ dropout_rate = 0.1
 
 ![스크린샷 2024-12-12 오후 9 31 53](https://github.com/user-attachments/assets/8b2e8eaf-92a0-46ec-a646-2a1f5917ed60)
 
-
 ## Transformer original Implementation
 
 - https://github.com/tensorflow/tensor2tensor
-
