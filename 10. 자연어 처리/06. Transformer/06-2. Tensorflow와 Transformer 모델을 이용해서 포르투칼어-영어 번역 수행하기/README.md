@@ -1,4 +1,5 @@
 # Transformer를 이용한 포르투칼어-영어번역
+
 - Transformer를 이용해서 포르투칼어를 영어로 번역하는 딥러닝 모델을 만들어봅시다.
 
 ## 라이브러리 설치
@@ -40,7 +41,6 @@ logging.getLogger('tensorflow').setLevel(logging.ERROR)  # suppress warnings
 
 - https://github.com/neulab/word-embeddings-for-nmt
 - https://www.ted.com/participate/translate
-
 
 ### 50000개의 training 데이터와 1100개의 validation 데이터, 2000개의 테스트 데이터를 가지고 있습니다.
 
@@ -192,11 +192,9 @@ train_batches = make_batches(train_examples)
 val_batches = make_batches(val_examples)
 ```
 
-## 위치 인코딩(Positional Encoding)을 위한 함수 정의 
+## 위치 인코딩(Positional Encoding)을 위한 함수 정의
 
-
-
-```python 
+```python
 def get_angles(pos, i, d_model):
   angle_rates = 1 / np.power(10000, (2 * (i//2)) / np.float32(d_model))
   return pos * angle_rates
