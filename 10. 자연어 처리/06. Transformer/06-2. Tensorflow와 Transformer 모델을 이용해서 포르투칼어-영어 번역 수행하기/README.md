@@ -1207,3 +1207,7 @@ Prediction     : i read about trifices in encyclopedia .
 Ground truth   : I read about triceratops in the encyclopedia.
 ```
 
+![스크린샷 2024-12-12 오후 11 34 04](https://github.com/user-attachments/assets/61ee2eed-4df9-4920-8852-726836631e6b)
+
+
+
