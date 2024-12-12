@@ -85,3 +85,8 @@ sample_ffn(tf.random.uniform((64, 50, 512))).shape
   - 두번째 Multi-head attention을 계산합니다. 이때 Key(K)와 Value(V)는 Encoder의 output으로 지정하고 Query(Q)는 Decoder의 이전 Multi-head 네트워크의 Output으로부터 계산합니다.
   - Point wise feed forward 네트워크를 계산합니다.
   - Softmax Layer를 이용해서 **다음에 올 글자나 단어를 예측**합니다.
+  - 
+
+![스크린샷 2024-12-12 오후 9 12 44](https://github.com/user-attachments/assets/5c443126-c35c-4d0b-8f04-ffbdef8a2223)
+
+
