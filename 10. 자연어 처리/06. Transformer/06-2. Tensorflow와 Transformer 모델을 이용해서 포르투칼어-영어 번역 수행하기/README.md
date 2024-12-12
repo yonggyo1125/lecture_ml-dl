@@ -240,3 +240,11 @@ plt.show()
 ```
 (1, 2048, 512)
 ```
+
+![스크린샷 2024-12-12 오후 10 13 45](https://github.com/user-attachments/assets/66005b33-62ae-4767-9ae1-ebb40ec7a664)
+
+
+
+
+
+
