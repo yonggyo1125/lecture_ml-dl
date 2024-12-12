@@ -132,4 +132,10 @@ dropout_rate = 0.1
 
 - English constituency parsing task에 대해서 좋은 성능을 보여줌
 
+![스크린샷 2024-12-12 오후 9 28 45](https://github.com/user-attachments/assets/030cd431-d15b-458f-921b-4412b0dc7e84)
+
+
+
+
+
 
