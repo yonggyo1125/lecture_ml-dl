@@ -1163,4 +1163,28 @@ plot_attention_head(in_tokens, translated_tokens, attention)
 ![스크린샷 2024-12-12 오후 11 29 57](https://github.com/user-attachments/assets/5c02cf8f-b5bb-4c0a-9835-57349efa113a)
 
 
+```python
+def plot_attention_weights(sentence, translated_tokens, attention_heads):
+  in_tokens = tf.convert_to_tensor([sentence])
+  in_tokens = tokenizers.pt.tokenize(in_tokens).to_tensor()
+  in_tokens = tokenizers.pt.lookup(in_tokens)[0]
+  in_tokens
+
+  fig = plt.figure(figsize=(16, 8))
+
+  for h, head in enumerate(attention_heads):
+    ax = fig.add_subplot(2, 4, h+1)
+
+    plot_attention_head(in_tokens, translated_tokens, head)
+
+    ax.set_xlabel(f'Head {h+1}')
+
+  plt.tight_layout()
+  plt.show()
+```
+
+```python
+plot_attention_weights(sentence, translated_tokens,
+                       attention_weights['decoder_layer4_block2'][0])
+```
 
