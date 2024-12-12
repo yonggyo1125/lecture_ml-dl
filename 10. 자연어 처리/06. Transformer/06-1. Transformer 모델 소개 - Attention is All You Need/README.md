@@ -108,3 +108,11 @@ dropout_rate = 0.1
 
 - Transformer를 이용해 포르투칼어에서 영어로 번역하는 딥러닝 모델을 만들고 학습시켜봅 시다.
 
+## Transformer 논문 리뷰
+
+- Vaswani, Ashish, et al. "Attention is all you need." Advances in neural information processing systems. 2017.
+
+## Experiment Result
+
+- 번역(Translation) Task에 대해 state-of-the-art 모델의 성능을 보여줌
+
