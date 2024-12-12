@@ -135,7 +135,7 @@ dropout_rate = 0.1
 ![스크린샷 2024-12-12 오후 9 28 45](https://github.com/user-attachments/assets/030cd431-d15b-458f-921b-4412b0dc7e84)
 
 
+## Attention Visualizations
 
-
-
+- 중요 단어 간의 관계를 학습함 (making -> more, difficult)
 
