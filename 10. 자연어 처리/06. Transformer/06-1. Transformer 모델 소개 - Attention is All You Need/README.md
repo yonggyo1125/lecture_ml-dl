@@ -106,7 +106,9 @@ dropout_rate = 0.1
 
 ![스크린샷 2024-12-12 오후 9 16 29](https://github.com/user-attachments/assets/494009f2-da1a-4593-aeb9-f0d8685e0198)
 
-- Transformer를 이용해 포르투칼어에서 영어로 번역하는 딥러닝 모델을 만들고 학습시켜봅 시다.
+- Transformer를 이용해 포르투칼어에서 영어로 번역하는 딥러닝 모델을 만들고 학습시켜봅시다.
+
+![스크린샷 2024-12-12 오후 9 18 45](https://github.com/user-attachments/assets/45e62f5b-5b35-4917-a383-aaf8c28f231e)
 
 ## Transformer 논문 리뷰
 
@@ -115,4 +117,3 @@ dropout_rate = 0.1
 ## Experiment Result
 
 - 번역(Translation) Task에 대해 state-of-the-art 모델의 성능을 보여줌
-
