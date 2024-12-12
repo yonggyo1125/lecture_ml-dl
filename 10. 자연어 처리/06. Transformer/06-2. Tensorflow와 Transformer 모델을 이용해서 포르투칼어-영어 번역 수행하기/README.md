@@ -1160,5 +1160,7 @@ array([b'[START]', b'this', b'is', b'the', b'first', b'book', b'i',
 plot_attention_head(in_tokens, translated_tokens, attention)
 ```
 
+![스크린샷 2024-12-12 오후 11 29 57](https://github.com/user-attachments/assets/5c02cf8f-b5bb-4c0a-9835-57349efa113a)
+
 
 
