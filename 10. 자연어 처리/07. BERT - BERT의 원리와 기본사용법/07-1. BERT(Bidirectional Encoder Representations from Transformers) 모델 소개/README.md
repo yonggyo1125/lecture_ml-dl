@@ -31,3 +31,7 @@
 ## BERT Input
 
 - We use WordPiece embeddings (Wu et al., 2016) with a 30,000 token vocabulary.
+
+![스크린샷 2024-12-13 오후 10 27 07](https://github.com/user-attachments/assets/ddf4ef96-cff5-493c-b21f-e09e97425a6d)
+
+
