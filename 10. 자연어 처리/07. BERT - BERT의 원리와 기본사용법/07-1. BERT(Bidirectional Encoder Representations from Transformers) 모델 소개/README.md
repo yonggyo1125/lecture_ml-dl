@@ -47,6 +47,7 @@
 ![스크린샷 2024-12-13 오후 10 35 19](https://github.com/user-attachments/assets/c6aa9b0c-da8f-43f3-8eff-bb3dc3159a43)
 
 ## Pre-training BERT ‒ Task 2 - Next Sentence Prediction (NSP)
+
 - <b>Task 2 ‒ Next Sentence Prediction(NSP)</b> : 2개의 문장이 이어지는 문장인지 아닌지를 이진 분류(binary prediction)하도록 학습시킴
 - 데이터셋 구성 과정에서 50%는 실제로 A와 B가 이어지는 문장으로 구성함 (IsNext라는 레이블로 설정)
 - 50%는 랜덤한 문장 묶음으로 구성함 (NotNext라는 레이블로 설정)
@@ -56,7 +57,11 @@
 - 아래 그림에서 C 부분이 Next Sentence Prediction 예측에 대응되는 부분
 - 학습이 완료된 모델은 NSP 태스크에 대해서 **97%-98%**의 정확도를 보여줌
 
-
 ![스크린샷 2024-12-13 오후 10 39 58](https://github.com/user-attachments/assets/5567f1b0-41d0-4264-912c-8393c1d39f7b)
 
+## Pre-training BERT ‒ Pre-Training Dataset
 
+- Pre-Training을 위해 다음의 데이터 셋을 사용
+- BooksCorpus (**800M words**)
+- English Wikipedia (**2,500M words**)
+- Wikipedia 데이터셋에서는 텍스트만 사용하고 리스트, 테이블, 헤더 등은 무시함
