@@ -43,3 +43,6 @@
   - **80%**는 \[MASK\] 토큰으로 Masking 처리 함
   - **10%**는 랜덤한 토큰으로 변경함
   - **10%**는 원래 단어를 유지함
+
+![스크린샷 2024-12-13 오후 10 35 19](https://github.com/user-attachments/assets/c6aa9b0c-da8f-43f3-8eff-bb3dc3159a43)
+
