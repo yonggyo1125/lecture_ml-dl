@@ -30,4 +30,4 @@
 
 ## BERT Input
 
-- We use WordPiece embeddings (Wu et al., 2016) with a 30,000 token vocabulary.
+- We use WordPiece embeddings (Wu et al., 2016) with a 30,000 tokenvocabulary.
