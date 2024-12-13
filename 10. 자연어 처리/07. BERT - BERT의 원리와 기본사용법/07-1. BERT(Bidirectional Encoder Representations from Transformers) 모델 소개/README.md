@@ -33,3 +33,13 @@
 - We use WordPiece embeddings (Wu et al., 2016) with a 30,000 tokenvocabulary.
 
 ![스크린샷 2024-12-13 오후 10 27 07](https://github.com/user-attachments/assets/ddf4ef96-cff5-493c-b21f-e09e97425a6d)
+
+## Pre-training BERT ‒ Task 1 ‒ Masked LM(MLM)
+
+- 2가지 비지도 학습 문제(Unsupervised Task)에 대해 BERT를 Pre-Training 함
+- <b>Task 1 - Masked LM(MLM)</b> : 인풋 데이터의 일부를 Mask(\[MASK\] 토큰)로 가리고 가린 Mask에 대한 Prediction을 수행하도록 학습시킴
+- 전체 실험에서 WordPiece 토큰에서 랜덤하게 **15%**를 마스크 처리할 대상으로 선택함
+- 선택된 대상에서
+  - **80%**는 \[MASK\] 토큰으로 Masking 처리 함
+  - **10%**는 랜덤한 토큰으로 변경함
+  - **10%**는 원래 단어를 유지함
