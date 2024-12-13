@@ -46,3 +46,8 @@
 
 ![스크린샷 2024-12-13 오후 10 35 19](https://github.com/user-attachments/assets/c6aa9b0c-da8f-43f3-8eff-bb3dc3159a43)
 
+## Pre-training BERT ‒ Task 2 - Next Sentence Prediction (NSP)
+- <b>Task 2 ‒ Next Sentence Prediction(NSP)</b> : 2개의 문장이 이어지는 문장인지 아닌지를 이진 분류(binary prediction)하도록 학습시킴
+- 데이터셋 구성 과정에서 50%는 실제로 A와 B가 이어지는 문장으로 구성함 (IsNext라는 레이블로 설정)
+- 50%는 랜덤한 문장 묶음으로 구성함 (NotNext라는 레이블로 설정)
+
