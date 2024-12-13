@@ -55,3 +55,8 @@
 
 - 아래 그림에서 C 부분이 Next Sentence Prediction 예측에 대응되는 부분
 - 학습이 완료된 모델은 NSP 태스크에 대해서 **97%-98%**의 정확도를 보여줌
+
+
+![스크린샷 2024-12-13 오후 10 39 58](https://github.com/user-attachments/assets/5567f1b0-41d0-4264-912c-8393c1d39f7b)
+
+
