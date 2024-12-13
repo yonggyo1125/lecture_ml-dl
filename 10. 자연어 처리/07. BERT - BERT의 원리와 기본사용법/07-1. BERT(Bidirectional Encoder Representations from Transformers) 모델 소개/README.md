@@ -28,3 +28,6 @@
 
 ![스크린샷 2024-12-13 오후 10 25 26](https://github.com/user-attachments/assets/5fea2877-8523-441c-a546-b1eadf02d171)
 
+## BERT Input
+
+- We use WordPiece embeddings (Wu et al., 2016) with a 30,000 token vocabulary.
