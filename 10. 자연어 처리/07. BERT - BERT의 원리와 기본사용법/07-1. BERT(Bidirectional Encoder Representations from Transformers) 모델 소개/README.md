@@ -26,3 +26,5 @@
 
 - 대량의 corpus 데이터셋으로 **Pre-training** -> 목적에 맞게 **Fine-Tuning**
 
+![스크린샷 2024-12-13 오후 10 25 26](https://github.com/user-attachments/assets/5fea2877-8523-441c-a546-b1eadf02d171)
+
