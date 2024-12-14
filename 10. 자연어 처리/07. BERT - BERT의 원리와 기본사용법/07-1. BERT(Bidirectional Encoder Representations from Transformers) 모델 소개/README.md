@@ -92,6 +92,10 @@ Training of 𝐵𝐸𝑅𝑇 ()\*+ was performed on <b>4 Cloud TPUs in Pod confi
 
 ## Experiment Result
 
+![스크린샷 2024-12-14 오후 11 13 30](https://github.com/user-attachments/assets/a583c0a1-27fd-4c07-9ac9-72bc0ee26a7a)
+
+
+
 ## BERT Input
 
 - **Token Id** : 토큰화된 인풋 데이터
