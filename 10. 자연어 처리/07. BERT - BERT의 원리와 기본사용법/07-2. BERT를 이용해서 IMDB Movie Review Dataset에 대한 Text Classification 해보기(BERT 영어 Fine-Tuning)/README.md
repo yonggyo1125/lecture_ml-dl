@@ -394,3 +394,104 @@ tf.keras.utils.plot_model(classifier_model)
 ![스크린샷 2024-12-14 오후 11 28 38](https://github.com/user-attachments/assets/29d49336-9116-4bab-8e1e-3059ae3889a5)
 
 
+```python
+loss = tf.keras.losses.BinaryCrossentropy(from_logits=True)
+metrics = tf.metrics.BinaryAccuracy()
+```
+
+```python
+epochs = 5
+steps_per_epoch = tf.data.experimental.cardinality(train_ds).numpy()
+print(steps_per_epoch)
+num_train_steps = steps_per_epoch * epochs
+num_warmup_steps = int(0.1*num_train_steps)
+
+init_lr = 3e-5
+optimizer = optimization.create_optimizer(init_lr=init_lr,
+                                          num_train_steps=num_train_steps,
+                                          num_warmup_steps=num_warmup_steps,
+                                          optimizer_type='adamw')
+```
+
+```
+625
+```
+
+```python
+classifier_model.compile(optimizer=optimizer,
+                         loss=loss,
+                         metrics=metrics)
+```
+
+
+```python
+print(f'Training model with {tfhub_handle_encoder}')
+history = classifier_model.fit(x=train_ds,
+                               validation_data=val_ds,
+                               epochs=epochs)
+```
+
+```
+Training model with https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-4_H-512_A-8/1
+Epoch 1/5
+625/625 [==============================] - 317s 495ms/step - loss: 0.4861 - binary_accuracy: 0.7384 - val_loss: 0.3858 - val_binary_accuracy: 0.8348
+Epoch 2/5
+625/625 [==============================] - 302s 483ms/step - loss: 0.3300 - binary_accuracy: 0.8511 - val_loss: 0.3769 - val_binary_accuracy: 0.8448
+Epoch 3/5
+625/625 [==============================] - 302s 483ms/step - loss: 0.2516 - binary_accuracy: 0.8935 - val_loss: 0.3952 - val_binary_accuracy: 0.8506
+Epoch 4/5
+625/625 [==============================] - 305s 487ms/step - loss: 0.1972 - binary_accuracy: 0.9243 - val_loss: 0.4319 - val_binary_accuracy: 0.8568
+Epoch 5/5
+625/625 [==============================] - 305s 488ms/step - loss: 0.1520 - binary_accuracy: 0.9440 - val_loss: 0.4909 - val_binary_accuracy: 0.8534
+```
+
+```python
+loss, accuracy = classifier_model.evaluate(test_ds)
+
+print(f'Loss: {loss}')
+print(f'Accuracy: {accuracy}')
+```
+
+```
+782/782 [==============================] - 172s 220ms/step - loss: 0.4779 - binary_accuracy: 0.8548
+Loss: 0.4779209494590759
+Accuracy: 0.8547599911689758
+```
+
+```python
+history_dict = history.history
+print(history_dict.keys())
+
+acc = history_dict['binary_accuracy']
+val_acc = history_dict['val_binary_accuracy']
+loss = history_dict['loss']
+val_loss = history_dict['val_loss']
+
+epochs = range(1, len(acc) + 1)
+fig = plt.figure(figsize=(10, 6))
+fig.tight_layout()
+
+plt.subplot(2, 1, 1)
+# "bo" is for "blue dot"
+plt.plot(epochs, loss, 'r', label='Training loss')
+# b is for "solid blue line"
+plt.plot(epochs, val_loss, 'b', label='Validation loss')
+plt.title('Training and validation loss')
+# plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+
+plt.subplot(2, 1, 2)
+plt.plot(epochs, acc, 'r', label='Training acc')
+plt.plot(epochs, val_acc, 'b', label='Validation acc')
+plt.title('Training and validation accuracy')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend(loc='lower right')
+```
+
+```
+dict_keys(['loss', 'binary_accuracy', 'val_loss', 'val_binary_accuracy'])
+<matplotlib.legend.Legend at 0x7f9abcab2b50>
+```
+
