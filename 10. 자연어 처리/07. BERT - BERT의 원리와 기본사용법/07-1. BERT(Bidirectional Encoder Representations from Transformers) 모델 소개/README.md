@@ -65,3 +65,44 @@
 - BooksCorpus (**800M words**)
 - English Wikipedia (**2,500M words**)
 - Wikipedia 데이터셋에서는 텍스트만 사용하고 리스트, 테이블, 헤더 등은 무시함
+
+## Pre-training Procedure
+
+- 학습 데이터의 최대 길이는 512 토큰으로 지정
+- Batch size 256으로 학습 (256 sequences \* 512 tokens = 128,000 tokens/batch)
+- 1,000,000 steps 학습, 이는 약 3.3 billion(33억) word corpus에 대한 40 epoch 정도의 학습
+- Adam Optimizer 사용 (lr=1e-4, 𝛽! = 0.9, 𝛽" = 0.99, L2 weight decay of 0.01,
+- learning rate warmup over the first 10,000 steps, and linear decay of the learning rate.)
+- We use a dropout probability of 0.1 on all layers. We use a gelu activation(Hendrycks and Gimpel, 2016) rather than the standard relu, following OpenAI GPT.
+- The training loss is the sum of the mean masked LM likelihood and the mean next sentence prediction likelihood.
+
+## Pre-training Procedure
+
+Training of 𝐵𝐸𝑅𝑇 ()\*+ was performed on <b>4 Cloud TPUs in Pod configuration (16 TPU chips total).</b>
+• Training of 𝐵𝐸𝑅𝑇<sub>LARGE</sub> was performed on <b>16 Cloud TPUs (64 TPU chips total).</b>
+• Each pre-training took <b>4 days to complete.</b>
+• Longer sequences are disproportionately expensive because attention is quadratic to the sequence length.
+• To speed up pre-traing in our experiments, we pre-train the model with sequence length of 128 for 90% of the steps.
+• Then, we train the rest 10% of the steps of sequence of 512 to learn the positional embeddings.
+
+## Fine-Tuning BERT
+
+- Compared to pre-training, **fine-tuning is relatively inexpensive.**
+  • All of the results in the paper <b>can be replicated in at most 1 hour on a single Cloud TPU, or a few hours on a GPU</b>, starting from the exact same pre-trained model.
+
+## Experiment Result
+
+## BERT Input
+
+- **Token Id** : 토큰화된 인풋 데이터
+- **Mask Id** : 실제 단어로 구성된 부분을 Binary로 표현
+- **Segment Id** : 인풋 문장이 여러개인지 구분 (인풋 문장이 하나면 모두 0로, 2개면 첫문장은 0, 뒷문장은 1로 구분)
+
+## 오픈소스로 공개된 BERT
+
+- 구글에서는 대용량 데이터 셋에 대해 학습시킨 BERT 모델의 파라미터를 모두 **오픈소스로 공개**하였습니다.
+- 따라서 우리가 특정 자연어 처리 문제 영역을 해결하고자 할 때 구글에서 공개한 BERT 모델을 토대로 Fine-Tuning을 진행하면 **적은 노력으로도 고성능의 자연어처리 모델**을 만들어 낼 수 있습니다
+
+## BERT 공식 구현체
+
+- https://github.com/google-research/bert
