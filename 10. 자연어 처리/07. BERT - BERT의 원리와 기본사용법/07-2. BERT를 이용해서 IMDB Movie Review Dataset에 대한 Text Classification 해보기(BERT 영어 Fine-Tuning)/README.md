@@ -497,5 +497,79 @@ dict_keys(['loss', 'binary_accuracy', 'val_loss', 'val_binary_accuracy'])
 
 ![스크린샷 2024-12-14 오후 11 32 34](https://github.com/user-attachments/assets/955d4f85-e655-4824-a2c7-8b65c0133318)
 
+```python
+dataset_name = 'imdb'
+saved_model_path = './{}_bert'.format(dataset_name.replace('/', '_'))
+
+classifier_model.save(saved_model_path, include_optimizer=False)
+```
+
+```python
+saved_model_path
+```
+
+```
+./imdb_bert
+```
+
+```python
+reloaded_model = tf.saved_model.load(saved_model_path)
+```
+
+```python
+def print_my_examples(inputs, results):
+  result_for_printing = \
+    [f'input: {inputs[i]:<30} : score: {results[i][0]:.6f}'
+                         for i in range(len(inputs))]
+  print(*result_for_printing, sep='\n')
+  print()
 
 
+examples = [
+    'this is such an amazing movie!',  # this is the same sentence tried earlier
+    'The movie was great!',
+    'The movie was meh.',
+    'The movie was okish.',
+    'The movie was terrible...'
+]
+
+reloaded_results = tf.sigmoid(reloaded_model(tf.constant(examples)))
+original_results = tf.sigmoid(classifier_model(tf.constant(examples)))
+
+print('Results from the saved model:')
+print_my_examples(examples, reloaded_results)
+print('Results from the model in memory:')
+print_my_examples(examples, original_results)
+```
+
+```
+Results from the saved model:
+input: this is such an amazing movie! : score: 0.998357
+input: The movie was great!           : score: 0.990219
+input: The movie was meh.             : score: 0.936522
+input: The movie was okish.           : score: 0.025267
+input: The movie was terrible...      : score: 0.000974
+
+Results from the model in memory:
+input: this is such an amazing movie! : score: 0.350714
+input: The movie was great!           : score: 0.386752
+input: The movie was meh.             : score: 0.364725
+input: The movie was okish.           : score: 0.386839
+input: The movie was terrible...      : score: 0.419686
+```
+
+```python
+serving_results = reloaded_model.signatures['serving_default'](tf.constant(examples))
+
+serving_results = tf.sigmoid(serving_results['classifier'])
+
+print_my_examples(examples, serving_results)
+```
+
+```
+input: this is such an amazing movie! : score: 0.998357
+input: The movie was great!           : score: 0.990219
+input: The movie was meh.             : score: 0.936522
+input: The movie was okish.           : score: 0.025267
+input: The movie was terrible...      : score: 0.000974
+```
