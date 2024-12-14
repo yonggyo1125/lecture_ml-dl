@@ -495,3 +495,7 @@ dict_keys(['loss', 'binary_accuracy', 'val_loss', 'val_binary_accuracy'])
 <matplotlib.legend.Legend at 0x7f9abcab2b50>
 ```
 
+![스크린샷 2024-12-14 오후 11 32 34](https://github.com/user-attachments/assets/955d4f85-e655-4824-a2c7-8b65c0133318)
+
+
+
