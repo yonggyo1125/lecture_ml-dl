@@ -390,3 +390,7 @@ tf.Tensor([[0.35071403]], shape=(1, 1), dtype=float32)
 ```python
 tf.keras.utils.plot_model(classifier_model)
 ```
+
+![스크린샷 2024-12-14 오후 11 28 38](https://github.com/user-attachments/assets/29d49336-9116-4bab-8e1e-3059ae3889a5)
+
+
