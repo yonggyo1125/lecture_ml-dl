@@ -32,3 +32,7 @@
   - batch size : 32
 
 ## SQUAD 데이터 셋의 성능 평가 방식
+
+![스크린샷 2024-12-15 오전 11 17 40](https://github.com/user-attachments/assets/579847a5-48cb-4f39-822e-dfd0564019de)
+
+
