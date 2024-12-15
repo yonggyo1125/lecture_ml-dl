@@ -36,3 +36,7 @@
 ![스크린샷 2024-12-15 오전 11 17 40](https://github.com/user-attachments/assets/579847a5-48cb-4f39-822e-dfd0564019de)
 
 
+## SQuAD v1.1 BERT Result
+
+- 기존 모델 대비 더 높은 stsate-of-the-art 성능의 EM(Exact Match), F1 Score 성능을 보여줌
+
