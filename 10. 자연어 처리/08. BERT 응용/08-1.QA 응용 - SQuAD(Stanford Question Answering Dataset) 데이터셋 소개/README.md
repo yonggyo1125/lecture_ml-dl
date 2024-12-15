@@ -8,5 +8,8 @@
 
 ![스크린샷 2024-12-15 오전 9 58 38](https://github.com/user-attachments/assets/4cc03795-ed59-4c76-8529-51952990557c)
 
+## BERT Overview
+
+- 대량의 corpus 데이터셋으로 Pre-training -> 목적에 맞게 Fine-Tuning
 
 
