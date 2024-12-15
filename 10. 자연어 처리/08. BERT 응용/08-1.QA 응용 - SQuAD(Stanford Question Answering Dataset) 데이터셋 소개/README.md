@@ -47,4 +47,5 @@
 
 - <b>SQuAD v2.0</b>은 기존의 SQuAD v1.1 모델의 100K(10만개)의 Question & Answer 쌍에 <b>답을 구할수 없는(un-answerable) 문제 50K</b>(5만개)의 데이터를 추가한 데이터셋입니다.
 
+![스크린샷 2024-12-15 오전 11 35 43](https://github.com/user-attachments/assets/b8d1d198-2346-43c4-86d5-6aa52d7b8718)
 
