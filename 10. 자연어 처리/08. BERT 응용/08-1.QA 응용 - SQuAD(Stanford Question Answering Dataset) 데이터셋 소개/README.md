@@ -54,3 +54,8 @@
 
 - 기존 모델 대비 더 높은 stsate-of-the-art 성능의 EM(Exact Match), F1 Score 성능을 보여줌
 
+
+![스크린샷 2024-12-15 오전 11 38 19](https://github.com/user-attachments/assets/e4ab2cb6-f2e2-4eaf-aa0f-49ec8d414803)
+
+
+
