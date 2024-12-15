@@ -93,3 +93,14 @@ df_train_labels = pd.DataFrame(corpus.train.labels, columns=['labels'])
 df_train = pd.concat([df_train_text, df_train_labels], axis=1)
 df_train
 ```
+
+![스크린샷 2024-12-15 오전 9 18 44](https://github.com/user-attachments/assets/faaf9c98-bef9-4960-b86f-1e2d602f4158)
+
+
+
+![스크린샷 2024-12-15 오전 9 19 26](https://github.com/user-attachments/assets/ddb3f12b-f5dd-4635-99b7-8671e6d50739)
+
+
+
+
+
