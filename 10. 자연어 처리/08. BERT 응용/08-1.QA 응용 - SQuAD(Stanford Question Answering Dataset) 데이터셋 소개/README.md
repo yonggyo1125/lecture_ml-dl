@@ -14,3 +14,11 @@
 
 
 ![스크린샷 2024-12-15 오전 10 00 55](https://github.com/user-attachments/assets/e88c8b89-6288-46b7-9fca-46310c5881ec)
+
+
+## SQuAD v1.1 Dataset
+
+- The Stanford Question Answering Dataset (SQuAD v1.1) 는 100K(10만개)의 Question & Answer 쌍으로 구성된 데이터셋입니다.
+- Question과 Answer를 위한 문맥 Paragraph가 주어지고 해당 Paragraph에 있는 정보를 통대로 Answer를 맞추는 형태의 데이터셋입니다.
+- https://rajpurkar.github.io/SQuAD-explorer/
+
