@@ -22,3 +22,4 @@
 - Question과 Answer를 위한 문맥 Paragraph가 주어지고 해당 Paragraph에 있는 정보를 통대로 Answer를 맞추는 형태의 데이터셋입니다.
 - https://rajpurkar.github.io/SQuAD-explorer/
 
+![스크린샷 2024-12-15 오전 11 13 02](https://github.com/user-attachments/assets/932def71-3eb3-4b91-a2b0-50929021141b)
