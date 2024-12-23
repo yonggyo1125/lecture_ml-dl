@@ -82,7 +82,7 @@ class RNN(tf.keras.Model):
  def __init__(self, batch_size):
    super(RNN, self).__init__()
    self.embedding_layer = tf.keras.layers.Embedding(vocab_size, embedding_dim,
-                                                    batch_input_shape=[batch_size, None])
+                                                    input_shape=(batch_size, None))
    self.hidden_layer_1 = tf.keras.layers.LSTM(hidden_size,
                                              return_sequences=True,
                                              stateful=True,
