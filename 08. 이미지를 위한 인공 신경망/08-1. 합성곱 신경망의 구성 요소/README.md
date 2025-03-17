@@ -45,3 +45,8 @@
 - 커널은 입력에 곱해지는 가중치, 필터는 뉴런 개수를 표현할 때 사용
 - 합성곱의 장점은 1차원이 아니라 2차원 입력에서도 적용할 수 있다는 것입니다. 다음 그림을 보죠.
 
+![스크린샷 2025-03-17 오후 9 44 00](https://github.com/user-attachments/assets/4ebe7c8b-2a5c-4df3-ab6a-00cb558916be)
+
+![스크린샷 2025-03-17 오후 9 44 23](https://github.com/user-attachments/assets/fb98b72b-f9db-44f4-8888-708cea866287)
+
+
