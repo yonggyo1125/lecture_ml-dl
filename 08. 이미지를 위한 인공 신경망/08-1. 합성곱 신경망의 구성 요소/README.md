@@ -98,3 +98,8 @@ keras.layers.Conv2D(10, kernel_size=(3, 3), activation='relu')
 ![스크린샷 2025-03-17 오후 10 10 37](https://github.com/user-attachments/assets/a2701310-1833-46ac-8006-ed807adb3da8)
 
 - 이렇게 입력 배열 주위를 가상의 원소로 채우는 것을 **패딩**<sup>padding</sup>이라고 합니다. 실제 입력값이 아니기 때문에 패딩은 0으로 채웁니다. 즉 (4,4) 크기의 입력에 0을 1개 패딩 하면 다음과 같은 (6,6) 크기의 입력이 됩니다. 패딩의 역할은 순전히 커널이 도장을 찍을 횟수를 늘려주는 것밖에는 없습니다. 실제 값은 0으로 채워져 있기 때문에 계산에 영향을 미치지는 않습니다.
+
+![스크린샷 2025-03-17 오후 10 15 01](https://github.com/user-attachments/assets/d1539ae7-3e0a-4a48-96c9-4c12f95a2fcd)
+![스크린샷 2025-03-17 오후 10 15 08](https://github.com/user-attachments/assets/b67af9c9-8d27-4a8c-bbd9-67a737e53c62)
+
+
