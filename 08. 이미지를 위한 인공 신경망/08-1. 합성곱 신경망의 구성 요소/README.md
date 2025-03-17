@@ -142,3 +142,9 @@ keras.layers.Conv2D(10, kernel_size=(3,3), activation='relu', padding='same', st
 ### 풀링
 
 - **풀링**<sup>pooling</sup>은 합성곱 층에서 만든 특성 맵의 가로세로 크기를 줄이는 역할을 수행합니다. 하지만 특성맵의 개수는 줄이지 않습니다. 예를 들면 다음 그림처럼 (2,2,3) 크기의 특성 맵에 풀링을 적용하면 마지막 차원인 개수는 그대로 유지하고 너비와 높이만 줄어들어 (1,1,3) 크기의 특성 맵이 됩니다.
+
+![스크린샷 2025-03-17 오후 10 42 31](https://github.com/user-attachments/assets/18f0a81c-b526-4245-95ca-0426d3be60b1)
+
+![스크린샷 2025-03-17 오후 10 42 38](https://github.com/user-attachments/assets/0c85164f-7717-4d84-9fb1-7d30987bcd74)
+
+
