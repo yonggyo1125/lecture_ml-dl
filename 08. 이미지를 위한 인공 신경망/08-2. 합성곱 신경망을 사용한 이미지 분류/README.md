@@ -27,6 +27,12 @@
   - 두 번째 매개변수에 막대의 y축 값을 리스트나 넘파이 배열로 전달합니다.
   - `width` 매개변수에서 막대의 두께를 지정할 수 있습니다. 기본값은 0.8입니다.
 
+## 패션 MNIST 데이터 불러오기
+
+- 먼저 주피터 노트북에서 케라스 API를 사용해 패션 MNIST 데이터를 불러오고 적절히 전처리하겠습니다. 이 작업은 7장에서 했던 것과 아주 비슷합니다. 데이터 스케일을 0\~255사이에서 0\~1 사이로 바꾸고 훈련 세트와 검증 세트로 나눕니다.
+- 여기에서는 한 가지 작업이 다릅니다. 완전 연결 신경망에서는 입력 이미지를 밀집층에 연결하기 위해 일렬로 펼쳐야 합니다. 이 작업을 위해 넘파이 `reshape()` 메서드를 사용하거나 `Flatten` 클래스를 사용했습니다. 합성곱 신경망은 2차원 이미지를 그대로 사용하기 때문에 이렇게 일렬로 펼치지 않습니다.
+- 다만 8장 1절에서 언급했듯이 입력 이미지는 항상 깊이(채널) 차원이 있어야 합니다. 흑백 이미지의 경우 채널 차원이 없는 2차원 배열이지만 `Conv2D` 층을 사용하기 위해 마지막에 이 채널 차원을 추가해야 합니다. 넘파이 `reshape()` 메서드를 사용해 전체 배열 차원을 그대로 유지하면서 마지막에 차원을 간단히 추가할 수 있습니다.
+
 ```python
 from tensorflow import keras
 from sklearn.model_selection import train_test_split
@@ -39,6 +45,8 @@ train_scaled = train_input.reshape(-1, 28, 28, 1) / 255.0
 train_scaled, val_scaled, train_target, val_target = train_test_split(
     train_scaled, train_target, test_size=0.2, random_state=42)
 ```
+
+- 이제 (48000, 28, 28) 크기인 train_input이 (48000, 28, 28, 1) 크기인 train_scaled가 되었습니다.
 
 ```python
 model = keras.Sequential()
