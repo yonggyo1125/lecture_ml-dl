@@ -181,6 +181,9 @@ plt.legend(['train', 'val'])
 plt.show()
 ```
 
+![스크린샷 2025-03-18 오후 12 37 59](https://github.com/user-attachments/assets/a72fc17b-e22e-4edf-8af0-065ae9a34a24)
+
+
 ```python
 model.evaluate(val_scaled, val_target)
 ```
