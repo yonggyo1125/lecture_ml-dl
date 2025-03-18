@@ -205,3 +205,8 @@ keras.layers.MaxPooling2D(2, strides=2, padding='valid')
 - 사실 케라스의 합성곱 층은 항상 이렇게 3차원 입력을 기대합니다. 만약 패션 MNIST 데이터처럼 흑백 이미지일 경우에는 깊이 차원이 1인 3차원 배열로 변환하여 전달합니다.
 - 예를 들어 (28, 28) 크기의 2차원 배열을 (28, 28, 1) 크기의 3차원 배열로 변환합니다. 원소 개수는 동일하면서 차원만 맞춘 거죠.
 
+![스크린샷 2025-03-18 오전 10 51 56](https://github.com/user-attachments/assets/7aa63fa9-e1b1-4e05-9928-2691535ffb50)
+
+![스크린샷 2025-03-18 오전 10 52 06](https://github.com/user-attachments/assets/cb976b30-5430-4f15-ba99-30e16f5aa75b)
+
+
