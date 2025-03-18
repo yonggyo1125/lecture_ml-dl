@@ -216,6 +216,9 @@ inputs = keras.Input(shape=(784,))
 
 - 전체를 합쳐 보면 다음과 같습니다.
 
+
+
+
 ```python
 print(model.inputs)
 ```
