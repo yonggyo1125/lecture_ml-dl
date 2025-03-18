@@ -24,6 +24,10 @@
 - 합성곱 층은 여러 개의 필터를 사용해 이미지에서 특징을 학습합니다. 각 필터는 커널이라고 부르는 가중치와 절편을 가지고 있죠. 일반적으로 절편은 시각적으로 의미가 있지 않습니다. 가중치는 입력 이미지의 가차원 영역에 적용되어 어떤 특징을 크게 두드러지게 표현하는 역할을 합니다.
 - 예를 들어 다음과 같은 가중치는 둥금 모서리가 있는 영역에서 크게 활성화되고 그렇지 않은 영역에서는 낮은 값을 만들 것입니다.
 
+
+![스크린샷 2025-03-18 오후 1 33 43](https://github.com/user-attachments/assets/883b9627-d39d-4285-b4be-2346efeb202e)
+
+
 ```python
 from tensorflow import keras
 model = keras.models.load_model('best-cnn-model.keras')
