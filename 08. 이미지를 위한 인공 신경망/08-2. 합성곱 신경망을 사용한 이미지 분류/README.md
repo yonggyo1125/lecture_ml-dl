@@ -128,6 +128,12 @@ keras.utils.plot_model(model, show_shapes=True)
 
 ![스크린샷 2025-03-18 오후 12 33 45](https://github.com/user-attachments/assets/338e72f0-c25a-4436-bc4f-4d7f4d2b3cea)
 
+- 패션 MNIST 데이터에 적용할 합성곱 신경망 모델의 구성을 마쳤습니다. 이제 모델을 컴파일하고 훈련해 보죠.
+
+## 모델 컴파일과 훈련
+
+- 케라스 API의 장점은 딥러닝 모델의 종류나 구성 방식에 상관없이 컴파일과 훈련 과정이 같다는 점입니다. 다음 코드는 7장 3절에서 사용했던 완전 연결 신경망 모델을 컴파일하고 훈련하는 코드와 거의 같습니다.
+- Adam 옵타마이저를 사용하고 ModelCheckpoint 콜백과 EarlyStopping 콜백을 함께 사용해 조기 종료 기법을 구현합니다.
 
 ```python
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
@@ -162,11 +168,11 @@ Epoch 8/20
 1500/1500 ━━━━━━━━━━━━━━━━━━━━ 5s 3ms/step - accuracy: 0.9314 - loss: 0.1847 - val_accuracy: 0.9208 - val_loss: 0.2206
 ```
 
-```python
-import matplotlib.pyplot as plt
-```
+- 얼핏 보아도 훈련 세트의 정확도가 이전보다 훨씬 좋아진 것을 알 수 있습니다. 손실 그래프를 그려서 조기 종료가 잘 이루어졌는지 확인해보죠
 
 ```python
+import matplotlib.pyplot as plt
+
 plt.plot(history.history['loss'])
 plt.plot(history.history['val_loss'])
 plt.xlabel('epoch')
