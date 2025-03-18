@@ -206,6 +206,15 @@ model = keras.Model(inputs, outputs)
 
 ![스크린샷 2025-03-18 오후 5 16 03](https://github.com/user-attachments/assets/065fdb02-1329-4089-9f31-95bd5e464091)
 
+- 입력에서 출력까지 층을 호출한 결과를 계속 이어주고 `Model` 클래스에 입력과 최종 출력을 지정합니다. 그런데 `inputs`는 어디서 온 걸까요? 이전 절에서 `plot_model()` 함수로 모델의 층을 도식화했을 떄 `InputLayer` 클래스가 맨 처음 나왔던 것을 기억하나요? `Sequential` 클래스는 `InputLayer` 클래스를 자동으로 추가하고 호출해 주지만 `Model` 클래스에서는 우리가 수동으로 만들어서 호출해야 합니다. 바로 `inputs`가 `InputLayer` 클래스의 출력값이 되어야 합니다.
+
+- 다행히 케라스는 `InputLayer` 클래스 객체를 쉽게 다룰 수 있도록 `Input()` 함수를 별도로 제공합니다. 입력의 크기를 지정하는 `shape` 매개변수와 함께 이 함수를 호출하면 `InputLayer` 클래스 객체를 만들어 출력을 반환해 줍니다.
+
+```python
+inputs = keras.Input(shape=(784,))
+```
+
+- 전체를 합쳐 보면 다음과 같습니다.
 
 ```python
 print(model.inputs)
