@@ -288,6 +288,9 @@ for i in range(4):
 plt.show()
 ```
 
+![스크린샷 2025-03-18 오후 6 59 55](https://github.com/user-attachments/assets/5765cba0-c37c-4c15-9189-46a15f14f7c4)
+
+
 ```python
 conv2_acti = keras.Model(model.inputs, model.layers[2].output)
 ```
