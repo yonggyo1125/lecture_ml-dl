@@ -36,3 +36,10 @@
 ## 순환 신경망
 
 - **순환 신경망**<sup>recurrent neural network, RNN</sup>은 일반적인 완전 연결 신경망과 거의 비슷합니다. 완전 연결 신경망에 이전 데이터의 처리 흐름을 순환하는 고리 하나만 추가하면 됩니다. 다음 그림에서 은닉층에 있는 붉은 고리를 눈여겨보세요.
+
+![스크린샷 2025-03-18 오후 8 12 31](https://github.com/user-attachments/assets/35f4ce28-4db9-4bc9-a09d-62dbb35883f1)
+
+![스크린샷 2025-03-18 오후 8 12 38](https://github.com/user-attachments/assets/cf30b427-e307-4a3d-bc26-61817c9ce154)
+
+![스크린샷 2025-03-18 오후 8 12 44](https://github.com/user-attachments/assets/710eb0a8-c172-4e84-9b03-e1a093739670)
+
