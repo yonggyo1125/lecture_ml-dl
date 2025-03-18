@@ -183,6 +183,8 @@ plt.show()
 
 ![스크린샷 2025-03-18 오후 12 37 59](https://github.com/user-attachments/assets/a72fc17b-e22e-4edf-8af0-065ae9a34a24)
 
+- 검증 세트에 대한 손실이 점차 감소하다가 정체되기 시작하고 훈련 세트에 대한 손실은 점점 더 낮아지고 있습니다. 이 그래프를 기반으로 아홉 번째 에포크를 최적으로 생각할 수 있습니다.
+- `EarlyStopping` 클래스에서 `restore_best_weights` 매개변수를 `True`로 지정했으므로 현재 `model` 객체가 최적의 모델 파라미터로 복원되어 있습니다. 즉 `ModelCheckpoint` 콜백이 저장한 `best-cnn-model.keras` 파일을 다시 읽을 필요가 없습니다. 이번에는 세트에 대한 성능을 평가해 보겠습니다.
 
 ```python
 model.evaluate(val_scaled, val_target)
@@ -192,6 +194,9 @@ model.evaluate(val_scaled, val_target)
 375/375 ━━━━━━━━━━━━━━━━━━━━ 1s 2ms/step - accuracy: 0.9231 - loss: 0.2125
 [0.21925583481788635, 0.9200833439826965]
 ```
+
+- 이 결과는 `fit()` 메서드의 출력 중 아홉 번째 에포크의 출력과 동일합니다. `EarlyStopping` 콜백이 `model` 객체를 최상의 모델 파라미터로 잘 복원한 것 같습니다.
+- 7장에서 잠깐 소개했던 `predict()` 메서드를 사용해 훈련된 모델을 사용하여 새로운 데이터에 대해 예측을 만들어 보겠습니다. 여기에서는 편의상 검증 세트의 첫 번째 샘플을 처음 본 이미지라고 가정합니다. 맷플롯립에서는 흑백 이미지에 깊이 차원은 없습니다. 따라서 (28, 28, 1) 크기를 (28, 28)로 바꾸어 출력해야 합니다. 첫 번째 샘플 이미지를 먼저 확인해 보죠.
 
 ```python
 plt.imshow(val_scaled[0].reshape(28, 28), cmap='gray_r')
