@@ -115,11 +115,15 @@ keras.utils.plot_model(model)
 
 ![스크린샷 2025-03-18 오후 12 28 35](https://github.com/user-attachments/assets/ec45c0c3-0e29-4996-a039-2e9363c4595e)
 
+- 네모 상자 안의 내용 중 콜론 왼쪽에는 층의 이름이 쓰여 있고 오른쪽에는 클래스가 나타납니다. 맨 처음에 나오는 `InputLayer`클래스는 케라스가 자동으로 추가해 주는 것으로 입력층의 역할을 합니다. 이 입력층은 첫 번째 `Conv2D` 클래스에 추가한 `input_shape` 매개변수를 사용합니다.
+- `plot_model()` 함수의 `show_shapes` 매개변수를 `True`로 설정하면 이 그림에 입력과 출력의 크기를 표시해 줍니다. 또 `to_file` 매개변수에 파일 이름을 지정하면 출력한 이미지를 파일로 저장합니다. dpi매개변수로 해상도를 지정할 수도 있습니다. 이 옵션들을 사용해 다시 그래프를 그려보죠.
 
 
 ```python
 keras.utils.plot_model(model, show_shapes=True)
 ```
+
+
 
 ```python
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
