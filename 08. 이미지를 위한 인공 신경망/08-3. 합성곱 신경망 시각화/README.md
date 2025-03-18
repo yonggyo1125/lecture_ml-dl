@@ -87,6 +87,9 @@ plt.ylabel('count')
 plt.show()
 ```
 
+![스크린샷 2025-03-18 오후 1 52 26](https://github.com/user-attachments/assets/3e0d7689-fb0c-4597-9df8-1f6e72331f9b)
+
+
 ```python
 fig, axs = plt.subplots(2, 16, figsize=(15,2))
 
