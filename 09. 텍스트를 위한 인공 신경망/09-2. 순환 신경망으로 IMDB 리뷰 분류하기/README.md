@@ -74,6 +74,9 @@ print(train_input.shape, test_input.shape)
 
 - 앞서 말했듯이 이 데이터셋은 훈련 세트와 테스트 세트가 각각 25,000개의 샘플로 이루어져 있습니다. 그런데 배열이 1차원인 게 이상하게 보이지요? IMDB 리뷰 텍스트는 길이가 제각각입니다. 따라서 고정 크기의 2차원 배열에 담기 보다는 리뷰마다 별도의 파이썬 리스트로 담아야 메모리를 효율적으로 사용할 수 있습니다.
 
+![스크린샷 2025-03-18 오후 10 05 58](https://github.com/user-attachments/assets/ee90d905-9729-4590-bbfc-facdb0f63a1d)
+
+
 ```python
 print(len(train_input[0]))
 ```
