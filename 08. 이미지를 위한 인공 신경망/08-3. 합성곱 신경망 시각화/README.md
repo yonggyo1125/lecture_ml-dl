@@ -106,7 +106,10 @@ plt.show()
 
 ![스크린샷 2025-03-18 오후 1 56 23](https://github.com/user-attachments/assets/386245c4-ebea-4cd3-80c4-da6faa2d9e47)
 
-- 앞에서 `conv_weights`에 32개의 가중치를 저장했습니다. 이 배열의 마지막 차원을 순회하면서 0에부터
+- 앞에서 `conv_weights`에 32개의 가중치를 저장했습니다. 이 배열의 마지막 차원을 순회하면서 0부터 i \* 16 + j 번째 까지의 가중치 값을 차례대로 출력합니다. 여기에서 i는 행 인덱스이고, j는 열 인덱스로 각각 0\~1, 0\~15까지의 범위를 가집니다. 따라서 `conv_weights[:,:,0,0]`에서 `conv_weights[:,:,0,3]`까지 출력합니다.
+- 결과 그래프를 보면 이 가중치 값이 무작위로 나열된 것이 아닌 어떤 패턴을 볼 수 있습니다. 예를 들어 첫 번째 줄의 맨 왼족 가중치는 오른쪽 3픽셀의 값이 가장 높습니다(밝은 부분의 값이 높습니다). 이 가중치는 오른쪽에 놓인 직선을 만나면 크게 활성화될 것입니다.
+- `imshow()`함수는 배열에 있는 최댓값과 최솟값을 사용해 픽셀의 강도를 표현합니다. 즉 0.1이나 0.3나 어떤 값이든지 그 배열의 최댓값이면 가장 밝은 노란 색으로 그리죠. 만약 두 배열을 `imshow()`로 비교하려면 이런 동작은 바람직하지 않습니다. 어떤 절댓값으로 기준을 정해서 픽셀의 강도를 나타내야 비교하기 좋죠. 이를 위해 위 코드에서 `vmin`과 `vmax`로 맷플롯립의 컬러맵<sup>colormap</sup>으로 표현할 범위를 지정했습니다.
+- 자 이번에는 훈련하지 않은 빈 합성곱 신경망을 만들어 보겠습니다. 이 합성곱 층의 가중치가 위에서 본 훈련한 가중치와 어떻게 다른지 그림으로 비교해 보겠습니다. 먼저 `Sequential` 클래스로 모델을 만들고 `Conv2D`층을 하나 추가합니다.
 
 ```python
 no_training_model = keras.Sequential()
@@ -115,6 +118,8 @@ no_training_model.add(keras.layers.Input(shape=(28,28,1)))
 no_training_model.add(keras.layers.Conv2D(32, kernel_size=3, activation='relu',
                                           padding='same'))
 ```
+
+- 그 다음 이 모델의 첫 번째 층(즉 Conv2D 층)의 가중치를 `no_training_conv` 변수에 저장합니다.
 
 ```python
 no_training_conv = no_training_model.layers[0]
@@ -126,6 +131,8 @@ print(no_training_conv.weights[0].shape)
 (3, 3, 1, 32)
 ```
 
+- 이 가중치의 크기도 앞서 그래프로 출력한 가중치와 같습니다. 동일하게 (3,3) 커널을 가진 필터를 32개 사용했기 때문이죠. 이 가중치의 평균과 표준편차를 확인해 보겠습니다. 이전처럼 먼저 넘파이 배열로 만든 다음 `mean()`, `std()` 메서드를 호출합니다.
+
 ```python
 no_training_weights = no_training_conv.weights[0].numpy()
 
@@ -136,7 +143,9 @@ print(no_training_weights.mean(), no_training_weights.std())
 0.0053191613 0.08463709
 ```
 
-```pytnon
+- 평균은 이전과 동일하게 0에 가깝지만 표준편차는 이전과 달리 매우 작습니다. 이 가중치 배열을 히스토그램으로 표현해 보죠.
+
+```python
 plt.hist(no_training_weights.reshape(-1, 1))
 plt.xlabel('weight')
 plt.ylabel('count')
