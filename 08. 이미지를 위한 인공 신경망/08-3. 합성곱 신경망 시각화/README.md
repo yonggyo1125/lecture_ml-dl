@@ -220,11 +220,11 @@ inputs = keras.Input(shape=(784,))
 
 - 마치 체인처럼 입력에서 출력까지 연결하고 마지막에 `Model` 클래스에 입력과 출력을 지정하여 모델을 만듭니다. 이렇게 모델을 만들게 되면 중간에 다양한 형태로 층을 연결할 수 있습니다. 그런데 특성 맵 시각화를 만드는 데 함수령 API가 왜 필요한 것일까요? 2절에서 정의한 `model`객체의 층을 순서대로 나열하면 다음과 같습니다.
 
-![스크린샷 2025-03-18 오후 5 24 16](https://github.com/user-attachments/assets/49d29e28-980f-4c0f-ae29-35df3d0c88b2)
+![스크린샷 2025-03-18 오후 5 24 10](https://github.com/user-attachments/assets/b01ba5b6-1c61-42b1-b555-fce62279bd81)
 
 - 우리가 필요한 것은 첫 번째 `Conv2D`의 출력입니다. `model` 객체의 입력과 `Conv2D`의 출력을 알수 있다면 이 둘을 연결하여 새로운 모델을 얻을 수 있지 않을까요?
 
-![스크린샷 2025-03-18 오후 5 24 10](https://github.com/user-attachments/assets/b01ba5b6-1c61-42b1-b555-fce62279bd81)
+![스크린샷 2025-03-18 오후 5 24 16](https://github.com/user-attachments/assets/49d29e28-980f-4c0f-ae29-35df3d0c88b2)
 
 - `model` 객체의 `predict()` 메서드를 호출하면 입력부터 마치막 층까지 모든 계산을 수행한 후 최종 출력을 반환합니다. 하지만 우리가 필요한 것은 첫 번째 `Conv2D` 층이 출력한 특성 맵입니다. 첫 번째 층의 출력은 `Conv2D` 객체의 `output` 속성에서 얻을 수 있습니다. `model.layers[0].output` 처럼 참조할 수 있죠. `model` 객체의 입력은 어떻게 얻을 수 있을까요? 다행이 케라스 모델은 `input` 속성으로 입력을 참조할 수 있습니다. 즉 `model.input`으로 이 모델의 입력을 간단히 얻을 수 있습니다.
 
