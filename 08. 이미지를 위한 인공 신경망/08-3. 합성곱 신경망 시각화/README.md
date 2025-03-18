@@ -296,15 +296,20 @@ plt.show()
 
 ![스크린샷 2025-03-18 오후 7 05 19](https://github.com/user-attachments/assets/c2fec1da-bfd0-4705-84fa-14f49635063d)
 
-
+- 두 번째 합성곱 층이 만든 특성 맵도 같은 방식으로 확인할 수 있습니다. 먼저 `model` 객체의 입력과 두 번째 합성곱 층인 `model.layers[2]`의 출력을 연결한 `conv2_acti` 모델을 만듭니다.
 
 ```python
 conv2_acti = keras.Model(model.inputs, model.layers[2].output)
 ```
 
+- 그다음 첫 번째 샘플을 `conv2_acti` 모델의 `predict()` 메서드에 전달합니다.
+
 ```python
-feature_maps = conv2_acti.predict(train_input[0:1].reshape(-1, 28, 28, 1)/255.0)
+inputs = train_input[0:1].reshape(-1, 28, 28, 1)/255.0
+feature_maps = conv2_acti.predict(inputs)
 ```
+
+- 첫 번째 풀링 층에서 가로세로 크기가 절반으로 줄었고, 두 번째 합성곱 층의 필터 개수는 64개이므로 `feature_maps`의 크기는 배치 차원을 제외하면 (14, 14, 64)일 것입니다. 한번 확인해 보죠.
 
 ```python
 print(feature_maps.shape)
@@ -313,6 +318,8 @@ print(feature_maps.shape)
 ```
 (1, 14, 14, 64)
 ```
+
+- 네, 예상대로네요. 그럼 64개의 특성 맵을 8개씩 나누어 `imshow()` 함수로 그려 보겠습니다.
 
 ```python
 fig, axs = plt.subplots(8, 8, figsize=(12,12))
