@@ -158,6 +158,7 @@ plt.xlabel('length')
 plt.ylabel('frequency')
 plt.show()
 ```
+![스크린샷 2025-03-18 오후 10 15 41](https://github.com/user-attachments/assets/36511312-2f25-4408-a3e5-b52e1486ccef)
 
 ```python
 from tensorflow.keras.preprocessing.sequence import pad_sequences
