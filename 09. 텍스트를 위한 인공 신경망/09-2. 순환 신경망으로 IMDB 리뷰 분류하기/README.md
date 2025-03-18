@@ -183,6 +183,9 @@ print(train_seq.shape)
 
 - `train_input`은 파이썬 리스트의 배열이었지만 길이를 100으로 맞춘 `train_seq`는 이제 (20000, 100) 크기의 2차원 배열이 되었습니다.
 
+![스크린샷 2025-03-18 오후 10 21 54](https://github.com/user-attachments/assets/8b5016a0-150f-4374-b9d7-50b2aae095e4)
+
+
 ```python
 print(train_seq[0])
 ```
