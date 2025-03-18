@@ -11,3 +11,5 @@
 
 - **순차 데이터**<sup>sequential data</sup>는 텍스트나 **시계열 데이터**<sup>time series data</sup>와 같이 순서에 의미가 있는 데이터를 말합니다. 예를 들어 "I am a boy"는 쉽게 이해할 수 있지만 "boy am a I"는 말이 되지 않습니다. 또 일별 온도를 기록한 데이터에서 날짜 순서를 뒤죽박죽 섞는다면 내일의 온도를 쉽게 예상하기 어렵습니다.
 
+![스크린샷 2025-03-18 오후 8 01 03](https://github.com/user-attachments/assets/6a00cd08-736b-4adc-8ea1-be97ea4a5d99)
+![스크린샷 2025-03-18 오후 8 01 10](https://github.com/user-attachments/assets/d6ba648a-7855-4f82-8f27-cc44f7de760b)
