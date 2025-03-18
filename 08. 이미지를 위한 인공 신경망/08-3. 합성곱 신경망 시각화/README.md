@@ -217,10 +217,12 @@ inputs = keras.Input(shape=(784,))
 - 전체를 합쳐 보면 다음과 같습니다.
 
 ![스크린샷 2025-03-18 오후 5 24 22](https://github.com/user-attachments/assets/e4f0372c-9029-4bbe-a553-9932af6983d2)
+
+- 마치 체인처럼 입력에서 출력까지 연결하고 마지막에 `Model` 클래스에 입력과 출력을 지정하여 모델을 만듭니다. 이렇게 모델을 만들게 되면 중간에 다양한 형태로 층을 연결할 수 있습니다. 그런데 특성 맵 시각화를 만드는 데 함수령 API가 왜 필요한 것일까요? 2절에서 정의한 `model`객체의 층을 순서대로 나열하면 다음과 같습니다.
+
 ![스크린샷 2025-03-18 오후 5 24 16](https://github.com/user-attachments/assets/49d29e28-980f-4c0f-ae29-35df3d0c88b2)
+
 ![스크린샷 2025-03-18 오후 5 24 10](https://github.com/user-attachments/assets/b01ba5b6-1c61-42b1-b555-fce62279bd81)
-
-
 
 ```python
 print(model.inputs)
