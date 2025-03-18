@@ -48,6 +48,9 @@ train_scaled, val_scaled, train_target, val_target = train_test_split(
 
 - 이제 (48000, 28, 28) 크기인 train_input이 (48000, 28, 28, 1) 크기인 train_scaled가 되었습니다.
 
+![스크린샷 2025-03-18 오후 12 05 26](https://github.com/user-attachments/assets/aacdfc7c-decb-41e6-9335-2fe1c73786a2)
+
+
 ```python
 model = keras.Sequential()
 ```
