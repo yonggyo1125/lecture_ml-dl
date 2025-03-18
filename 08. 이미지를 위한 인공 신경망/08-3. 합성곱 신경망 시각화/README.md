@@ -256,13 +256,15 @@ plt.show()
 
 ![스크린샷 2025-03-18 오후 6 54 50](https://github.com/user-attachments/assets/5af82bf9-31de-4f00-a144-48b9bf0a0885)
 
-
+- 앵클 부츠군요. 이 샘플을 `conv_acti` 모델에 주입하여 `Conv2D` 층이 만드는 특성 맵을 출력해 보겠습니다. 앞에서도 설명했지만 `predict()` 메서드는 항상 입력의 첫 번째 차원이 배치 차원일 것으로 기대합니다. 하나의 샘픙을 전달하더라도 꼭 첫 번째 차원을 유지해야 합니다. 이를 위해 슬라이싱 연산자를 사용해 첫 번째 샘플을 선택합니다. 그 다음에 (784,) 크기를 (28, 28, 1) 크기로 변경하고 255로 나눕니다(2절에서 했던 전처리 과정과 동일합니다).
 
 ```python
 inputs = train_input[0:1].reshape(-1, 28, 28, 1)/255.0
 
 feature_maps = conv_acti.predict(inputs)
 ```
+
+- `conv_acti.predict()` 메서드가 출력한 `feature_maps`의 크기를 확인해 보죠.
 
 ```python
 print(feature_maps.shape)
@@ -271,6 +273,9 @@ print(feature_maps.shape)
 ```
 (1, 28, 28, 32)
 ```
+
+- 세임 패딩과 32개의 필터를 사용한 합성곱 층의 출력이므로 (28, 28, 32) 입니다. 첫 번쨰 차원은 배치 차원이라는 점을 기억하세요. 샘플을 하나 입력했기 때문에 1이 됩니다.
+- 이제 앞에서와 같이 맷플롯립의 `imshow` 함수로 이 특성 맵을 그려 보겠습니다. 총 32개의 특성 맵이 있으므로 4개의 행으로 나누어 그려 보겠습니다.
 
 ```python
 fig, axs = plt.subplots(4, 8, figsize=(15,8))
