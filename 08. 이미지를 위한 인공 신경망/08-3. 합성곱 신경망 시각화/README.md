@@ -104,6 +104,9 @@ for i in range(2):
 plt.show()
 ```
 
+![스크린샷 2025-03-18 오후 1 56 23](https://github.com/user-attachments/assets/386245c4-ebea-4cd3-80c4-da6faa2d9e47)
+
+
 ```python
 no_training_model = keras.Sequential()
 
