@@ -204,6 +204,9 @@ model = keras.Model(inputs, outputs)
 
 - 이 과정을 그림으로 나타내면 다음과 같습니다.
 
+![스크린샷 2025-03-18 오후 5 16 03](https://github.com/user-attachments/assets/065fdb02-1329-4089-9f31-95bd5e464091)
+
+
 ```python
 print(model.inputs)
 ```
