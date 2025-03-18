@@ -123,6 +123,7 @@ keras.utils.plot_model(model)
 keras.utils.plot_model(model, show_shapes=True)
 ```
 
+![스크린샷 2025-03-18 오후 12 31 48](https://github.com/user-attachments/assets/830b4827-53ce-4ee5-a37d-a06f0a9df786)
 
 
 ```python
