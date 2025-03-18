@@ -100,6 +100,7 @@ model.add(keras.layers.Dense(10, activation='softmax'))
 model.summary()
 ```
 
+![스크린샷 2025-03-18 오후 12 21 26](https://github.com/user-attachments/assets/6c362b31-7c0f-4a2d-ad73-71dbdd5fec63)
 
 
 ```python
