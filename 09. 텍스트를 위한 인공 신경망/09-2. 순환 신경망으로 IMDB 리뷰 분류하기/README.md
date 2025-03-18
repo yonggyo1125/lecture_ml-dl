@@ -309,6 +309,10 @@ val_oh = keras.utils.to_categorical(val_seq)
 ```python
 model.summary()
 ```
+![스크린샷 2025-03-18 오후 10 49 42](https://github.com/user-attachments/assets/eae7f766-aa15-49c8-9346-64d4de2b056c)
+
+![스크린샷 2025-03-18 오후 10 49 53](https://github.com/user-attachments/assets/0e05d45f-e58b-4386-9ad3-c158c03376c1)
+
 
 ```python
 rmsprop = keras.optimizers.RMSprop(learning_rate=1e-4)
