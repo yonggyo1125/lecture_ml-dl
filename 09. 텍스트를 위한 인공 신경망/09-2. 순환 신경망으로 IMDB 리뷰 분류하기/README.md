@@ -158,13 +158,20 @@ plt.xlabel('length')
 plt.ylabel('frequency')
 plt.show()
 ```
+
 ![스크린샷 2025-03-18 오후 10 15 41](https://github.com/user-attachments/assets/36511312-2f25-4408-a3e5-b52e1486ccef)
+
+- 역시 한쪽으로 치우쳤군요. 대부분의 리뷰 길이는 300 미만입니다. 평균이 중간값보다 높은 이유는 오른쪽 끝에 아주 큰 데이터가 있기 떄문입니다. 어떤 리뷰는 1,000개의 단어가 넘기도 합니다.
+- 리뷰는 대부분 짧아서 이 예제에서는 중간값보다 훨씬 짧은 100개의 단어만 사용하겠습니다. 하지만 여전히 100개의 단어보다 작은 리뷰가 있습니다. 이런 리뷰들의 길이를 100에 맞추기 위해 패딩이 필요합니다. 보통 패딩을 나타내는 토큰으로 0을 사용합니다.
+- 물론 수동으로 훈련 세트에 있는 20,000개의 리뷰를 순회하면서 길이가 100이 되도록 잘라내거나 0으로 패딩할 수 있습니다. 하지만 자주 있는 번거로운 작업에는 항상 편리한 도구가 준비되어 있죠. 케라스는 시퀀스 데이터의 길이를 맞추는 `pad_sequences()` 함수를 제공합니다. 이 함수를 사용해 `train_input`의 길이를 100으로 맞추어 보겠습니다.
 
 ```python
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 train_seq = pad_sequences(train_input, maxlen=100)
 ```
+
+- 사용법은 간단합니다. `maxlen`에 원하는 길이를 지정하면 이보다 긴 경우는 잘라내고 짧은 경우는 0으로 패딩합니다. 패딩 된 결과가 어떻게 나타나는지 확인해 보겠습니다. 먼저 `train_seq`의 크기를 확인해 보죠.
 
 ```python
 print(train_seq.shape)
@@ -173,6 +180,8 @@ print(train_seq.shape)
 ```
 (20000, 100)
 ```
+
+- `train_input`은 파이썬 리스트의 배열이었지만 길이를 100으로 맞춘 `train_seq`는 이제 (20000, 100) 크기의 2차원 배열이 되었습니다.
 
 ```python
 print(train_seq[0])
