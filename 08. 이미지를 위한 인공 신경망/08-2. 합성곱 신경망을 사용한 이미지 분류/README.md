@@ -93,6 +93,25 @@ history = model.fit(train_scaled, train_target, epochs=20,
                     callbacks=[checkpoint_cb, early_stopping_cb])
 ```
 
+```
+Epoch 1/20
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 14s 3ms/step - accuracy: 0.7493 - loss: 0.7043 - val_accuracy: 0.8833 - val_loss: 0.3211
+Epoch 2/20
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 5s 3ms/step - accuracy: 0.8726 - loss: 0.3552 - val_accuracy: 0.8975 - val_loss: 0.2714
+Epoch 3/20
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 5s 3ms/step - accuracy: 0.8905 - loss: 0.2989 - val_accuracy: 0.9087 - val_loss: 0.2455
+Epoch 4/20
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 4s 3ms/step - accuracy: 0.9043 - loss: 0.2608 - val_accuracy: 0.9100 - val_loss: 0.2380
+Epoch 5/20
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 6s 4ms/step - accuracy: 0.9113 - loss: 0.2400 - val_accuracy: 0.9136 - val_loss: 0.2326
+Epoch 6/20
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 4s 3ms/step - accuracy: 0.9184 - loss: 0.2174 - val_accuracy: 0.9201 - val_loss: 0.2193
+Epoch 7/20
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 5s 3ms/step - accuracy: 0.9263 - loss: 0.2022 - val_accuracy: 0.9151 - val_loss: 0.2330
+Epoch 8/20
+1500/1500 ━━━━━━━━━━━━━━━━━━━━ 5s 3ms/step - accuracy: 0.9314 - loss: 0.1847 - val_accuracy: 0.9208 - val_loss: 0.2206
+```
+
 ```python
 import matplotlib.pyplot as plt
 ```
@@ -110,6 +129,11 @@ plt.show()
 model.evaluate(val_scaled, val_target)
 ```
 
+```
+375/375 ━━━━━━━━━━━━━━━━━━━━ 1s 2ms/step - accuracy: 0.9231 - loss: 0.2125
+[0.21925583481788635, 0.9200833439826965]
+```
+
 ```python
 plt.imshow(val_scaled[0].reshape(28, 28), cmap='gray_r')
 plt.show()
@@ -118,6 +142,12 @@ plt.show()
 ```python
 preds = model.predict(val_scaled[0:1])
 print(preds)
+```
+
+```
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 411ms/step
+[[8.7171188e-19 1.7660993e-26 4.9542759e-21 1.7801612e-19 6.3786056e-18
+  4.7823439e-21 2.4926043e-19 3.2195997e-17 1.0000000e+00 4.5894585e-22]]
 ```
 
 ```python
@@ -143,4 +173,9 @@ test_scaled = test_input.reshape(-1, 28, 28, 1) / 255.0
 
 ```python
 model.evaluate(test_scaled, test_target)
+```
+
+```
+313/313 ━━━━━━━━━━━━━━━━━━━━ 2s 4ms/step - accuracy: 0.9114 - loss: 0.2617
+[0.2516588270664215, 0.9125000238418579]
 ```
