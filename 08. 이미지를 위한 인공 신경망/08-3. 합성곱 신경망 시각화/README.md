@@ -106,6 +106,7 @@ plt.show()
 
 ![스크린샷 2025-03-18 오후 1 56 23](https://github.com/user-attachments/assets/386245c4-ebea-4cd3-80c4-da6faa2d9e47)
 
+- 앞에서 `conv_weights`에 32개의 가중치를 저장했습니다. 이 배열의 마지막 차원을 순회하면서 0에부터
 
 ```python
 no_training_model = keras.Sequential()
