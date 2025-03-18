@@ -126,6 +126,9 @@ keras.utils.plot_model(model, show_shapes=True)
 
 - 오른쪽의 `input`, `output` 상자에서 층으로 입력되는 크기와 출력되는 크기가 나타나기 때문에 이해하기 훨씬 쉽습니다. 지금까지 만든 신경망을 그림으로 다시 살펴보도록 하겠습니다.
 
+![스크린샷 2025-03-18 오후 12 33 45](https://github.com/user-attachments/assets/338e72f0-c25a-4436-bc4f-4d7f4d2b3cea)
+
+
 ```python
 model.compile(optimizer='adam', loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
