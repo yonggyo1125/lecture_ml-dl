@@ -216,6 +216,9 @@ inputs = keras.Input(shape=(784,))
 
 - 전체를 합쳐 보면 다음과 같습니다.
 
+![스크린샷 2025-03-18 오후 5 24 22](https://github.com/user-attachments/assets/e4f0372c-9029-4bbe-a553-9932af6983d2)
+![스크린샷 2025-03-18 오후 5 24 16](https://github.com/user-attachments/assets/49d29e28-980f-4c0f-ae29-35df3d0c88b2)
+![스크린샷 2025-03-18 오후 5 24 10](https://github.com/user-attachments/assets/b01ba5b6-1c61-42b1-b555-fce62279bd81)
 
 
 
