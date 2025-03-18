@@ -203,6 +203,9 @@ plt.imshow(val_scaled[0].reshape(28, 28), cmap='gray_r')
 plt.show()
 ```
 
+![스크린샷 2025-03-18 오후 12 43 07](https://github.com/user-attachments/assets/042e15f9-5ea9-4fb1-a54e-99bba7a8c006)
+
+
 ```python
 preds = model.predict(val_scaled[0:1])
 print(preds)
