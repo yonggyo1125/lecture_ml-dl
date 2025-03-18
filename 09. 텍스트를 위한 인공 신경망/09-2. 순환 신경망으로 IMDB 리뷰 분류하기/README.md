@@ -521,6 +521,9 @@ plt.legend(['train', 'val'])
 plt.show()
 ```
 
+![스크린샷 2025-03-18 오후 11 00 09](https://github.com/user-attachments/assets/ae6ea004-6145-4b3f-8067-3fb7f562e5ba)
+
+
 ```python
 model2 = keras.Sequential()
 
