@@ -254,6 +254,10 @@ plt.imshow(train_input[0], cmap='gray_r')
 plt.show()
 ```
 
+![스크린샷 2025-03-18 오후 6 54 50](https://github.com/user-attachments/assets/5af82bf9-31de-4f00-a144-48b9bf0a0885)
+
+
+
 ```python
 inputs = train_input[0:1].reshape(-1, 28, 28, 1)/255.0
 
