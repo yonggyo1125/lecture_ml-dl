@@ -256,6 +256,9 @@ model.add(keras.layers.Dense(1, activation='sigmoid'))
 - 분명히 이 정수 사이에는 어떤 관련이 없습니다. 20번 토큰을 10번 토큰보다 더 중요시해야 할 이유가 없습니다. 따라서 단순한 정수값을 신경망에 입력하기 위해서는 다른 방식을 찾아야 합니다.
 - 정수값에 있는 크기 속성을 없애고 각 정수를 고유하게 표현하는 방법은 7장에서 잠깐 보았던 원-핫 인코딩입니다. 예를 들어 `train_seq[0]`의 첫 번째 토큰인 10을 원-핫 인코딩으로 바꾸면 다음과 같습니다.
 
+![스크린샷 2025-03-18 오후 10 38 43](https://github.com/user-attachments/assets/debda8a6-e4de-43df-9073-e8c9b913e6fe)
+
+
 ```python
 train_oh = keras.utils.to_categorical(train_seq)
 ```
