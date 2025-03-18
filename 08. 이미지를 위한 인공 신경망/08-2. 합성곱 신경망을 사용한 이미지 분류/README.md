@@ -230,6 +230,7 @@ plt.ylabel('prob.')
 plt.show()
 ```
 
+![스크린샷 2025-03-18 오후 12 48 04](https://github.com/user-attachments/assets/a589af50-9aa2-4673-9fd0-ae8a71189dfa)
 
 
 ```python
