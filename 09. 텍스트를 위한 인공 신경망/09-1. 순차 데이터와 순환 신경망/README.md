@@ -48,3 +48,10 @@
 ![스크린샷 2025-03-18 오후 8 12 44](https://github.com/user-attachments/assets/710eb0a8-c172-4e84-9b03-e1a093739670)
 
 - 따라서 O<sub>A</sub>와 B를 사용해서 만든 O<sub>B</sub>에는 A에 대한 정보가 어느 정도 포함되어 있을 것입니다. 그다음 C를 처리할 떄는 O<sub>B</sub>를 함께 사용합니다.
+
+![스크린샷 2025-03-18 오후 8 17 29](https://github.com/user-attachments/assets/88590dad-4be3-42e2-9c23-be4ddea0f729)
+
+
+![스크린샷 2025-03-18 오후 8 17 54](https://github.com/user-attachments/assets/073f3365-c966-4ebb-a44a-3d919077f437)
+
+
