@@ -113,6 +113,10 @@ model.summary()
 keras.utils.plot_model(model)
 ```
 
+![스크린샷 2025-03-18 오후 12 28 35](https://github.com/user-attachments/assets/ec45c0c3-0e29-4996-a039-2e9363c4595e)
+
+
+
 ```python
 keras.utils.plot_model(model, show_shapes=True)
 ```
