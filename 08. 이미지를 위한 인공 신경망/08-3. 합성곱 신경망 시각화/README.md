@@ -222,7 +222,11 @@ inputs = keras.Input(shape=(784,))
 
 ![스크린샷 2025-03-18 오후 5 24 16](https://github.com/user-attachments/assets/49d29e28-980f-4c0f-ae29-35df3d0c88b2)
 
+- 우리가 필요한 것은 첫 번째 `Conv2D`의 출력입니다. `model` 객체의 입력과 `Conv2D`의 출력을 알수 있다면 이 둘을 연결하여 새로운 모델을 얻을 수 있지 않을까요?
+
 ![스크린샷 2025-03-18 오후 5 24 10](https://github.com/user-attachments/assets/b01ba5b6-1c61-42b1-b555-fce62279bd81)
+
+- `model` 객체의 `predict()` 메서드를 호출하면 입력부터 마치막 층까지 모든 계산을 수행한 후 최종 출력을 반환합니다. 하지만 우리가 필요한 것은 첫 번째 `Conv2D` 층이 출력한 특성 맵입니다. 첫 번째 층의 출력은 `Conv2D` 객체의 `output` 속성에서 얻을 수 있습니다. `model.layers[0].output` 처럼 참조할 수 있죠. `model` 객체의 입력은 어떻게 얻을 수 있을까요? 다행이 케라스 모델은 `input` 속성으로 입력을 참조할 수 있습니다. 즉 `model.input`으로 이 모델의 입력을 간단히 얻을 수 있습니다.
 
 ```python
 print(model.inputs)
@@ -232,15 +236,20 @@ print(model.inputs)
 [<KerasTensor shape=(None, 28, 28, 1), dtype=float32, sparse=False, name=input_layer>]
 ```
 
+- 이제 `model.input`과 `model.layers[0].output`을 연결하는 새로운 `conv_acti` 모델을 만들 수 있습니다.
+
 ```python
 conv_acti = keras.Model(model.inputs, model.layers[0].output)
 ```
 
-```python
-(train_input, train_target), (test_input, test_target) = keras.datasets.fashion_mnist.load_data()
-```
+- `model` 객체의 `predict()` 메서드를 호출하면 최종 출력층의 확률을 반환합니다. 하지만 `conv_acti`의 `predict()` 메서드를 호출하면 첫 번째 `Conv2D`의 출력을 반환할 것입니다. 이제 준비를 마쳤으니 특성 맵을 시각화해 보죠.
+
+## 특성 맵 시각화
+
+- 케라스로 패션 MNIST 데이터셋을 읽은 후 훈련 세트에 있는 첫 번째 샘플을 그려 보겠습니다.
 
 ```python
+(train_input, train_target), (test_input, test_target) = keras.datasets.fashion_mnist.load_data()
 plt.imshow(train_input[0], cmap='gray_r')
 plt.show()
 ```
