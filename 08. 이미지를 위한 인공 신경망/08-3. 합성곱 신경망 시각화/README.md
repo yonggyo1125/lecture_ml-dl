@@ -152,6 +152,9 @@ plt.ylabel('count')
 plt.show()
 ```
 
+![스크린샷 2025-03-18 오후 5 01 13](https://github.com/user-attachments/assets/ed364b33-7156-495f-a440-ea4f61fa3c07)
+
+
 ```python
 fig, axs = plt.subplots(2, 16, figsize=(15,2))
 
@@ -162,6 +165,9 @@ for i in range(2):
 
 plt.show()
 ```
+
+![스크린샷 2025-03-18 오후 5 01 22](https://github.com/user-attachments/assets/dbdf4fe4-1136-40d7-be16-f0fba123783c)
+
 
 ```python
 print(model.inputs)
