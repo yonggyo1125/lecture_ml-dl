@@ -455,6 +455,9 @@ plt.show()
 
 - `GRU`는 Gated Recurrent Unit의 약자입니다. 뉴욕 대학교 조경현 교수가 발명한 셀로 유명합니다. 이 셀은 `LSTM`을 간소화한 버전으로 생각할 수 있습니다. 이 셀은 `LSTM`처럼 셀 상태를 계산하지 않고 은닉 상태 하나만 포함하고 있습니다. 먼저 GRU 셀의 그림을 보죠
 
+![스크린샷 2025-03-19 오후 12 38 54](https://github.com/user-attachments/assets/6ef3d6d8-eec4-4e4f-9895-49d40678be50)
+
+
 ```python
 model4 = keras.Sequential()
 
