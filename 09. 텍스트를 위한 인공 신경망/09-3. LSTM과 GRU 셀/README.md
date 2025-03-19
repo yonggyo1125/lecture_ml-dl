@@ -719,6 +719,9 @@ plt.legend(['train', 'val'])
 plt.show()
 ```
 
+![스크린샷 2025-03-19 오후 12 53 50](https://github.com/user-attachments/assets/f8a2efa8-8011-485d-9ec2-f6e8cc6183a4)
+
+
 ```python
 test_seq = pad_sequences(test_input, maxlen=100)
 
