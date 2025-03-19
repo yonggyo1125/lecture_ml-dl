@@ -94,6 +94,8 @@ model.summary()
 
 ![스크린샷 2025-03-19 오후 12 11 03](https://github.com/user-attachments/assets/bc138016-7a37-4562-8d11-b76d18a92596)
 
+- `SimpleRNN` 클래스의 모델 파라미터 개수는 200개였습니다. LSTM 셀에는 작은 셸이 4개 있으므로 정확히 4배가 늘어 모델 파라미터의 개수는 800개가 되었습니다.
+- 모델을 컴파일하고 훈련해 보겠습니다. 이전과 마찬가지로 배치 크기는 64개, 에포크 횟수는 100으로 지정합니다. 체크포인트와 조기 종료를 위한 코드도 동일합니다.
 
 ```python
 rmsprop = keras.optimizers.RMSprop(learning_rate=1e-4)
@@ -217,6 +219,8 @@ Epoch 52/100
 313/313 ━━━━━━━━━━━━━━━━━━━━ 2s 7ms/step - accuracy: 0.8167 - loss: 0.4013 - val_accuracy: 0.7944 - val_loss: 0.4368
 ```
 
+- 훈련 손실과 검증 손실 그래프를 그려 보겠습니다.
+
 ```python
 import matplotlib.pyplot as plt
 
@@ -228,6 +232,18 @@ plt.legend(['train', 'val'])
 plt.show()
 ```
 
+- 그래프를 보면 기본 순환층보다 `LSTM`이 과대적합을 억제하면서 훈련을 잘 수행한 것으로 보입니다..
+- 하지만 경우에 따라서는 과대적합을 더 강하게 제어할 필요가 있습니다. 7장에서 배웠던 드롭아웃을 순환층에도 적용할 수 있을까요? 다음 섹션에서 이에 대해 알아보겠습니다.
+
+## 순환층에 드롭아웃 적용하기
+
+- 완전 연결 신경망과 합성곱 신경망에서는 `Dropout` 클래스를 사용해 드롭아웃을 적용했습니다. 이를 통해 모델이 훈련 세트에 너무 과대적합되는 것을 막았죠. 순환층은 자체적으로 드롭아웃 기능을 제공합니다. `SimpleRNN`과 `LSTM` 클래스 모두 `dropout` 매개변수와 `recurrent_dropout` 매개변수를 가지고 있습니다.
+
+> 드롭아웃은 은닉층에 있는 뉴런의 출력을 랜덤하게 꺼서 과대적합을 막는 기법입니다.
+
+- `dropout` 매개변수는 셀의 입력에 드롭아웃을 적용하고 `recurrent_dropout`은 순환되는 은닉 상태에 드롭아웃을 적용합니다. 하지만 기술적인 문제로 인해 `recurrent_dropout`을 사용하면 `GPU`를 사용하여 모델을 훈련하지 못합니다. 이 떄문에 모델의 훈련 속도가 크게 느려집니다. 따라서 여기에서는 `dropout`만을 사용해 보겠습니다.
+- 전체적인 모델 구조는 이전과 동일합니다. `LSTM` 클래스에 `dropout` 매개변수를 0.3으로 지정하여 30%의 입력을 드롭아웃 합니다.
+
 ```python
 model2 = keras.Sequential()
 
@@ -236,6 +252,8 @@ model2.add(keras.layers.Embedding(500, 16))
 model2.add(keras.layers.LSTM(8, dropout=0.3))
 model2.add(keras.layers.Dense(1, activation='sigmoid'))
 ```
+
+- 이 모델을 이전과 동일한 조건으로 훈련해 보죠.
 
 ```python
 rmsprop = keras.optimizers.RMSprop(learning_rate=1e-4)
@@ -320,6 +338,8 @@ Epoch 32/100
 Epoch 33/100
 313/313 ━━━━━━━━━━━━━━━━━━━━ 2s 8ms/step - accuracy: 0.8109 - loss: 0.4198 - val_accuracy: 0.7902 - val_loss: 0.4500
 ```
+
+- 검증 손실이 약간 향상된 것 같네요. 훈련 손실과 검증 손실 그래프를 그려 보겠습니다.
 
 ```python
 plt.plot(history.history['loss'])
