@@ -534,6 +534,9 @@ print(train_seq.nbytes, train_oh.nbytes)
 
 ## 단어 임베딩을 사용하기
 
+- 순환 신경망에서 텍스트를 처리할 때 즐겨 사용하는 방법은 **단어 임베딩**<sup>word embedding</sup>입니다. 단어 임베딩은 각 단어를 고정된 크기의 실수 벡터로 바꾸어 줍니다. 예를 들면 다음 그림과 같습니다.
+
+
 ```python
 model2 = keras.Sequential()
 
