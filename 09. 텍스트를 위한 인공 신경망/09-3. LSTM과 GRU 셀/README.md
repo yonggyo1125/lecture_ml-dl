@@ -381,6 +381,8 @@ model3.summary()
 
 ![스크린샷 2025-03-19 오후 12 29 14](https://github.com/user-attachments/assets/7a84fa9d-da24-41c7-add4-0d75938800f6)
 
+- 첫 번쨰 `LSTM` 층이 모든 타임스텝(100개)의 은닉 상태를 출력하기 때문에 출력 크기가 (None, 100, 8)로 표시되었습니다. 이에 반해 두 번쨰 `LSTM` 층의 출력 크기는 마지막 타임스텝의 은닉 상태만 출력하기 때문에 (None, 8)입니다.
+- 이 모델을 앞에서와 같이 훈련해 보겠습니다.
 
 ```python
 rmsprop = keras.optimizers.RMSprop(learning_rate=1e-4)
@@ -433,6 +435,8 @@ Epoch 16/100
 Epoch 17/100
 313/313 ━━━━━━━━━━━━━━━━━━━━ 6s 13ms/step - accuracy: 0.7982 - loss: 0.4452 - val_accuracy: 0.7812 - val_loss: 0.4698
 ```
+
+- 모델이 잘 훈련된 것 같네요. 일반적으로 순환층을 쌓으면 성능이 높아집니다. 이 예에서는 그리 큰 효과를 내지 못했네요. 손실 그래프를 그려서 과대적합이 잘 제어되었는지 확인해 보겠습니다.
 
 ```python
 plt.plot(history.history['loss'])
