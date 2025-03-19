@@ -379,6 +379,9 @@ model3.add(keras.layers.Dense(1, activation='sigmoid'))
 model3.summary()
 ```
 
+![스크린샷 2025-03-19 오후 12 29 14](https://github.com/user-attachments/assets/7a84fa9d-da24-41c7-add4-0d75938800f6)
+
+
 ```python
 rmsprop = keras.optimizers.RMSprop(learning_rate=1e-4)
 model3.compile(optimizer=rmsprop, loss='binary_crossentropy',
