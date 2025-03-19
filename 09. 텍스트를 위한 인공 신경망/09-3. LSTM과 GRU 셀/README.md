@@ -32,6 +32,12 @@
 - 이 그림에는 편의상 은닉 상태를 계산할 떄 사용하는 가중치 W<sub>x</sub>와 W<sub>h</sub>를 통틀어 W<sub>o</sub>라고 표시했습니다. 파란색 원은 `tanh` 함수를 나타내고 주황색 원은 시그모이드 함수를 나타냅니다. x는 곱셈을 나타냅니다. 기본 순환층과 크게 다르지 않습니다. 그럼 `tanh`함수를 통과하는 값이 무엇인지 알아보죠.
 - `LSTM`에는 순환되는 상태가 2개입니다. 은닉 상태 말고 **셀 상태**<sup>cell state</sup>라고 부르는 값이 또 있죠. 은닉 상태와 달리 셀 상태는 다음 층으로 전달되지 않고 `LSTM` 셀에서 순환만 되는 값입니다. 다음 그림에 초록색으로 순환되는 셀 상태가 표시되어 있습니다.
 
+![스크린샷 2025-03-19 오전 11 56 04](https://github.com/user-attachments/assets/e007f436-4ddc-407a-b386-34e1886e7fc9)
+
+![스크린샷 2025-03-19 오전 11 56 10](https://github.com/user-attachments/assets/6119e7e5-0ffe-4b13-90b2-77ab74dad015)
+
+
+
 ```python
 from tensorflow.keras.datasets import imdb
 from sklearn.model_selection import train_test_split
