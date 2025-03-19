@@ -27,6 +27,9 @@
 - `LSTM`은 Long Short-Term Memory의 약자입니다. 말 그대로 단기 기억을 오래 기억하기 위해 고안되었습니다. `LSTM`은 구조가 복잡하므로 단계적으로 설명하겠습니다. 하지만 기본 개념은 동일합니다. `LSTM`에는 가중치를 곱하고 절편을 더해 활성화 함수를 통과시키는 구조를 여러개 가지고 있습니다. 이런 계산 결과는 다음 타임스텝에 재사용됩니다. 이 과정을 하나씩 따라가 보죠.
 - 먼저 은닉 상태를 만드는 방법을 알아보죠. 은닉 상태는 입력과 이전 타임스텝의 은닉 상태를 가중치에 곱한 후 활성화 함수를 통과시켜 다음 은닉 상태를 만듭니다. 이때 기본 순환층과는 달리 시그모이드 활성화 함수를 사용합니다. 또 `tanh` 활성화 함수를 통과한 어떤 값과 곱해져서 은닉 상태를 만듭니다. 이 값은 잠시 후에 설명하겠습니다. 다음 그림을 참고하세요.
 
+![스크린샷 2025-03-19 오전 11 51 26](https://github.com/user-attachments/assets/a063a56b-6a18-4a5f-aa99-7228ae76bc6b)
+
+
 ```python
 from tensorflow.keras.datasets import imdb
 from sklearn.model_selection import train_test_split
