@@ -561,6 +561,8 @@ model2.add(keras.layers.Dense(1, activation='sigmoid'))
 ```python
 model2.summary()
 ```
+![스크린샷 2025-03-19 오전 11 23 08](https://github.com/user-attachments/assets/5253fdae-0e7e-4d9f-99bf-ae9ef031607b)
+
 
 ```python
 rmsprop = keras.optimizers.RMSprop(learning_rate=1e-4)
