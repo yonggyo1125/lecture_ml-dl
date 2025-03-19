@@ -664,6 +664,7 @@ plt.ylabel('loss')
 plt.legend(['train', 'val'])
 plt.show()
 ```
+
 ![스크린샷 2025-03-19 오전 11 28 36](https://github.com/user-attachments/assets/12ed1c63-13cf-41b4-85d8-a566e6076371)
 
-
+- 검증 손실이 더 감소되지 않아 훈련이 적절히 조기 종료된 것 같습니다. 이에 비해 훈련 손실은 계속 감소합니다. 이를 더 개선할 방법이 있는지 다음 절에서 알아보겠습니다.
