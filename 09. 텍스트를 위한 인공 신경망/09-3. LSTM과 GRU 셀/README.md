@@ -721,6 +721,7 @@ plt.show()
 
 ![스크린샷 2025-03-19 오후 12 53 50](https://github.com/user-attachments/assets/f8a2efa8-8011-485d-9ec2-f6e8cc6183a4)
 
+- 드롭아웃을 사용하지 않았기 때문에 이전보다 훈련 손실과 검증 손실 사이에 차이가 있지만 훈련 과정이 잘 수렴되고 있는 것을 확인할 수 있습니다.
 
 ```python
 test_seq = pad_sequences(test_input, maxlen=100)
