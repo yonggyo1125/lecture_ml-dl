@@ -44,6 +44,9 @@
 - 이전과 마찬가지로 입력과 은닉 상태를 각기 다른 가중치에 곱한 다음, 하나는 시그모이드 함수를 통과시키고 다른 하나는 `tanh` 함수를 통과시킵니다. 그다음 두 결과를 곱한 후 이전 셀 상태와 더합니다. 이 결과가 최종적인 다음 셀 상태가 됩니다.
 - 다음 그림처럼 세 군데의 곱셈을 왼쪽부터 차례대로 삭제 게이트<sup>gate</sup>, 입력 게이트, 출력 게이트라고 부릅니다.
 
+![스크린샷 2025-03-19 오후 12 05 43](https://github.com/user-attachments/assets/9482bcdf-f850-4add-a313-b0dc79d76ad8)
+
+
 ```python
 from tensorflow.keras.datasets import imdb
 from sklearn.model_selection import train_test_split
