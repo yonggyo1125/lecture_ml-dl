@@ -457,6 +457,11 @@ plt.show()
 
 ![스크린샷 2025-03-19 오후 12 38 54](https://github.com/user-attachments/assets/6ef3d6d8-eec4-4e4f-9895-49d40678be50)
 
+- GRU 셀에는 은닉 상태와 입력에 가중치를 곱하고 절편을 더하는 작은 셀이 3개 들어 있습니다. 2개는 시그모이드 활성화 함수를 사용하고 하나는 `tanh` 활성화 함수를 사용합니다. 여기에서도 은닉 상태와 입력에 곱해지는 가중치를 합쳐서 나타냈습니다.
+- 맨 왼쪽에서 W<sub>z</sub>를 사용하는 셀의 출력이 은닉 상태에 바로 곱해져 삭제 게이트 역할을 수행합니다. 이와 똑같은 출력을 1에서 뺀 다음에 가장 오른쪽 W<sub>g</sub>를 사용하는 셀의 출력에 곱합니다. 이는 입력되는 정보를 제어하는 역할을 수행합니다. 가운데 W<sub>t</sub>을 사용하는 셀에서 출력된 값은 W<sub>g</sub>셀이 사용할 은닉 상태의 정보를 제어합니다.
+- `GRU` 셀은 `LSTM`보다 가중치가 적기 때문에 계산량이 적지만 `LSTM` 못지않은 좋은 성능을 내는 것으로 알려져 있습니다. 다음 섹션에서 `GRU`셀을 사용한 순환 신경망을 만들어 보겠습니다.
+
+## GRU 신경망 훈련하기
 
 ```python
 model4 = keras.Sequential()
@@ -465,7 +470,11 @@ model4.add(keras.layers.Input(shape=(100,)))
 model4.add(keras.layers.Embedding(500, 16))
 model4.add(keras.layers.GRU(8))
 model4.add(keras.layers.Dense(1, activation='sigmoid'))
+```
 
+- `LSTM` 클래스를 `GRU` 클래스로 바뀐 것 외에는 이전 모델과 동일합니다. 이 모델의 구조를 확인해보죠.
+
+```python
 model4.summary()
 ```
 
