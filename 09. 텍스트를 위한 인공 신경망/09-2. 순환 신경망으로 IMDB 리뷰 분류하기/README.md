@@ -664,3 +664,6 @@ plt.ylabel('loss')
 plt.legend(['train', 'val'])
 plt.show()
 ```
+![스크린샷 2025-03-19 오전 11 28 36](https://github.com/user-attachments/assets/12ed1c63-13cf-41b4-85d8-a566e6076371)
+
+
