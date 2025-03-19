@@ -46,6 +46,12 @@
 
 ![스크린샷 2025-03-19 오후 12 05 43](https://github.com/user-attachments/assets/9482bcdf-f850-4add-a313-b0dc79d76ad8)
 
+- 삭제 게이트는 셀 상태에 있는 정보를 제거하는 역할을 하고 입력 게이트는 새로운 정보를 셀 상태에 추가합니다. 출력 게이트를 통해서 이 셀 상태가 다음 은닉 상태로 출력됩니다.
+- 물론 이 복잡한 셀 계산을 직접 할 필요는 없습니다. 케라스에는 이미 `LSTM` 클래스가 준비되어 있습니다. 다음 섹션에서 `LSTM` 클래스를 사용해 `LSTM` 순환 신경망을 만들어 보겠습니다.
+
+## LSTM 신경망 훈련하기
+
+- 먼저 이전 절에서처럼 IMDB 리뷰 데이터를 로드하고 훈련 세트와 검증 세트로 나눕니다. 이번에는 500개의 단어를 사용하겠습니다.
 
 ```python
 from tensorflow.keras.datasets import imdb
@@ -58,12 +64,16 @@ train_input, val_input, train_target, val_target = train_test_split(
     train_input, train_target, test_size=0.2, random_state=42)
 ```
 
+- 그 다음 케라스의 `pad_sequences()` 함수로 각 샘플의 길이를 100에 맞추고 부족할 떄는 패딩을 추가합니다.
+
 ```python
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 train_seq = pad_sequences(train_input, maxlen=100)
 val_seq = pad_sequences(val_input, maxlen=100)
 ```
+
+- 이제 `LSTM` 셀을 사용한 순환층을 만들어 보겠습니다. 사실 `SimpleRNN` 클래스를 `LSTM` 클래스로 바꾸기만 하면 됩니다.
 
 ```python
 from tensorflow import keras
@@ -74,7 +84,11 @@ model.add(keras.layers.Input(shape=(100,)))
 model.add(keras.layers.Embedding(500, 16))
 model.add(keras.layers.LSTM(8))
 model.add(keras.layers.Dense(1, activation='sigmoid'))
+```
 
+- 2절에서 임베딩을 사용했던 순환 신경망 모델과 완전히 동일합니다. 여기에서는 `SimpleRNN` 대신 `LSTM`을 사용합니다. 모델 구조를 출력해 보죠.
+
+```python
 model.summary()
 ```
 
