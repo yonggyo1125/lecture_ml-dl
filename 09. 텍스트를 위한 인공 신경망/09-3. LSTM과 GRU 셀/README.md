@@ -361,15 +361,21 @@ plt.show()
 
 ![스크린샷 2025-03-19 오후 12 26 13](https://github.com/user-attachments/assets/f0e0eace-1ad7-42c1-a3b7-d5d2a135bf5c)
 
+- 케라스의 순환층에서 모든 타임스텝의 은닉 상태를 출력하려면 마지막을 제외한 다른 모든 순환층에서 `return_sequences` 매개변수를 True로 지정하면 됩니다. 다음의 코드를 확인해 보세요.
 
 ```python
 model3 = keras.Sequential()
 
-model3.add(keras.layers.Embedding(500, 16, input_shape=(100,)))
+model3.add(keras.layers.Input(shape=(100,)))
+model3.add(keras.layers.Embedding(500, 16))
 model3.add(keras.layers.LSTM(8, dropout=0.3, return_sequences=True))
 model3.add(keras.layers.LSTM(8, dropout=0.3))
 model3.add(keras.layers.Dense(1, activation='sigmoid'))
+```
 
+- 2개의 `LSTM` 층을 쌓았고 모두 드롭아웃을 0.3으로 지정했습니다. 그리고 첫 번쨰 `LSTM` 클래스에는 `return_sequences` 매개변수를 True로 지정한 것을 볼 수 있습니다. `summary()` 메서드의 결과를 확인해 보죠
+
+```python
 model3.summary()
 ```
 
