@@ -84,5 +84,7 @@
 ### 어텐션 점수 계산
 - 쿼리 벡터와 키 벡터가 생성되면 두 벡터를 서로 곱해서 **어텐션 점수**<sup>attention score</sup>를 계산합니다. 예를 들어, 입력된 토큰이 3개라면 쿼리 벡터도 3개, 키 벡터도 3개가 생성됩니다. 각 쿼리 벡터와 키 벡터를 곱하면 총 9개의 어텐션 점수가 만들어집니다. 이를 행렬 형태로 정리한 것이 **어텐션 행렬**<sup>attention matrix</sup>입니다. 
 
+![스크린샷 2025-04-12 오후 10 25 09](https://github.com/user-attachments/assets/6ae7cca7-3100-401a-a6c9-64e2483e5055)
 
+![스크린샷 2025-04-12 오후 10 25 39](https://github.com/user-attachments/assets/b770c4bd-0cc5-4408-a9e2-491fe6176bcf)
 
