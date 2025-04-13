@@ -99,3 +99,7 @@
 
 - 셀프 어텐션 연산을 수행하는 하나의 단위를 **어텐션 헤드**<sup>attention head</sup>라고 합니다. 트랜스포머는 여러개의 어텐션 헤드를 사용하는데, 이를 **멀티 헤드 어텐션**<sup>multi-head attention</sup>이라고 합니다. 이를 그림으로 나타내면 다름과 같습니다.
 
+
+![스크린샷 2025-04-13 오후 9 16 47](https://github.com/user-attachments/assets/356bcfd2-0bed-40fa-afd5-77dbcb480aad)
+
+
