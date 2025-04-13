@@ -95,4 +95,7 @@
 
 ![스크린샷 2025-04-12 오후 10 30 57](https://github.com/user-attachments/assets/20dfa4c2-423e-40ed-bb19-544bcfc8d036)
 
+### 멀티 헤드 어텐션
+
+- 셀프 어텐션 연산을 수행하는 하나의 단위를 **어텐션 헤드**<sup>attention head</sup>라고 합니다. 트랜스포머는 여러개의 어텐션 헤드를 사용하는데, 이를 **멀티 헤드 어텐션**<sup>multi-head attention</sup>이라고 합니다. 이를 그림으로 나타내면 다름과 같습니다.
 
