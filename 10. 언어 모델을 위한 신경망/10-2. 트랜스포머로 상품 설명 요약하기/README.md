@@ -185,5 +185,5 @@ pipe(sample_text)
 ```
 
 ```
-
+[{'summary_text': " Vincent Willem van Gogh was a Dutch Post-Impressionist painter . His oeuvre includes landscapes, still lifes, portraits and self-portraits . Van Gogh's work was beginning to gain critical attention before he died from a self-inflicted gunshot at age 37 ."}]
 ```
