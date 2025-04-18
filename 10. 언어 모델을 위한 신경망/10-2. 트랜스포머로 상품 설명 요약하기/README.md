@@ -137,3 +137,53 @@
 ```
 !pip install transformers
 ```
+
+
+```python
+from transformers import pipeline
+pipe = pipeline(task='summarization', device=0)
+```
+
+```
+No model was supplied, defaulted to sshleifer/distilbart-cnn-12-6 and revision a4f8f3e (https://huggingface.co/sshleifer/distilbart-cnn-12-6).
+Using a pipeline without specifying a model name and revision in production is not recommended.
+```
+
+```
+config.json:   0%|          | 0.00/1.80k [00:00<?, ?B/s]
+pytorch_model.bin:   0%|          | 0.00/1.22G [00:00<?, ?B/s]
+tokenizer_config.json:   0%|          | 0.00/26.0 [00:00<?, ?B/s]
+vocab.json:   0%|          | 0.00/899k [00:00<?, ?B/s]
+merges.txt:   0%|          | 0.00/456k [00:00<?, ?B/s]
+model.safetensors:   0%|          | 0.00/1.22G [00:00<?, ?B/s]
+```
+
+- `pipeline()` 함수를 사용하면 허깅페이스에 있는 LLM을 사용하기 위해 수행할 몇 가지 단계를 한 번에 실행할 수 있어 매우 편리합니다. 이 함수는 매개변수가 많습니다. 가장 기본이 되는 매개변수는 수행할 작업의 종류를 지정하는 task입니다. 앞의 코드에서는 요약 작업을 위해 `summarization`으로 지정했습니다.
+- `task` 매개변수에 지정할 수 있는 다른 옵션으로는 텍스트 분류를 위한 `text-classification` 텍스트 생성을 위한 `text-generation`, 번역을 위한 `translation`등이 있습니다. 전체 옵션은 온라인 문서(https://bit.ly3D0BLxW)를 참고하세요.
+- GPU를 사용하려면 device 매개변수를 지정해야 합니다. 이 장에서는 코랩의 T4 GPU 하나를 사용한다고 가정하므로 device=0으로 지정했습니다.
+
+> `pipeline()` 함수는 각 작업에 연관된 파이프라인 클래스의 인스턴스 객체를 반환합니다. 예를 들어 요약 작업의 경우 `SummarizationPipeline` 클래스의 객체를 만들어 반환합니다. `transformers` 패키지에는 이렇게 작업마다 정의된 파이프라인 클래스가 있습니다. 하지만 작업에 특화된 클래스를 호출하여 사용하는 것보다 `pipeline()` 함수의 task 매개변수에 작업을 지정하는 것이 훨씬 간편합니다. 
+
+- `pipeline()` 함수의 출력 결과를 보면 모델을 지정하지 않았기 때문에 요약 작업을 위한 기본 모델인 `sshleifer/distilbart-cnn-12-6`을 사용한다고 나타나 있습니다. 이어서 필요한 파일을 허깅페이스에서 다운로드합니다. 다른 모델이나 리비전을 지정하고 싶다면 model 매개변수와 revision 매개변수를 사용할 수 있습니다. 따라서 다음 코드는 앞의 코드와 동일한 작업을 수행합니다.
+> distilbart는 전직 허깅페이스 연구원인 Sam Shleifer가 CNN 뉴스 데이터셋으로 훈련한 BART 변종 모델입니다. 이 모델은 원본 모델의 출력을 흉내내도록 더 작은 모델을 훈련하는 지식 정제(knowledge distillation) 기법을 사용한 것으로 추정됩니다.
+
+```python
+pipe = pipeline(task='summarization',
+                model='sshleifer/distilbart-cnn-12-6', device=0)
+```
+
+> model 매개변수를 지정하면 자동으로 최신 리비전의 파일을 다운로드합니다.
+
+- 이 모델 이름은 허깅페이스 웹사이트의 경로를 나타냅니다. 따라서 다음처럼 https://huggingface.co/shleifer/distilbart-cnn-12-6 에 접속하면 이 모델에 대한 상세 내용을 확인할 수 있습니다.
+- 반대로 허깅 페이스 웹사이트에서 찾은 어떤 모델을 `pipeline()` 함수로 로드하고 싶다면 URL에서 https://huggingface.co/ 다음에 나오는 경로를 model 매개변수에 지정하면 됩니다.
+- `pipe`객체로 텍스트를 요약하려면 8장에서 해보았던 것처럼 이 객체를 마치 함수처럼 호출하면 됩니다. 다음과 같이 반 고흐에 관련 위키백과 텍스트를 요약해 보겠습니다.
+
+```python
+sample_text = """Vincent Willem van Gogh was a Dutch Post-Impressionist painter who is among the most famous and influential figures in the history of Western art. In just over a decade, he created approximately 2100 artworks, including around 860 oil paintings, most of them in the last two years of his life. His oeuvre includes landscapes, still lifes, portraits, and self-portraits, most of which are characterised by bold colours and dramatic brushwork that contributed to the rise of expressionism in modern art. Van Gogh's work was beginning to gain critical attention before he died from a self-inflicted gunshot at age 37. During his lifetime, only one of Van Gogh's paintings, The Red Vineyard, was sold.
+"""
+pipe(sample_text)
+```
+
+```
+
+```
