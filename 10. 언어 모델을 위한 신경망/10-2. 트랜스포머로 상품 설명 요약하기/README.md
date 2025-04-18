@@ -115,5 +115,10 @@
 
 - BART의 피드포워드 네트워크에서 사용하는 활성화 함수는 젤루입니다. 이 함수는 입력에 표준 정규 분포의 **누적 분포 함수**<sup>cumulative distribution function for gaussian distribution</sup>를 곱합니다. 이 누적 분포 함수를 계산하려면 적분이 필요합니다. 그래서 대부분의 딥러닝 프레임워크들은 복잡한 적분 대신 근사값을 구할 수 있는 간단한 공식을 사용합니다.
 
+![스크린샷 2025-04-18 오후 10 08 41](https://github.com/user-attachments/assets/eaeb30a6-4170-4e55-ba97-75bfb6d16bbe)
+
 
 - 젤루 함수의 그래프는 다음처럼 렐루 함수와 비슷하지만 원점에서 부드럽게 변하기 때문에 미분 가능합니다.
+
+![스크린샷 2025-04-18 오후 10 08 52](https://github.com/user-attachments/assets/4650d9ed-c7bd-44fa-80ae-249fcbbd0d6d)
+
