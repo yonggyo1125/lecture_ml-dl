@@ -274,5 +274,5 @@ BartConfig {
 
 ![스크린샷 2025-04-19 오전 11 49 06](https://github.com/user-attachments/assets/a3d97922-09ff-4c79-9e7f-aa9df3999f47)
 
-
-
+- 그럼 토큰화에는 어떤 방법이 있을까요? 공백을 기준으로 텍스트를 나누는 방법이 가장 간단하지만 이렇게 하면 훈련 데이터에 등장하지 않는 단어의 경우는 학습하기 어렵습니다. 따라서 단어보다 더 작은 **부분단어**<sup>subword</sup> 토큰화 방식이 등장했으며 트랜스포머 기반 LLM에서 널리 사용됩니다.
+- 대표적인 부분단어 토큰화 방법에는 **BPE**<sup>Byte-Pair Encoding</sup>, **워드피스**<sup>WordPiece</sup>, **유니그램**<sup>unigram</sup>, **센텐스피스**<sup>SentencePiece</sup>가 있습니다.
