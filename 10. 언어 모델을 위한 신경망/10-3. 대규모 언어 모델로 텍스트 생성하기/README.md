@@ -341,5 +341,11 @@ print(output[0]['generated_text'])
 > top-p 샘플링을 뉴클리어스 샘플링(nucleus sampling)이라고도 부릅니다.
 
 
+![스크린샷 2025-04-20 오후 7 22 40](https://github.com/user-attachments/assets/49c54e64-11d2-4608-b7d3-0053509d1c5d)
+
+
 - top-p 샘플링을 적용하려면 top_p 매개변수에 0.0보다 크고 1.0보다 작은 실숫값을 지정해야 합니다. 
 > 일반적으로 top_p는 0.9\~0.95 사이의 값을 많이 사용합니다.
+
+
+
