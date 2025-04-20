@@ -81,3 +81,7 @@
   - For the GPU-rich: 650억 개 이상
 - 이 중 'For Edge Devices'를 선택하면 다음과 같은 목록이 보여집니다.
 
+![스크린샷 2025-04-20 오후 3 21 55](https://github.com/user-attachments/assets/bf228161-f518-4637-a4ca-dd1ca36dfae2)
+
+
+
